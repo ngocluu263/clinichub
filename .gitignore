@@ -4,4 +4,9 @@ dist
 db.sqlite3
 **/npm-debug.log
 **/*.swp
+**/*.swo
 node_modules
+
+bin
+include
+lib
