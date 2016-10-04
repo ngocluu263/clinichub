@@ -1,7 +1,7 @@
 from django.db import models
 from mongoengine import *
 
-class Employee(Document):
-    email = StringField(required=True)
-    first_name = StringField(max_length=50)
-    last_name = StringField(max_length=50)
+class User(Document):
+    username = StringField(required=True, max_length=20)
+    firstname = StringField(max_length=50)
+    lastname = StringField(max_length=50)

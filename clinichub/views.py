@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from .models import Employee
+from .models import User
 
 def index(request):
-    employee = Employee.objects.create(
-        email = "theuser@company.com",
-        first_name = "FirstName",
-        last_name = "LastName"
+    user = User.objects.create(
+        username = "somebody"
     )
-    employee.save()
+    user.save()
     return render(request, 'index.html')

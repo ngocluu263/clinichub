@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """ 
 import os
+from mongoengine import connect
+from .secret import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,9 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6vbu^!6%s0pizq(&vu(n_7w=6j8kgs^+)fowi1a!egn*pb11vl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -118,5 +117,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-from mongoengine import connect
-connect('employeedb')
+connect(MONGODB_DATABASE,
+        host=MONGODB_HOST,
+        port=MONGODB_PORT,
+        username=MONGODB_USERNAME,
+        password=MONGODB_PASSWORD)
