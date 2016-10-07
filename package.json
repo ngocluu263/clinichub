@@ -6,9 +6,7 @@
   "scripts": {
     "start": "./manage.py runserver",
     "build": "NODE_ENV=production webpack -p",
-    "dev": "webpack-dev-server --content-base ./src/html --hot --inline",
-    "activate": "source ./bin/activate",
-    "deactivate": "deactivate"
+    "dev": "webpack-dev-server --content-base ./src/html --hot --inline"
   },
   "repository": {
     "type": "git",

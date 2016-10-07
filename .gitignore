@@ -7,7 +7,5 @@ db.sqlite3
 **/*.swo
 node_modules
 
-bin
-include
-lib
 clinichub/secret.py
+env_clinichub
