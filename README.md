@@ -28,8 +28,11 @@ $ git clone https://github.com/jenwich/clinichub.git
   ```
   $ pip install -r requirements.txt
   ```
+4. Create `secret.py`
 
-4. Run server
+  Create `clinichub/secret.py` - contains secret variables for this project such as secretkey, database connection parameters
+
+5. Run server
 
   ```
   $ ./manage.py runserver
@@ -43,7 +46,7 @@ $ git clone https://github.com/jenwich/clinichub.git
   $ ./manage.py shell
   ```
  
-### Install client (Optional - ไม่ต้องมีก็ได้)
+### Install client (Optional)
  
 1. Install node.js & npm
 2. Install dependencies
