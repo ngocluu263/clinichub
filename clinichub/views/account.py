@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
-from .models import *
+from clinichub.models import *
 
 def index(request):
     return render(request, 'index.html')
