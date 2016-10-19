@@ -1,26 +1,15 @@
 from django.db import models
 from mongoengine import *
+from mongoengine.django.auth import User
 
-# Is User still to be used? 
-class User(Document):
-    username = StringField(required=True, max_length=20)
-    firstname = StringField(required=True,max_length=50)
-    lastname = StringField(required=True,max_length=50)
-
-class Patient(Document):
-	username = StringField(required=True, max_length=20)
-	password = StringField(required=True, max_length=50)
+class Patient(User):
 	firstname = StringField(required=True,max_length=50)
 	lastname = StringField(required=True,max_length=50)
-	email = StringField(required=True,max_length=50)
 	balance = DecimalField()
 	
-class Doctor(Document):
-	username = StringField(required=True, max_length=20)
-	password = StringField(required=True, max_length=50)
+class Doctor(User):
 	firstname = StringField(required=True,max_length=50)
 	lastname = StringField(required=True,max_length=50)
-	email = StringField(required=True,max_length=50)
 	field = StringField(max_length=50)
 	clinic = ReferenceField('Clinic')
 
