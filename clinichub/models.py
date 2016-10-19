@@ -24,15 +24,15 @@ class Doctor(Document):
 	field = StringField(max_length=50)
 	clinic = ReferenceField('Clinic')
 
-class Clinic(Document):
-	clinic_name = StringField(required = True, max_length=50)
-	clinic_description = StringField(max_length=100)
-	clinic_contrib = ListField(ReferenceField(Message))
-
 class Message(EmbeddedDocument):
 	msg = StringField(max_length=100)
 	sender = StringField(required=True,max_length=1)
 	timestamp = DateTimeField()
+
+class Clinic(Document):
+	clinic_name = StringField(required = True, max_length=50)
+	clinic_description = StringField(max_length=100)
+	clinic_contrib = ListField(ReferenceField('Message'))
 	
 class Session(Document):
 	topic = StringField(max_length=50)
