@@ -21,7 +21,7 @@ class Message(EmbeddedDocument):
 class Clinic(Document):
 	clinic_name = StringField(required = True, max_length=50)
 	clinic_description = StringField(max_length=100)
-	clinic_contrib = ListField(ReferenceField('Message'))
+	clinic_contrib = ListField(ReferenceField(Doctor))
 	
 class Session(Document):
 	topic = StringField(max_length=50)
