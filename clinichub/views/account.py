@@ -16,7 +16,10 @@ def login(request):
                 'error_message': login_result['error_message']
             })
     else:
-        return render(request, 'account/login.html')
+        if 'username' not in request.session:
+            return render(request, 'account/login.html')
+        else:
+            return redirect('/profile')
 
 def register(request):
     if request.method == 'POST':
@@ -35,7 +38,10 @@ def register(request):
             login_result = Patient.login(request)
             return redirect('/profile')
     else:
-        return render(request, 'account/register.html')
+        if 'username' not in request.session:
+            return render(request, 'account/register.html')
+        else:
+            return redirect('/profile')
 
 def profile(request):
     return render(request, 'account/profile.html', {
