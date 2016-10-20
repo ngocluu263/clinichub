@@ -8,15 +8,12 @@ def index(request):
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
-        user = Patient.objects(username=username).first()
-        if user and user.check_password(password):
-            request.session['username'] = username
+        login_result = Patient.login(request)
+        if 'error_message' not in login_result:
             return redirect('/profile')
         else:
             return render(request, 'account/login.html', {
-                'error_message': "Wrong username or password"    
+                'error_message': login_result['error_message']
             })
     else:
         return render(request, 'account/login.html')
@@ -54,5 +51,5 @@ def profile(request):
     })
 
 def logout(request):
-    request.session.pop('username')
+    User.logout(request)
     return redirect('/')
