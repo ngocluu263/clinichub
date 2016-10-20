@@ -21,27 +21,19 @@ def login(request):
 def register(request):
     if request.method == 'POST':
         try:
-            username = request.POST.get('username', '')
-            password = request.POST.get('password', '')
-            password_confirm = request.POST.get('password_confirm', '')
-            email = request.POST.get('email', '')
-            firstname = request.POST.get('firstname', '')
-            lastname = request.POST.get('lastname', '')
-            if (password != password_confirm):
-                raise ValidationError('Password and confirm password must be same.')
-            user = Patient.create_user(username, password)
-            user.balance = 0
-            user.save()
+            register_result = Patient.register(request)
         except ValidationError as e:
-            return render(request, 'account/register.html', {
-                'error_message': e.args[0]
-            })
+            if e.args[0] == 'PasswordNotMatched':
+                return render(request, 'account/register.html', {
+                    'error_message': 'Password and confirm password must be same.'
+                })
         except NotUniqueError as e:
             return render(request, 'account/register.html', {
                 'error_message': "Username must be unique."
             })
         else:
-            return redirect('/')
+            login_result = Patient.login(request)
+            return redirect('/profile')
     else:
         return render(request, 'account/register.html')
 
