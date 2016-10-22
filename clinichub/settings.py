@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mongoengine.django.mongo_auth',
+    'mongoengine.django'
 ]
 
 MIDDLEWARE = [
@@ -81,6 +83,17 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+
+SESSION_ENGINE = 'mongoengine.django.sessions'
+
+SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
+
+AUTHENTICATION_BACKENDS = (
+    'mongoengine.django.auth.MongoEngineBackend',
+)
+
+# AUTH_USER_MODEL = ('mongo_auth.MongoUser')
+MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

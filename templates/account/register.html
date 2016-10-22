@@ -1,0 +1,30 @@
+<h2>Patient Register</h2>
+<form action="" method="post">
+  {% csrf_token %}
+  <p>
+    <label for="username">Username: </label>
+    <input id="username" type="text" name="username" maxlength="30" required />
+  </p>
+  <p>
+    <label for="password">Password: </label>
+    <input id="password" type="password" name="password" required />
+  </p>
+  <p>
+    <label for="password_confirm">Confirm Password: </label>
+    <input id="password_confirm" type="password" name="password_confirm" required />
+  </p>
+  <p>
+    <label for="email">Email: </label>
+    <input id="email" type="email" name="email" maxlength="50" required />
+  </p>
+  <p>
+    <label for="firstname">First Name: </label>
+    <input id="firstname" type="text" name="firstname" maxlength="50" required />
+  </p>
+  <p>
+    <label for="lastname">Last Name: </label>
+    <input id="lastname" type="text" name="lastname" maxlength="50" required />
+  </p>
+  <p><input type="submit" value="Register"></p>
+  {{ error_message }}
+</form>

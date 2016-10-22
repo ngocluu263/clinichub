@@ -16,8 +16,15 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
+# from django.contrib.auth import views as auth_views
+from django.core.urlresolvers import reverse
 
+app_name = 'clinichub'
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'^admin/', admin.site.urls)
+    url(r'^login/', views.login, name='login'),
+    url(r'^register/', views.register, name='register'),
+    url(r'^profile/', views.profile, name='profile'),
+    url(r'^logout/', views.logout, name='logout'),
+    # url(r'^admin/', admin.site.urls),
 ]
