@@ -1,4 +1,7 @@
 from django.shortcuts import render
 
 def index(request):
-    return render(request, 'index.html')
+    print(request.session.get('username'))
+    return render(request, 'index.html', {
+        'username': request.session.get('username')    
+    })

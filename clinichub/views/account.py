@@ -3,9 +3,6 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from clinichub.models import *
 
-def index(request):
-    return render(request, 'index.html')
-
 def login(request):
     if request.method == 'POST':
         login_result = Patient.login(request)

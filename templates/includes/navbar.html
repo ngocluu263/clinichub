@@ -17,8 +17,15 @@
         <li><a href="/doctor">For Doctor</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/register">Register</a></li>
-        <li><a href="/login">Sign in</a></li>
+        {% if not username %}
+          <li><a href="/register">Register</a></li>
+          <li><a href="/login">Sign in</a></li>
+        {% elif type == 'doctor' %}
+        {% else %}
+          <p class="navbar-text">Signed in as {{ username }}</p>
+          <li><a href="/profile">My profile</a></li>
+          <li><a href="/logout">Log out</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>
