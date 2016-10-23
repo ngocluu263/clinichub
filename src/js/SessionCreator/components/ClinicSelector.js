@@ -1,39 +1,38 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 
-let FieldItem = ({name, selectField, isSelected}) => {
+const ClinicItem = ({id, name, selectClinic, isSelected}) => {
   return (
     <li className={isSelected? 'select': ''}>
-      <a href="javascript:;" onClick={selectField}>{name}</a>
+      <a href="javascript:;" onClick={selectClinic}>{id}: {name}</a>
     </li>
   )
 }
 
 @observer
 export default class ClinicSelector extends React.Component {
-  filter(e) {
-    this.props.store.fieldFilter = e.target.value.trim()
-  }
-
-  selectField(field) {
-    this.props.store.selectedField = field
+  selectClinic(clinic) {
+    this.props.store.selectedClinic = clinic
   }
 
   render() {
-    const fieldList = this.props.fields.map(field => {
+    const clinicList = this.props.clinics.map(clinic => {
       return (
-        <FieldItem
-          key={field}
-          name={field}
-          selectField={this.selectField.bind(this, field)}
-          isSelected={field==this.props.store.selectedField} />
+        <ClinicItem
+          key={clinic.id}
+          id={clinic.id}
+          name={clinic.name}
+          selectClinic={this.selectClinic.bind(this, clinic)}
+          isSelected={clinic==this.props.store.selectedClinic} />
       )
     })
     return (
       <div>
-        <input type="text" onChange={this.filter.bind(this)} />
-        <ul>{ fieldList }</ul>
-        <button onClick={() => this.props.store.step++} disabled={!this.props.store.selectedField}>Confirm</button>
+        <p>Seleted field: {this.props.store.selectedField}</p>
+        <ul>
+          { clinicList }
+        </ul>
+        <button onClick={() => this.props.store.step++} disabled={!this.props.store.selectedClinic}>Confirm</button>
         <button onClick={() => this.props.store.step--}>Back</button>
       </div>
     )

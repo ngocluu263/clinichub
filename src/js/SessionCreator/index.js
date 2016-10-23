@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { action } from 'mobx'
+import { autorun } from 'mobx'
 
 import SessionCreator from './components/SessionCreator'
 import SessionCreatorStore from './stores/SessionCreatorStore'
 
 let initialData = {
-  step: 1,
+  step: 3,
   clinics: [
     {id: "1", name: "Clinic1", fields: ["Eye", "Dentist"]},
     {id: "2", name: "Clinic2", fields: ["Eye", "Bone", "Skin"]},

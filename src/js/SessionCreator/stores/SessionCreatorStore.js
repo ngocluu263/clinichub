@@ -1,10 +1,11 @@
-import { observable, autorun, computed, action } from 'mobx'
+import { observable, computed, action } from 'mobx'
 import _ from 'lodash'
 
 export default class SessionCreatorStore {
   @observable step = 1
   @observable fieldFilter = ""
-  @observable selectedField = ""
+  @observable selectedField = "Eye"
+  @observable selectedClinic
   clinics = []
   fields = []
 
@@ -21,6 +22,10 @@ export default class SessionCreatorStore {
       case 5: return "Step 5: Detail session"  
       case 6: return "Step 6: Finish!"  
     }
+  }
+
+  @computed get clinicsWithSelectedField() {
+    return this.clinics.filter(item => _.includes(item.fields, this.selectedField))
   }
 
   deriveFields() {
