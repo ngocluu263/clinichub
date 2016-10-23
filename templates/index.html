@@ -1,1 +1,9 @@
-<h1>{{ greeting }}</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1>ClinicHub</h1>
+  <p>Description</p>
+  <p><a class="btn btn-primary btn-lg" href="/register" role="button">Join us</a></p>
+</div>
+{% endblock %}
