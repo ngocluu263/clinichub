@@ -7,6 +7,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src/js'),
   entry: {
     index: './index',
+    sessionCreator: './SessionCreator/index',
     // vendors: ['react', 'react-dom']
   },
   output: {
