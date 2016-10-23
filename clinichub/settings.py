@@ -130,6 +130,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "dist")
+]
+
 connect(MONGODB_DATABASE,
         host=MONGODB_HOST,
         port=MONGODB_PORT,
