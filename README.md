@@ -1,5 +1,7 @@
 # Clinichub
 
+*Description here*
+
 ## Installation
 
 Clone project
@@ -32,36 +34,41 @@ $ git clone https://github.com/jenwich/clinichub.git
 
   Create `clinichub/secret.py` - contains secret variables for this project such as secretkey, database connection parameters
 
-5. Run server
-
-  ```
-  $ ./manage.py runserver
-  ```
-  or run via npm script (require node.js & npm)
-  ```
-  $ npm start
-  ```
-  or run django shell
-  ```
-  $ ./manage.py shell
-  ```
- 
 ### Install client (Optional)
- 
+
 1. Install node.js & npm
 2. Install dependencies
 
   ```
   $ npm install
-  ```
 
-3. Run dev server
+## How to run it
+
+### Server
+
+Run server
+
+```
+$ ./manage.py runserver
+```
+or run via npm script (require node.js & npm)
+```
+$ npm start
+```
+or run django shell
+```
+$ ./manage.py shell
+```
+
+### React.js
+
+* Run dev server
 
   ```
   $ npm run dev
   ```
 
-4. Build
+* Build
 
   ```
   $ npm run build
