@@ -41,6 +41,7 @@ $ git clone https://github.com/jenwich/clinichub.git
 
   ```
   $ npm install
+  ```
 
 ## How to run it
 
