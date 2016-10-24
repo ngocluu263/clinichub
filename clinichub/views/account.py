@@ -5,12 +5,14 @@ from clinichub.models import *
 
 def login(request):
     if request.method == 'POST':
-        login_result = Patient.login(request)
-        if 'error_message' not in login_result:
+        result = Patient.login(request)
+        if 'error_message' not in result:
+            request.session['username'] = result['user'].username
+            request.session['user_type'] = 'patient'
             return redirect('/profile')
         else:
             return render(request, 'account/login.html', {
-                'error_message': login_result['error_message']
+                'error_message': result['error_message']
             })
     else:
         if 'username' not in request.session:
@@ -21,7 +23,7 @@ def login(request):
 def register(request):
     if request.method == 'POST':
         try:
-            register_result = Patient.register(request)
+            result = Patient.register(request)
         except ValidationError as e:
             if e.args[0] == 'PasswordNotMatched':
                 return render(request, 'account/register.html', {
@@ -32,7 +34,9 @@ def register(request):
                 'error_message': "Username must be unique."
             })
         else:
-            login_result = Patient.login(request)
+            result = Patient.login(request)
+            request.session['username'] = result['user'].username
+            request.session['user_type'] = 'patient'
             return redirect('/profile')
     else:
         if 'username' not in request.session:
@@ -41,7 +45,8 @@ def register(request):
             return redirect('/profile')
 
 def logout(request):
-    User.logout(request)
+    request.session.pop('username')
+    request.session.pop('user_type')
     return redirect('/')
 
 def doctor_login(request):

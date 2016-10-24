@@ -11,11 +11,6 @@ class User(User):
         password = request.POST.get('password', '')
         user = cls.objects(username=username).first()
         if user and user.check_password(password):
-            request.session['username'] = username
-            return {}
+            return { 'user': user }
         else:
             return {'error_message': "Wrong username or password"}
-
-    @classmethod
-    def logout(cls, request):
-        request.session.pop('username')
