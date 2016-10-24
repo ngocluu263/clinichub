@@ -40,11 +40,15 @@ def register(request):
         else:
             return redirect('/profile')
 
-def profile(request):
-    return render(request, 'account/profile.html', {
-        'username': request.session.get('username')
-    })
-
 def logout(request):
     User.logout(request)
     return redirect('/')
+
+def doctor_login(request):
+    return HttpResponse('Doctor_login')
+
+def doctor_register(request):
+    return HttpResponse('Doctor_register')
+
+def doctor_profile(request):
+    return HttpResponse('Doctor_profile')

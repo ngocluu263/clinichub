@@ -1,30 +1,50 @@
-"""clinichub URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.10/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
 from django.conf.urls import url, include
-from django.contrib import admin
-from . import views
-# from django.contrib.auth import views as auth_views
 from django.core.urlresolvers import reverse
+from . import views
 
-app_name = 'clinichub'
+patient_urlpatterns = [
+    url(r'^$', views.patient_profile, name='profile'),
+    url(r'^sessions$', views.patient_sessions, name='patient_sessions'),
+    url(r'^info$', views.patient_info, name='patient_info'),
+    url(r'^payment$', views.patient_payment, name='patient_payment'),
+    url(r'^appointments$', views.patient_appointments, name='patient_appointments'),
+    url(r'^transcripts$', views.patient_transcripts, name='patient_transcripts'),
+]
+
+doctor_urlpatterns = [
+    url(r'^$', views.doctor_profile, name='profile'),
+    url(r'^sessions$', views.doctor_sessions, name='doctor_sessions'),
+    url(r'^info$', views.doctor_info, name='doctor_info'),
+    url(r'^clinic$', views.doctor_clinic, name='doctor_clinic'),
+    url(r'^appointments$', views.doctor_appointments, name='doctor_appointments'),
+]
+
+session_urlpatterns = [
+    url(r'^create$', views.session_create, name='session_create'),
+    url(r'^(?P<session_id>[a-f0-9]+)$', views.session, name='session'),
+]
+
+transcript_urlpatterns = [
+    url(r'^create$', views.transcript_create, name='transcript_create'),
+    url(r'^(?P<transcript_id>[a-f0-9]+)$', views.transcript, name='transcript'),
+]
+
+appointment_urlpatterns = [
+    url(r'^create$', views.appointment_create, name='appointment_create'),
+    url(r'^(?P<appointment_id>[a-f0-9]+)$', views.appointment, name='appointment'),
+]
+
 urlpatterns = [
     url(r'^$', views.index),
-    url(r'^login/', views.login, name='login'),
-    url(r'^register/', views.register, name='register'),
-    url(r'^profile/', views.profile, name='profile'),
-    url(r'^logout/', views.logout, name='logout'),
-    # url(r'^admin/', admin.site.urls),
+    url(r'^login$', views.login, name='login'),
+    url(r'^register$', views.register, name='register'),
+    url(r'^logout$', views.logout, name='logout'),
+    url(r'^profile/', include(patient_urlpatterns)),
+    url(r'^doctor$', views.doctor_index),
+    url(r'^doctor/login$', views.doctor_login, name='doctor_login'),
+    url(r'^doctor/register$', views.doctor_register, name='doctor_register'),
+    url(r'^doctor/profile/', include(doctor_urlpatterns)),
+    url(r'^session/', include(session_urlpatterns)),
+    url(r'^transcript/', include(transcript_urlpatterns)),
+    url(r'^appointment/', include(appointment_urlpatterns)),
 ]
