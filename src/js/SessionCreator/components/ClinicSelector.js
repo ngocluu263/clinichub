@@ -1,4 +1,5 @@
 import React from 'react'
+import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
 
 const ClinicItem = ({id, name, selectClinic, isSelected}) => {

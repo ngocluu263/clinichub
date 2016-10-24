@@ -6,7 +6,7 @@ import SessionCreator from './components/SessionCreator'
 import SessionCreatorStore from './stores/SessionCreatorStore'
 
 let initialData = {
-  step: 3,
+  step: 1,
   clinics: [
     {id: "1", name: "Clinic1", fields: ["Eye", "Dentist"]},
     {id: "2", name: "Clinic2", fields: ["Eye", "Bone", "Skin"]},
