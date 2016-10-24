@@ -4,21 +4,37 @@ from django.core.urlresolvers import reverse
 from clinichub.models import *
 
 def patient_profile(request):
-    return render(request, 'account/profile.html', {
+    return render(request, 'patient/profile.html', {
+        'page': 'profile',
         'username': request.session.get('username')
     })
 
 def patient_sessions(request):
-    return HttpResponse('Patient sessions')
+    return render(request, 'patient/sessions.html', {
+        'page': 'sessions',
+        'username': request.session.get('username')
+    })
 
 def patient_info(request):
-    return HttpResponse('Patient info')
+    return render(request, 'patient/info.html', {
+        'page': 'info',
+        'username': request.session.get('username')
+    })
 
 def patient_payment(request):
-    return HttpResponse('Patient payment')
+    return render(request, 'patient/payment.html', {
+        'page': 'payment',
+        'username': request.session.get('username')
+    })
 
 def patient_appointments(request):
-    return HttpResponse('Patient appointments')
+    return render(request, 'patient/appointments.html', {
+        'page': 'appointments',
+        'username': request.session.get('username')
+    })
 
 def patient_transcripts(request):
-    return HttpResponse('Patient transcripts')
+    return render(request, 'patient/transcripts.html', {
+        'page': 'transcripts',
+        'username': request.session.get('username')
+    })

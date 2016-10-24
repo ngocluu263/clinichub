@@ -1,3 +1,12 @@
 #main {
   margin-top: 60px;
 }
+
+.nav-menu-center {
+  text-align: center;
+}
+
+.nav-menu-center li {
+  float: none;
+  display: inline-block;
+}
