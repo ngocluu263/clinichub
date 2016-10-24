@@ -17,12 +17,15 @@
         <li><a href="{% url 'doctor_index' %}">For Doctor</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        {% if not username %}
+        {% if not request.session.username %}
           <li><a href="{% url 'register' %}">Register</a></li>
           <li><a href="{% url 'login' %}">Sign in</a></li>
-        {% elif type == 'doctor' %}
+        {% elif request.session.user_type == "doctor" %}
+          <p class="navbar-text">Signed in as Dr. {{ request.session.username }}</p>
+          <li><a href="{% url 'doctor_profile' %}">My profile</a></li>
+          <li><a href="{% url 'logout' %}">Log out</a></li>
         {% else %}
-          <p class="navbar-text">Signed in as {{ username }}</p>
+          <p class="navbar-text">Signed in as {{ request.session.username }}</p>
           <li><a href="{% url 'patient_profile' %}">My profile</a></li>
           <li><a href="{% url 'logout' %}">Log out</a></li>
         {% endif %}

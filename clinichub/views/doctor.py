@@ -4,16 +4,41 @@ from django.core.urlresolvers import reverse
 from clinichub.models import *
 
 def doctor_profile(request):
-    return HttpResponse('Doctor profile')
+    if 'username' in request.session:
+        return render(request, 'doctor/profile.html', {
+            'page': 'profile',
+        })
+    else:
+        return redirect(reverse('doctor_login'))
 
 def doctor_sessions(request):
-    return HttpResponse('Doctor sessions')
+    if 'username' in request.session:
+        return render(request, 'doctor/sessions.html', {
+            'page': 'sessions',
+        })
+    else:
+        return redirect(reverse('doctor_login'))
 
 def doctor_info(request):
-    return HttpResponse('Doctor info')
+    if 'username' in request.session:
+        return render(request, 'doctor/info.html', {
+            'page': 'info',
+        })
+    else:
+        return redirect(reverse('doctor_login'))
 
 def doctor_clinic(request):
-    return HttpResponse('Doctor clinic management')
+    if 'username' in request.session:
+        return render(request, 'doctor/clinic.html', {
+            'page': 'clinic',
+        })
+    else:
+        return redirect(reverse('doctor_login'))
 
 def doctor_appointments(request):
-    return HttpResponse('Doctor appointments')
+    if 'username' in request.session:
+        return render(request, 'doctor/appointments.html', {
+            'page': 'appointments',
+        })
+    else:
+        return redirect(reverse('doctor_login'))

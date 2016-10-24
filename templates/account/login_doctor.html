@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign in - ClinicHub {% endblock %}
+
+{% block content %}
+<div class="col-sm-6 col-sm-offset-3">
+  <h2 style="text-align: center;">Sign in as Doctor</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" type="text" name="username" maxlength="30" class="form-control" required autofocus />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+        {% if error_message %}
+          <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

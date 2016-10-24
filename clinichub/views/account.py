@@ -50,7 +50,21 @@ def logout(request):
     return redirect('/')
 
 def doctor_login(request):
-    return HttpResponse('Doctor_login')
+    if request.method == 'POST':
+        result = Doctor.login(request)
+        if 'error_message' not in result:
+            request.session['username'] = result['user'].username
+            request.session['user_type'] = 'doctor'
+            return redirect('/doctor/profile')
+        else:
+            return render(request, 'account/login_doctor.html', {
+                'error_message': result['error_message']
+            })
+    else:
+        if 'username' not in request.session:
+            return render(request, 'account/login_doctor.html')
+        else:
+            return redirect('/doctor/profile')
 
 def doctor_register(request):
     return HttpResponse('Doctor_register')

@@ -1,0 +1,16 @@
+{% extends '../base.html' %}
+
+{% block content %}
+  <div class="col-md-8 col-md-offset-2" style="text-align: center;">
+    <h2>Doctor profile</h2>
+    <ul class="nav nav-pills nav-menu-center">
+      <li role="presentation" class="{% if page == "profile" %}active{% endif %}"><a href="{% url 'doctor_profile' %}">Home</a></li>
+      <li role="presentation" class="{% if page == "info" %}active{% endif %}"><a href="{% url 'doctor_info' %}">Information</a></li>
+      <li role="presentation" class="{% if page == "sessions" %}active{% endif %}"><a href="{% url 'doctor_sessions' %}">Sessions</a></li>
+      <li role="presentation" class="{% if page == "clinic" %}active{% endif %}"><a href="{% url 'doctor_clinic' %}">Clinic Management</a></li>
+      <li role="presentation" class="{% if page == "appointments" %}active{% endif %}"><a href="{% url 'doctor_appointments' %}">Appointments</a></li>
+    </ul>
+    {% block innercontent %}
+    {% endblock innercontent %}
+  </div>
+{% endblock content %}
