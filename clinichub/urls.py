@@ -34,6 +34,10 @@ appointment_urlpatterns = [
     url(r'^(?P<appointment_id>[a-f0-9]+)$', views.appointment, name='appointment'),
 ]
 
+api_urlpatterns = [
+    url(r'^get_all_clinics$', views.api.get_all_clinics),
+]
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^login$', views.login, name='login'),
@@ -47,4 +51,5 @@ urlpatterns = [
     url(r'^session/', include(session_urlpatterns)),
     url(r'^transcript/', include(transcript_urlpatterns)),
     url(r'^appointment/', include(appointment_urlpatterns)),
+    url(r'^api/', include(api_urlpatterns)),
 ]

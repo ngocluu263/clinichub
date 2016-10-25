@@ -5,3 +5,4 @@ from .doctor import *
 from .session import *
 from .transcript import *
 from .appointment import *
+from . import api
