@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from mongoengine import *
 from clinichub.models import *
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -36,8 +37,9 @@ def create_session(request):
         session.message.append(message)
         session.save()
         session_ = { 'id': str(session.id), 'topic': session.topic, 'description': session.message[0].msg}
-    except Exception:
-        raise
+    except ValidationError as e:
+        return HttpResponse(json.dumps({ 'error_message': e.args[0] }),
+            content_type='application/json')
     else:
         return HttpResponse(json.dumps({
             'clinics': clinic_,
