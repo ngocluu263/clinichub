@@ -102,3 +102,16 @@ def create_appointment(request):
     except Exception as e:
         return JsonResponse({ 'error_message': e.args[0] })
     return JsonResponse(appointment_)
+
+@csrf_exempt
+def delete_session(request):
+    body = json.loads(request.body.decode("utf-8"))
+    session_id = body['session_id']
+    try:
+        session = Session.objects(id=session_id).first()
+        if not session:
+            raise Exception('Session not found')
+        session.delete()
+    except Exception as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse({})
