@@ -24,15 +24,22 @@ def get_all_clinics(request):
     
 @csrf_exempt
 def create_session(request):
-    topic = request.POST.get('topic', 'Unnamed session')
-    description = request.POST.get('description', '')
-    username = request.session.get('username') or 'bobby'
+    body = json.loads(request.body.decode("utf-8"))
     try:
-        clinic = Clinic.objects(id=request.POST.get('clinic')).first()
-        doctor = Doctor.objects(clinic=clinic, field=request.POST.get('field')).first()
+        topic = body['topic']
+        description = body['description']
+        patient_username = request.session.get('username') or body['patient']
+        field = body['field']
+        clinic_id = body['clinic']
+        clinic = Clinic.objects(id=clinic_id).first()
+        if not clinic:
+            raise ValidtionError('Clinic not found')
+        doctor = Doctor.objects(clinic=clinic, field=field).first()
+        if not doctor:
+            raise ValidtionError('Doctor not found')
         doctor_ = { 'id': str(doctor.id), 'username': doctor.username }
         clinic_ = { 'id': str(clinic.id), 'name': clinic.clinic_name }
-        patient = Patient.objects(username=username).first()
+        patient = Patient.objects(username=patient_username).first()
         session = Session.objects.create(topic=topic, ses_patient=patient, ses_doctor=doctor)
         message = Message(msg=description, sender='P', time=datetime.datetime.now())
         session.messages.append(message)
@@ -48,16 +55,19 @@ def create_session(request):
 
 @csrf_exempt
 def get_session(request):
-    session_id = request.POST.get('session_id','581134d44f5d211a49545691')
+    body = json.loads(request.body.decode("utf-8"))
     try:
+        session_id = body['session_id']
         session = Session.objects(id=session_id).first()
+        me = request.session.get('user_type') or 'patient'
         if not session:
             raise ValidationError("Session not found.")
         session_ = {
             'id': str(session.id),
             'topic': session.topic,
             'patient': session.ses_patient.username,
-            'doctor': session.ses_doctor.username}
+            'doctor': session.ses_doctor.username,
+            'me': me}
         messages = [{ 'msg': msg.msg, 'sender': msg.sender, 'time': msg.time } for msg in session.messages]
         session_['messages'] = messages
     except ValidationError as e:
@@ -68,10 +78,7 @@ def get_session(request):
 def create_transcript(request):
     body = json.loads(request.body.decode("utf-8"))
     try:
-        if request.session.get('user_type') == 'doctor':
-            doctor = request.session.get('user').id 
-        else:
-            doctor = '580f6de35a95ef3bbb446033'
+        doctor = body['doctor']
         patient = Patient.objects(id=body['patient']).first()
         transcript = Transcript.objects.create(doctor=doctor, patient=patient, note=body['note'], drugs=body['drugs'])
         transcript_ = {
@@ -87,10 +94,7 @@ def create_transcript(request):
 def create_appointment(request):
     body = json.loads(request.body.decode("utf-8"))
     try:
-        if request.session.get('user_type') == 'doctor':
-            doctor = request.session.get('user').id 
-        else:
-            doctor = '580f6de35a95ef3bbb446033'
+        doctor = body['doctor']
         patient = Patient.objects(id=body['patient']).first()
         appointment = Appointment.objects.create(doctor=doctor, patient=patient, note=body['note'], time=datetime.datetime.fromtimestamp(int(body['time'])))
         appointment_ = {
