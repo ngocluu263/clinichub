@@ -37,6 +37,7 @@ appointment_urlpatterns = [
 api_urlpatterns = [
     url(r'^get_all_clinics$', views.api.get_all_clinics),
     url(r'^create_session$', views.api.create_session),
+    url(r'^get_session$', views.api.get_session),
 ]
 
 urlpatterns = [

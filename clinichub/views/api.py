@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from mongoengine import *
 from clinichub.models import *
-import json
 from django.views.decorators.csrf import csrf_exempt
 
 def get_doctors_by_clinic(clinic):
@@ -19,13 +18,13 @@ def get_fields_by_clinic(clinic):
 @csrf_exempt
 def get_all_clinics(request):
     clinic_list = [{'id': str(clinic.id), 'name': clinic.clinic_name, 'description': clinic.clinic_description, 'fields': get_fields_by_clinic(clinic)} for clinic in Clinic.objects.all()]
-    return HttpResponse(json.dumps({ 'clinics': clinic_list }), content_type='application/json')
+    return JsonResponse({ 'clinics': clinic_list })
     
 @csrf_exempt
 def create_session(request):
     topic = request.POST.get('topic', 'Unnamed session')
     description = request.POST.get('description', '')
-    username = 'bobby'
+    username = request.session.get('username') or 'bobby'
     try:
         clinic = Clinic.objects(id=request.POST.get('clinic')).first()
         doctor = Doctor.objects(clinic=clinic, field=request.POST.get('field')).first()
@@ -38,11 +37,28 @@ def create_session(request):
         session.save()
         session_ = { 'id': str(session.id), 'topic': session.topic, 'description': session.message[0].msg}
     except ValidationError as e:
-        return HttpResponse(json.dumps({ 'error_message': e.args[0] }),
-            content_type='application/json')
+        return JsonResponse({ 'error_message': e.args[0] })
     else:
-        return HttpResponse(json.dumps({
+        return JsonResponse({
             'clinics': clinic_,
             'doctor': doctor_,
-            'session': session_ }),
-            content_type='application/json')
+            'session': session_ })
+
+@csrf_exempt
+def get_session(request):
+    session_id = request.POST.get('session_id','581134d44f5d211a49545691')
+    try:
+        session = Session.objects(id=session_id).first()
+        if not session:
+            raise ValidationError("Session not found.")
+        session_ = {
+            'id': str(session.id),
+            'topic': session.topic,
+            'patient': session.ses_patient.username,
+            'doctor': session.ses_doctor.username}
+        messages = [{ 'msg': msg.msg, 'sender': msg.sender, 'time': msg.timestamp } for msg in session.message]
+        session_['messages'] = messages
+    except ValidationError as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse({'session': session_ })
+        

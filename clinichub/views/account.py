@@ -9,6 +9,7 @@ def login(request):
         if 'error_message' not in result:
             request.session['username'] = result['user'].username
             request.session['user_type'] = 'patient'
+            request.session['user'] = result['user']
             return redirect('/profile')
         else:
             return render(request, 'account/login.html', {
@@ -37,6 +38,7 @@ def register(request):
             result = Patient.login(request)
             request.session['username'] = result['user'].username
             request.session['user_type'] = 'patient'
+            request.session['user'] = result['user']
             return redirect('/profile')
     else:
         if 'username' not in request.session:
@@ -47,6 +49,7 @@ def register(request):
 def logout(request):
     request.session.pop('username')
     request.session.pop('user_type')
+    request.session.pop('user')
     return redirect('/')
 
 def doctor_login(request):
@@ -55,6 +58,7 @@ def doctor_login(request):
         if 'error_message' not in result:
             request.session['username'] = result['user'].username
             request.session['user_type'] = 'doctor'
+            request.session['user'] = result['user']
             return redirect('/doctor/profile')
         else:
             return render(request, 'account/login_doctor.html', {
@@ -68,6 +72,3 @@ def doctor_login(request):
 
 def doctor_register(request):
     return HttpResponse('Doctor_register')
-
-def doctor_profile(request):
-    return HttpResponse('Doctor_profile')
