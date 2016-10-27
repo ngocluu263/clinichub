@@ -24,12 +24,12 @@ class Appointments(Document):
     app_note = StringField(max_length=100)
 
 class Drug(EmbeddedDocument):
-    drug_name = StringField(max_length=50)
-    drug_amount = IntField()
-    drug_usage = StringField(max_length=100)
+    name = StringField(max_length=50)
+    amount = IntField()
+    usage = StringField(max_length=100)
 	
 class Transcript(Document):
-    trans_doctor = ReferenceField(Doctor)
-    trans_patient = ReferenceField(Patient)
-    trans_drugs = ListField(EmbeddedDocumentField(Drug))
-    trans_note = StringField(max_length = 100)
+    doctor = ReferenceField(Doctor)
+    patient = ReferenceField(Patient)
+    drugs = ListField(EmbeddedDocumentField(Drug))
+    note = StringField(max_length = 100)

@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from mongoengine import *
 from clinichub.models import *
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 def get_doctors_by_clinic(clinic):
     doctor_list = filter(lambda doctor: doctor.clinic == clinic, Doctor.objects.all())
@@ -62,3 +63,19 @@ def get_session(request):
         return JsonResponse({ 'error_message': e.args[0] })
     return JsonResponse({'session': session_ })
         
+@csrf_exempt
+def create_transcript(request):
+    request.POST.urlencode()
+    body = json.loads(request.body.decode("utf-8"))
+    try:
+        doctor = Doctor.objects(id=body['doctor']).first()
+        patient = Patient.objects(id=body['patient']).first()
+        transcript = Transcript.objects.create(doctor=doctor, patient=patient, note=body['note'], drugs=body['drugs'])
+        transcript_ = {
+            'id': str(transcript.id),
+            'doctor': transcript.doctor.username,
+            'patient': transcript.patient.username,
+            'drugs': [{ 'name': drug.name, 'amount': drug.amount, 'usage': drug.usage } for drug in transcript.drugs]}
+    except Exception as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse({'transcript': transcript_ })
