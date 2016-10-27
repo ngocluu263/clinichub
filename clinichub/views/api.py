@@ -4,6 +4,7 @@ from mongoengine import *
 from clinichub.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
+import datetime
 
 def get_doctors_by_clinic(clinic):
     doctor_list = filter(lambda doctor: doctor.clinic == clinic, Doctor.objects.all())
@@ -65,10 +66,12 @@ def get_session(request):
         
 @csrf_exempt
 def create_transcript(request):
-    request.POST.urlencode()
     body = json.loads(request.body.decode("utf-8"))
     try:
-        doctor = Doctor.objects(id=body['doctor']).first()
+        if request.session.get('user_type') == 'doctor':
+            doctor = request.session.get('user').id 
+        else:
+            doctor = '580f6de35a95ef3bbb446033'
         patient = Patient.objects(id=body['patient']).first()
         transcript = Transcript.objects.create(doctor=doctor, patient=patient, note=body['note'], drugs=body['drugs'])
         transcript_ = {
@@ -79,3 +82,23 @@ def create_transcript(request):
     except Exception as e:
         return JsonResponse({ 'error_message': e.args[0] })
     return JsonResponse({'transcript': transcript_ })
+
+@csrf_exempt
+def create_appointment(request):
+    body = json.loads(request.body.decode("utf-8"))
+    try:
+        if request.session.get('user_type') == 'doctor':
+            doctor = request.session.get('user').id 
+        else:
+            doctor = '580f6de35a95ef3bbb446033'
+        patient = Patient.objects(id=body['patient']).first()
+        appointment = Appointment.objects.create(doctor=doctor, patient=patient, note=body['note'], time=datetime.datetime.fromtimestamp(int(body['time'])))
+        appointment_ = {
+            'id': str(appointment.id),
+            'doctor': appointment.doctor.username,
+            'patient': appointment.patient.username,
+            'note': appointment.note,
+            'time': appointment.time}
+    except Exception as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse(appointment_)

@@ -39,6 +39,7 @@ api_urlpatterns = [
     url(r'^create_session$', views.api.create_session),
     url(r'^get_session$', views.api.get_session),
     url(r'^create_transcript$', views.api.create_transcript),
+    url(r'^create_appointment$', views.api.create_appointment),
 ]
 
 urlpatterns = [

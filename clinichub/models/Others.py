@@ -17,11 +17,11 @@ class Session(Document):
     ses_doctor = ReferenceField(Doctor)
     message = ListField(EmbeddedDocumentField(Message))
 
-class Appointments(Document):
-    app_doctor = ReferenceField(Doctor)
-    app_patient = ReferenceField(Patient)
-    app_time = DateTimeField()
-    app_note = StringField(max_length=100)
+class Appointment(Document):
+    doctor = ReferenceField(Doctor)
+    patient = ReferenceField(Patient)
+    time = DateTimeField()
+    note = StringField(max_length=100)
 
 class Drug(EmbeddedDocument):
     name = StringField(max_length=50)
