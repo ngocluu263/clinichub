@@ -34,10 +34,10 @@ def create_session(request):
         clinic_ = { 'id': str(clinic.id), 'name': clinic.clinic_name }
         patient = Patient.objects(username=username).first()
         session = Session.objects.create(topic=topic, ses_patient=patient, ses_doctor=doctor)
-        message = Message(msg=description, sender='P')
-        session.message.append(message)
+        message = Message(msg=description, sender='P', time=datetime.datetime.now())
+        session.messages.append(message)
         session.save()
-        session_ = { 'id': str(session.id), 'topic': session.topic, 'description': session.message[0].msg}
+        session_ = { 'id': str(session.id), 'topic': session.topic, 'description': session.messages[0].msg}
     except ValidationError as e:
         return JsonResponse({ 'error_message': e.args[0] })
     else:
@@ -58,7 +58,7 @@ def get_session(request):
             'topic': session.topic,
             'patient': session.ses_patient.username,
             'doctor': session.ses_doctor.username}
-        messages = [{ 'msg': msg.msg, 'sender': msg.sender, 'time': msg.timestamp } for msg in session.message]
+        messages = [{ 'msg': msg.msg, 'sender': msg.sender, 'time': msg.time } for msg in session.messages]
         session_['messages'] = messages
     except ValidationError as e:
         return JsonResponse({ 'error_message': e.args[0] })
@@ -112,6 +112,20 @@ def delete_session(request):
         if not session:
             raise Exception('Session not found')
         session.delete()
+    except Exception as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse({})
+
+@csrf_exempt
+def send_message(request):
+    body = json.loads(request.body.decode("utf-8"))
+    try:
+        message = Message(msg=body['msg'], time=datetime.datetime.now(), sender=body['sender'])
+        session = Session.objects(id=body['session_id']).first()
+        if not session:
+            raise Exception('Session not found')
+        session.messages.append(message)
+        session.save()
     except Exception as e:
         return JsonResponse({ 'error_message': e.args[0] })
     return JsonResponse({})

@@ -4,7 +4,7 @@ from . import Doctor, Patient
 class Message(EmbeddedDocument):
     msg = StringField(max_length=100)
     sender = StringField(required=True,max_length=1)
-    timestamp = DateTimeField()
+    time = DateTimeField()
 
 class Clinic(Document):
     clinic_name = StringField(required = True, max_length=50)
@@ -15,7 +15,7 @@ class Session(Document):
     topic = StringField(max_length=50)
     ses_patient = ReferenceField(Patient)
     ses_doctor = ReferenceField(Doctor)
-    message = ListField(EmbeddedDocumentField(Message))
+    messages = ListField(EmbeddedDocumentField(Message))
 
 class Appointment(Document):
     doctor = ReferenceField(Doctor)
