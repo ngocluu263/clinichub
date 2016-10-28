@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { autorun } from 'mobx'
+import fetch from 'isomorphic-fetch'
 
 import SessionCreator from './components/SessionCreator'
 import SessionCreatorStore from './stores/SessionCreatorStore'
@@ -14,8 +15,22 @@ let initialData = {
   ]
 }
 
-let store = SessionCreatorStore.fromJS(initialData)
+fetch('http://localhost:8000/api/get_all_clinics')
+  .then(res => {
+    if (res.status >= 400) {
+      throw new Error("Bad response from server");
+    }
+    return res.json()
+  })
+  .then(data => {
+    initialData.clinics = data.clinics
+    init()
+  })
 
-ReactDOM.render(<SessionCreator store={store} />, document.getElementById('session-creator'))
+function init() {
+  let store = SessionCreatorStore.fromJS(initialData)
 
-window.store = store
+  ReactDOM.render(<SessionCreator store={store} />, document.getElementById('session-creator'))
+  window.store = store
+}
+
