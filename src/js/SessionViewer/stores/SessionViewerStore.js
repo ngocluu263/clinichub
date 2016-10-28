@@ -18,7 +18,7 @@ export default class SessionViewerStore {
 
   fetchSession() {
     myFetch('/api/get_session', { session_id: this.session.id }).then(data => {
-      Object.assign(store, data)
+      Object.assign(this, data)
     })
   }
 
