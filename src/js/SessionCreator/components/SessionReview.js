@@ -11,6 +11,7 @@ export default class PaymentReview extends React.Component {
       <div>
         <h4>{topic}</h4>
         <p>
+          Clinic: {doctor.clinic_name}<br />
           Doctor: {doctor.name}<br />
           Field: {doctor.field}<br />
         </p>

@@ -37,7 +37,7 @@ def create_session(request):
         doctor = Doctor.objects(clinic=clinic, field=field).first()
         if not doctor:
             raise ValidtionError('Doctor not found')
-        doctor_ = { 'id': str(doctor.id), 'username': doctor.username }
+        doctor_ = { 'id': str(doctor.id), 'name': doctor.username, 'field': doctor.field }
         clinic_ = { 'id': str(clinic.id), 'name': clinic.clinic_name }
         patient = Patient.objects(username=patient_username).first()
         session = Session.objects.create(topic=topic, ses_patient=patient, ses_doctor=doctor)
@@ -49,7 +49,7 @@ def create_session(request):
         return JsonResponse({ 'error_message': e.args[0] })
     else:
         return JsonResponse({
-            'clinics': clinic_,
+            'clinic': clinic_,
             'doctor': doctor_,
             'session': session_ })
 

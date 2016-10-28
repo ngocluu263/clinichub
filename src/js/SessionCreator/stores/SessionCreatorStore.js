@@ -1,5 +1,6 @@
 import { observable, computed, action, toJS } from 'mobx'
 import _ from 'lodash'
+import fetch from 'isomorphic-fetch'
 
 function getFakeData(data) {
   return new Promise((resolve, reject) => {
@@ -53,22 +54,32 @@ export default class SessionCreatorStore {
     let summary = {
       topic: this.sessionTopic,
       description: this.sessionDescription,
-      selectedClinic: toJS(this.selectedClinic),
-      selectedField: this.selectedField
+      clinic: this.selectedClinic.id,
+      field: this.selectedField
     }
-    console.log(summary)
-    getFakeData({
-      session_id: 123456,
-      topic: 'Topic',
-      doctor: {
-        id: 'doctor_id',
-        name: 'doctor_name',
-        field: 'Eye',
-        clinic_name: 'Clinic999'
+    if (!process.env.NODE_ENV) summary.patient = '5808aae05a95ef4211820cbd'
+    fetch('http://localhost:8000/api/create_session', {
+      header: {
+        'content-type': 'applicatino/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(summary)
+    }).then(res => {
+      if (res.status >= 400) {
+        throw new Error("Bad response from server");
       }
-    }).then((data) => {
-      this.completedSession = data
-      this.step++
+      return res.json()
+    }).then(data => {
+      this.completedSession = Object.assign(this.completedSession, {
+        session_id: data.session.id,
+        topic: data.session.topic,
+        doctor: {
+          name: data.doctor.name,
+          field: data.doctor.field,
+          clinic_name: data.clinic.name
+        }
+      })
+      this.step++;
     })
   }
 
