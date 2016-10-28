@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { autorun } from 'mobx'
-import fetch from 'isomorphic-fetch'
+import { myFetch } from '../utils'
 
 import SessionCreator from './components/SessionCreator'
 import SessionCreatorStore from './stores/SessionCreatorStore'
@@ -15,17 +15,10 @@ let initialData = {
   ]
 }
 
-fetch('http://localhost:8000/api/get_all_clinics')
-  .then(res => {
-    if (res.status >= 400) {
-      throw new Error("Bad response from server");
-    }
-    return res.json()
-  })
-  .then(data => {
-    initialData.clinics = data.clinics
-    init()
-  })
+myFetch('/api/get_all_clinics').then(data => {
+  initialData.clinics = data.clinics
+  init()
+})
 
 function init() {
   let store = SessionCreatorStore.fromJS(initialData)
