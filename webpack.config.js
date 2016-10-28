@@ -8,7 +8,7 @@ module.exports = {
   entry: {
     index: './index',
     sessionCreator: './SessionCreator/index',
-    // vendors: ['react', 'react-dom']
+    vendors: ['react', 'react-dom', 'lodash']
   },
   output: {
     path: path.resolve(__dirname, 'dist/js'),
@@ -36,7 +36,7 @@ module.exports = {
         warnings: false
       }
     }),
-    // new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')

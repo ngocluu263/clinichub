@@ -4,4 +4,11 @@
 
 {% block content%}
   <h1>Create Session</h1>
+  <div id="session-creator"></div>
 {% endblock%}
+
+{% load static %}
+{% block js %}
+  <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/sessionCreator.js' %}"></script>
+{% endblock %}
