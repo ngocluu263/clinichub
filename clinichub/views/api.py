@@ -5,6 +5,7 @@ from clinichub.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 import datetime
+import time
 
 def get_doctors_by_clinic(clinic):
     doctor_list = filter(lambda doctor: doctor.clinic == clinic, Doctor.objects.all())
@@ -16,6 +17,9 @@ def get_fields_by_clinic(clinic):
     for doctor in doctor_list:
         field_list.append(doctor['field'])
     return list(set(field_list))
+
+def format_date(date):
+    return time.strftime('%s', date.timetuple())
 
 @csrf_exempt
 def get_all_clinics(request):
@@ -68,7 +72,7 @@ def get_session(request):
             'patient': session.ses_patient.username,
             'doctor': session.ses_doctor.username,
             'me': me}
-        messages = [{ 'msg': msg.msg, 'sender': msg.sender, 'time': msg.time } for msg in session.messages]
+        messages = [{ 'msg': msg.msg, 'sender': msg.sender, 'time': format_date(msg.time)  } for msg in session.messages]
         session_['messages'] = messages
     except ValidationError as e:
         return JsonResponse({ 'error_message': e.args[0] })
@@ -130,6 +134,7 @@ def send_message(request):
             raise Exception('Session not found')
         session.messages.append(message)
         session.save()
+        messages = [ { 'msg': msg.msg, 'sender': msg.sender, 'time': format_date(msg.time) } for msg in session.messages ]
     except Exception as e:
         return JsonResponse({ 'error_message': e.args[0] })
-    return JsonResponse({})
+    return JsonResponse({ 'messages': messages })

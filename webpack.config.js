@@ -7,6 +7,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src/js'),
   entry: {
     sessionCreator: './SessionCreator/index',
+    sessionViewer: './SessionViewer/index',
     vendors: ['react', 'react-dom', 'lodash']
   },
   output: {
