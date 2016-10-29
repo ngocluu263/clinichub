@@ -3,24 +3,24 @@ import _ from 'lodash'
 
 let DrugForm = ({index, drug, handleChange, handleDelete}) => {
   return (
-    <div>
-      <label>
-        <span>Name: </span>
-        <input type="text" value={drug.name || ""}
+    <tr>
+      <td>
+        <input type="text" className="form-control" value={drug.name || ""} placeholder="Drug name"
           onChange={e => handleChange({id: index, key: 'name', value: e.target.value})} />
-      </label>
-      <label>
-        <span>Amount: </span>
-        <input type="number" min="0" value={drug.amount || 0}
+      </td>
+      <td>
+        <input type="number" className="form-control" min="0" value={drug.amount || 0}
           onChange={e => handleChange({id: index, key: 'amount', value: e.target.value})} />
-      </label>
-      <label>
-        <span>Usage: </span>
-        <input type="text" value={drug.usage || ""}
+      </td>
+      <td>
+        <input type="text" className="form-control" value={drug.usage || ""} placeholder="Usage"
           onChange={e => handleChange({id: index, key: 'usage', value: e.target.value})} />
-      </label>
-      <button onClick={() => handleDelete(drug.id)}>Delete</button>
-    </div>
+      </td>
+      <td>
+      <button className="btn btn-default"
+        onClick={() => handleDelete(drug.id)}>Delete</button>
+      </td>
+    </tr>
   )
 }
 
@@ -28,7 +28,7 @@ export default class TranscriptCreator extends Component {
   constructor() {
     super()
     this.state = {
-      drugs: [{ id: 0, name: 'Drug', amount: 1, usage: 'Eat' }, { id: 1, name: 'Duck', amount: 2, usage: 'Hit'}]
+      drugs: []
     }
   }
 
@@ -65,18 +65,47 @@ export default class TranscriptCreator extends Component {
     ))
     return (
       <div>
-        <p>
-          <span>Doctor: {this.props.doctor}</span>
-          <span>Patient: {this.props.patient}</span>
-        </p>
-        <label htmlFor="transcript-note">Note</label>
-        <textarea ref="note" id="transcript-note"></textarea>
-        <br />
-        <label>Drugs</label>
-        <button onClick={this.addDrugForm.bind(this)}>Add drug</button>
-        <div>{drugList}</div>
-        <button onClick={this.submit.bind(this)}>Submit</button>
-          <button onClick={this.props.changePage.bind(null, 'message')}>Back</button>
+        <h4>Create Transcript</h4>
+        <div className="form">
+          <div className="form-group">
+            <label>Doctor</label>
+            <input type="text" className="form-control" value={this.props.doctor} disabled />
+          </div>
+          <div className="form-group">
+            <label>Patient</label>
+            <input type="text" className="form-control" value={this.props.patient} disabled/>
+          </div>
+          <div className="form-group">
+            <label>Note</label>
+            <textarea ref="note" id="transcript-note" className="form-control" rows="5"></textarea>
+          </div>
+          <div className="form-group">
+            <label>Drugs</label>
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th width="30%">Name</th>
+                  <th width="20%">Amount</th>
+                  <th width="40%">Usage</th>
+                  <th width="10%">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {drugList}
+              </tbody>
+            </table>
+          </div> 
+          <div className="form-group" style={{'textAlign': 'center'}}>
+            <button className="btn btn-default"
+              onClick={this.addDrugForm.bind(this)}>Add drug</button>
+          </div>
+          <div className="form-group" style={{'textAlign': 'center'}}>
+            <button className="btn btn-success"
+              onClick={this.submit.bind(this)}>Create Transcript</button>
+            <button className="btn btn-default"
+              onClick={this.props.changePage.bind(null, 'message')}>Cancel</button>
+          </div>
+        </div>
       </div>
     )
   }

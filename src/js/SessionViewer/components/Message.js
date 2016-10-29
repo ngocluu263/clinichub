@@ -16,10 +16,10 @@ let modifyMessage = (msg, sender) => {
 
 let MessageBox = ({msg, sender, sender_name, time, side}) => {
   return (
-    <div style={ {'textAlign': side} }>
-      <b>{sender_name}: </b>
-      <span>{modifyMessage(msg, sender)} - </span>
-      <i>[{time.format('ddd, DD MMM YYYY HH:mm')}]</i>
+    <div className={side} style={{'marginButtom': '10px'}}>
+      <big>{modifyMessage(msg, sender)}</big><br />
+      <b>{sender_name}</b>
+      <small>{time.format('ddd, DD MMM YYYY HH:mm')}</small>
     </div>
   )
 }
@@ -46,15 +46,32 @@ export default class Message extends Component {
     })
     return (
       <div>
-        <h2>Topic: {session.topic}</h2>
-        <div>{ MessageList }</div>
-        <div>
-          <input type="text" ref="messageBox" /><br />
-          <button onClick={this.sendMessage.bind(this)}>Send</button>
-          <button onClick={this.props.fetchSession}>Refresh</button>
+        <div id="message-list">{MessageList}</div>
+        <hr />
+        <div className="form-inline" style={{'textAlign': 'center'}}>
+          <div className="form-group">
+            <label>
+              <span>Message:</span>
+              <input type="text" ref="messageBox" className="form-control" />
+            </label>
+          </div>
+          <button className="btn btn-primary"
+            onClick={this.sendMessage.bind(this)}>Send</button>
+          <button className="btn btn-default"
+            onClick={this.props.fetchSession}>Refresh</button>
         </div>
+        <hr />
         <div>
-          <button onClick={this.props.changePage.bind(null, 'transcript')}>Create Transcript</button>
+          {(shouldShow => {
+            if (shouldShow) return (
+              <div style={{'textAlign': 'center'}}>
+                <button className="btn btn-default"
+                  onClick={this.props.changePage.bind(null, 'transcript')}>Create Transcript</button>
+                <button className="btn btn-default">Create Appointment</button>
+                <button className="btn btn-danger">Delete Session</button>
+              </div>
+            )
+          })(me == 'doctor')}
         </div>
       </div>
     )
