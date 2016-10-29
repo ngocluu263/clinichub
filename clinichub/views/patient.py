@@ -19,8 +19,20 @@ def patient_sessions(request):
         if request.session.get('user_type') != 'patient':
             return redirect(reverse('doctor_profile'))
         else:
+            try:
+                user = Patient.objects(username=request.session.get('username')).first()
+                sessions = Session.objects(patient=user)
+                sessions_ = [{
+                    'id': session.id,
+                    'topic': session.topic,
+                    'doctor': session.doctor.username,
+                    'clinic': session.doctor.clinic.name
+                } for session in sessions] 
+            except Exception as e:
+                raise
             return render(request, 'patient/sessions.html', {
                 'page': 'sessions',
+                'sessions': sessions_
             })
     else:
         return redirect(reverse('login'))

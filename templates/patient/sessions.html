@@ -2,4 +2,11 @@
 
 {% block innercontent %}
   <div>Sessions</div>
+  {% for session in sessions %}
+    <div>
+      <b><a href="{% url 'session' session.id %}">{{session.topic}}</a></b><br />
+      <b>Doctor: {{session.doctor}}</b><br />
+      <b>Clinic: {{session.clinic}}</b><br />
+    </div>
+  {% endfor %}
 {% endblock %}
