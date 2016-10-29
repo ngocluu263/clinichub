@@ -29,7 +29,9 @@ def patient_sessions(request):
                     'clinic': session.doctor.clinic.name
                 } for session in sessions] 
             except Exception as e:
-                raise
+                return render(request, 'patient/sessions.html', {
+                    'error_message': e.args[0]
+                })
             return render(request, 'patient/sessions.html', {
                 'page': 'sessions',
                 'sessions': sessions_

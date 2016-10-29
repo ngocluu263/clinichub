@@ -21,15 +21,15 @@ doctor_urlpatterns = [
 
 session_urlpatterns = [
     url(r'^create$', views.session_create, name='session_create'),
-    url(r'^(?P<session_id>[a-f0-9]+){24}$', views.session, name='session'),
+    url(r'^(?P<session_id>[a-f0-9]{24})$', views.session, name='session'),
 ]
 
 transcript_urlpatterns = [
-    url(r'^(?P<transcript_id>[a-f0-9]+){24}$', views.transcript, name='transcript'),
+    url(r'^(?P<transcript_id>[a-f0-9]{24})$', views.transcript, name='transcript'),
 ]
 
 appointment_urlpatterns = [
-    url(r'^(?P<appointment_id>[a-f0-9]+){24}$', views.appointment, name='appointment'),
+    url(r'^(?P<appointment_id>[a-f0-9]{24})$', views.appointment, name='appointment'),
 ]
 
 api_urlpatterns = [
