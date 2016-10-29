@@ -69,9 +69,16 @@ def get_session(request):
         session_ = {
             'id': str(session.id),
             'topic': session.topic,
-            'patient': session.ses_patient.username,
-            'doctor': session.ses_doctor.username,
-            'me': me}
+            'patient': {
+                'id': str(session.ses_patient.id),
+                'name': session.ses_patient.username
+            },
+            'doctor': {
+                'id': str(session.ses_doctor.id),
+                'name': session.ses_doctor.username
+            },
+            'me': me
+        }
         messages = [{ 'msg': msg.msg, 'sender': msg.sender, 'time': format_date(msg.time)  } for msg in session.messages]
         session_['messages'] = messages
     except ValidationError as e:

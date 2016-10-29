@@ -22,6 +22,21 @@ export default class SessionViewerStore {
     })
   }
 
+  submitTranscript(data) {
+    myFetch('/api/create_transcript', {
+      drugs: data.drugs, 
+      note: data.note,
+      patient: this.session.patient.id,
+      doctor: this.session.doctor.id
+    }).then(data => {
+      console.log(data)
+    })
+  }
+
+  changePage(page) {
+    this.page = page
+  }
+
   static fromJS(data) {
     const store = new SessionViewerStore()   
     Object.assign(store, data)

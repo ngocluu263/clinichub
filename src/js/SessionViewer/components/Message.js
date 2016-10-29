@@ -24,19 +24,22 @@ export default class Message extends Component {
         <MessageBox
           key={index}
           msg={item.msg}
-          sender={item.sender=='P'? session.patient: session.doctor}
+          sender={item.sender=='P'? session.patient.name: session.doctor.name}
           side={side}
           time={moment.unix(item.time)}/>
       )
     })
     return (
       <div>
-        <h1>{session.topic}</h1>
+        <h2>Topic: {session.topic}</h2>
         <div>{ MessageList }</div>
         <div>
           <input type="text" ref="messageBox" /><br />
           <button onClick={this.sendMessage.bind(this)}>Send</button>
           <button onClick={this.props.fetchSession}>Refresh</button>
+        </div>
+        <div>
+          <button onClick={this.props.changePage.bind(null, 'transcript')}>Create Transcript</button>
         </div>
       </div>
     )
