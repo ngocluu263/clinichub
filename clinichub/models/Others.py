@@ -7,9 +7,8 @@ class Message(EmbeddedDocument):
     time = DateTimeField()
 
 class Clinic(Document):
-    clinic_name = StringField(required = True, max_length=50)
-    clinic_description = StringField(max_length=100)
-    clinic_contrib = ListField(ReferenceField(Doctor))
+    name = StringField(required = True, max_length=50)
+    description = StringField(max_length=100)
 	
 class Session(Document):
     topic = StringField(max_length=50)

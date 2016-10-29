@@ -23,7 +23,7 @@ def format_date(date):
 
 @csrf_exempt
 def get_all_clinics(request):
-    clinic_list = [{'id': str(clinic.id), 'name': clinic.clinic_name, 'description': clinic.clinic_description, 'fields': get_fields_by_clinic(clinic)} for clinic in Clinic.objects.all()]
+    clinic_list = [{'id': str(clinic.id), 'name': clinic.name, 'description': clinic.description, 'fields': get_fields_by_clinic(clinic)} for clinic in Clinic.objects.all()]
     return JsonResponse({ 'clinics': clinic_list })
     
 @csrf_exempt
@@ -48,7 +48,7 @@ def create_session(request):
         session.messages.append(message)
         session.save()
         doctor_ = { 'id': str(doctor.id), 'name': doctor.username, 'field': doctor.field }
-        clinic_ = { 'id': str(clinic.id), 'name': clinic.clinic_name }
+        clinic_ = { 'id': str(clinic.id), 'name': clinic.name }
         session_ = { 'id': str(session.id), 'topic': session.topic, 'description': session.messages[0].msg}
     except ValidationError as e:
         return JsonResponse({ 'error_message': e.args[0] })
