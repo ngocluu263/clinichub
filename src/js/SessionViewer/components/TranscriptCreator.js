@@ -1,30 +1,27 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 
-class DrugForm extends Component {
-  render() {
-    let { index, drug, handleChange, handleDelete } = this.props
-    return (
-      <div>
-        <label>
-          <span>Name: </span>
-          <input type="text" value={drug.name || ""}
-            onChange={e => handleChange({id: index, key: 'name', value: e.target.value})} />
-        </label>
-        <label>
-          <span>Amount: </span>
-          <input type="number" min="0" value={drug.amount || 0}
-            onChange={e => handleChange({id: index, key: 'amount', value: e.target.value})} />
-        </label>
-        <label>
-          <span>Usage: </span>
-          <input type="text" value={drug.usage || ""}
-            onChange={e => handleChange({id: index, key: 'usage', value: e.target.value})} />
-        </label>
-        <button onClick={() => handleDelete(drug.id)}>Delete</button>
-      </div>
-    )
-  }
+let DrugForm = ({index, drug, handleChange, handleDelete}) => {
+  return (
+    <div>
+      <label>
+        <span>Name: </span>
+        <input type="text" value={drug.name || ""}
+          onChange={e => handleChange({id: index, key: 'name', value: e.target.value})} />
+      </label>
+      <label>
+        <span>Amount: </span>
+        <input type="number" min="0" value={drug.amount || 0}
+          onChange={e => handleChange({id: index, key: 'amount', value: e.target.value})} />
+      </label>
+      <label>
+        <span>Usage: </span>
+        <input type="text" value={drug.usage || ""}
+          onChange={e => handleChange({id: index, key: 'usage', value: e.target.value})} />
+      </label>
+      <button onClick={() => handleDelete(drug.id)}>Delete</button>
+    </div>
+  )
 }
 
 export default class TranscriptCreator extends Component {
@@ -79,6 +76,7 @@ export default class TranscriptCreator extends Component {
         <button onClick={this.addDrugForm.bind(this)}>Add drug</button>
         <div>{drugList}</div>
         <button onClick={this.submit.bind(this)}>Submit</button>
+          <button onClick={this.props.changePage.bind(null, 'message')}>Back</button>
       </div>
     )
   }

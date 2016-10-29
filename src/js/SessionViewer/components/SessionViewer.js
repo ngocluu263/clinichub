@@ -17,6 +17,7 @@ export default class SessionViewer extends Component {
       switch (page) {
         case 'message': return (
           <Message
+            me={store.me}
             session={toJS(store.session)}
             sendMessage={this.sendMessage.bind(this)}
             fetchSession={store.fetchSession.bind(store)}
@@ -28,6 +29,7 @@ export default class SessionViewer extends Component {
             doctor={store.session.doctor.name}
             patient={store.session.patient.name}
             submitTranscript={store.submitTranscript.bind(store)}
+            changePage={store.changePage.bind(store)}
           />
         )
       }

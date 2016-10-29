@@ -32,22 +32,23 @@ def create_session(request):
     try:
         topic = body['topic']
         description = body['description']
-        patient_username = request.session.get('username') or body['patient']
+        patient_username = body['patient']['username']
         field = body['field']
         clinic_id = body['clinic']
+
         clinic = Clinic.objects(id=clinic_id).first()
         if not clinic:
             raise ValidtionError('Clinic not found')
         doctor = Doctor.objects(clinic=clinic, field=field).first()
         if not doctor:
             raise ValidtionError('Doctor not found')
-        doctor_ = { 'id': str(doctor.id), 'name': doctor.username, 'field': doctor.field }
-        clinic_ = { 'id': str(clinic.id), 'name': clinic.clinic_name }
         patient = Patient.objects(username=patient_username).first()
-        session = Session.objects.create(topic=topic, ses_patient=patient, ses_doctor=doctor)
+        session = Session.objects.create(topic=topic, patient=patient, doctor=doctor)
         message = Message(msg=description, sender='P', time=datetime.datetime.now())
         session.messages.append(message)
         session.save()
+        doctor_ = { 'id': str(doctor.id), 'name': doctor.username, 'field': doctor.field }
+        clinic_ = { 'id': str(clinic.id), 'name': clinic.clinic_name }
         session_ = { 'id': str(session.id), 'topic': session.topic, 'description': session.messages[0].msg}
     except ValidationError as e:
         return JsonResponse({ 'error_message': e.args[0] })
@@ -63,21 +64,19 @@ def get_session(request):
     try:
         session_id = body['session_id']
         session = Session.objects(id=session_id).first()
-        me = request.session.get('user_type') or 'patient'
         if not session:
             raise ValidationError("Session not found.")
         session_ = {
             'id': str(session.id),
             'topic': session.topic,
             'patient': {
-                'id': str(session.ses_patient.id),
-                'name': session.ses_patient.username
+                'id': str(session.patient.id),
+                'name': session.patient.username
             },
             'doctor': {
-                'id': str(session.ses_doctor.id),
-                'name': session.ses_doctor.username
+                'id': str(session.doctor.id),
+                'name': session.doctor.username
             },
-            'me': me
         }
         messages = [{ 'msg': msg.msg, 'sender': msg.sender, 'time': format_date(msg.time)  } for msg in session.messages]
         session_['messages'] = messages

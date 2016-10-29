@@ -10,7 +10,7 @@ export default class SessionViewerStore {
     myFetch('/api/send_message', {
       session_id: this.session.id,
       msg: msg,
-      sender: this.session.me == 'patient'? 'P': 'D'
+      sender: this.me == 'patient'? 'P': 'D'
     }).then(data => {
       this.fetchSession()
     })
@@ -20,6 +20,7 @@ export default class SessionViewerStore {
     myFetch('/api/get_session', { session_id: this.session.id }).then(data => {
       Object.assign(this, data)
     })
+    this.page = 'message'
   }
 
   submitTranscript(data) {
@@ -29,7 +30,7 @@ export default class SessionViewerStore {
       patient: this.session.patient.id,
       doctor: this.session.doctor.id
     }).then(data => {
-      console.log(data)
+      this.sendMessage('/create-transcript '+ data.transcript.id)
     })
   }
 

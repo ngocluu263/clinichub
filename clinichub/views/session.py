@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 
 def session(request, session_id):
-    if 'username' in request.session and request.session.get('user_type') == 'patient':
+    if 'username' in request.session:
         return render(request, 'session/session.html')
     else:
         return redirect(reverse('index'))

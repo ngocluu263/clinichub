@@ -56,7 +56,9 @@ export default class SessionCreatorStore {
       description: this.sessionDescription,
       clinic: this.selectedClinic.id,
       field: this.selectedField,
-      patient: '5808aae05a95ef4211820cbd'
+      patient: {
+        username: window.patient || "bobby"
+      }
     }
     myFetch('/api/create_session', summary).then(data => {
       this.completedSession = Object.assign(this.completedSession, {

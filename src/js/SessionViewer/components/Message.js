@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 
-let MessageBox = ({msg, sender, time, side}) => {
+let modifyMessage = (msg, sender) => {
+  if (sender == 'D') {
+    if (msg.match(/^\/create-transcript/)) {
+      return (
+        <span>Create&nbsp; 
+          <a href={"/transcript/"+ msg.split(' ')[1]}>Transcript</a>
+        </span>
+      )
+    }
+  }
+  return msg
+}
+
+let MessageBox = ({msg, sender, sender_name, time, side}) => {
   return (
     <div style={ {'textAlign': side} }>
-      <b>{sender}: </b>
-      <span>{msg} - </span>
+      <b>{sender_name}: </b>
+      <span>{modifyMessage(msg, sender)} - </span>
       <i>[{time.format('ddd, DD MMM YYYY HH:mm')}]</i>
     </div>
   )
@@ -17,14 +30,16 @@ export default class Message extends Component {
   }
 
   render() {
-    let { session } = this.props
+    let { session, me } = this.props
     let MessageList = session.messages.map((item, index) => {
-      let side = (item.sender == 'P' && session.me == 'patient')? 'right': 'left'
+      let side = ((item.sender == 'P' && me == 'patient') ||
+        (item.sender == 'D' && me == 'doctor'))? 'right': 'left'
       return (
         <MessageBox
           key={index}
           msg={item.msg}
-          sender={item.sender=='P'? session.patient.name: session.doctor.name}
+          sender={item.sender}
+          sender_name={item.sender=='P'? session.patient.name: session.doctor.name}
           side={side}
           time={moment.unix(item.time)}/>
       )

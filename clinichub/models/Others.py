@@ -13,8 +13,8 @@ class Clinic(Document):
 	
 class Session(Document):
     topic = StringField(max_length=50)
-    ses_patient = ReferenceField(Patient)
-    ses_doctor = ReferenceField(Doctor)
+    patient = ReferenceField(Patient)
+    doctor = ReferenceField(Doctor)
     messages = ListField(EmbeddedDocumentField(Message))
 
 class Appointment(Document):

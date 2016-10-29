@@ -4,4 +4,14 @@
 
 {% block content%}
   <h1>Session</h1>
+  <div id="session-viewer"></div>
 {% endblock%}
+
+{% load static %}
+{% block js %}
+  <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
+  <script type="text/javascript">
+    window.me = '{{request.session.user_type}}'
+  </script>
+  <script type="text/javascript" src="{% static 'js/sessionViewer.js' %}"></script>
+{% endblock %}
