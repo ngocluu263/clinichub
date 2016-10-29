@@ -3,15 +3,107 @@
 {% block title %}Session{% endblock %}
 
 {% block content%}
-  <h1>Session</h1>
-  <div id="session-viewer"></div>
+  {% if not error_message %}
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">Session</div>
+        </div>
+        <div class="panel-body">
+          <div id="hereeeeeeeeee">
+            <div id="message-list">
+              <div class="right">
+                <big>msg</big><br />
+                <b>doctor2</b>
+                <small>Sat, 29 Oct 2016 23:57</small>
+              </div>
+              <div class="left">
+                <big>msg</big><br />
+                <b>user1</b>
+                <small>Sat, 29 Oct 2016 23:57</small>
+              </div>
+            </div>
+            <hr />
+            <div class="form-inline" style="text-align: center">
+              <div class="form-group">
+                <label>
+                  <span>Message: </span>
+                  <input type="text" size="30" class="form-control" />
+                </label>
+              </div>
+              <button class="btn btn-primary">Send</button>
+              <button class="btn btn-default">Refresh</button>
+            </div>
+            <hr />
+            <div style="text-align: center">
+              <button class="btn btn-default">Create Transcript</button>
+              <button class="btn btn-default">Create Appointment</button>
+              <button class="btn btn-danger">Delete Session</button>
+            </div>
+          </div>
+          <div id="hereeeee">
+            <h4>Create Transcript</h4>
+            <div class="form">
+              <div class="form-group">
+                <label>Doctor</label>
+                <input type="text" class="form-control" value="doctor2" disabled />
+              </div> 
+              <div class="form-group">
+                <label>Patient</label>
+                <input type="text" class="form-control" value="user1" disabled/>
+              </div> 
+              <div class="form-group">
+                <label>Note</label>
+                <textarea class="form-control" rows="5"></textarea>
+              </div> 
+              <div class="form-group">
+                <label>Drugs</label>
+                <table class="table table-bordered">
+                  <tr>
+                    <th width="30%">Name</th>
+                    <th width="20%">Amount</th>
+                    <th width="40%">Usage</th>
+                    <th width="10%">Delete</th>
+                  </tr>
+                  <tr>
+                    <td><input type="text" class="form-control" placeholder="Drug name" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="text" class="form-control" placeholder="Usage" /></td>
+                    <td><button class="btn btn-default">Delete</button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" class="form-control" placeholder="Drug name" /></td>
+                    <td><input type="number" class="form-control" /></td>
+                    <td><input type="text" class="form-control" placeholder="Usage" /></td>
+                    <td><button class="btn btn-default">Delete</button></td>
+                  </tr>
+                </table>
+              </div> 
+              <div class="form-group" style="text-align: center">
+                <button class="btn btn-default">Add drug</button>
+              </div>
+              <div class="form-group" style="text-align: center">
+                <button class="btn btn-success">Create Transcript</button>
+                <button class="btn btn-default">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="session-viewer"></div>
+    </div>
+  {% else %}
+    {{ error_message }}
+  {% endif %}
 {% endblock%}
 
 {% load static %}
 {% block js %}
-  <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
-  <script type="text/javascript">
-    window.me = '{{request.session.user_type}}'
-  </script>
-  <script type="text/javascript" src="{% static 'js/sessionViewer.js' %}"></script>
+  {% if not error_message %}
+    <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
+    <script type="text/javascript">
+      window.me = '{{request.session.user_type}}'
+    </script>
+    <script type="text/javascript" src="{% static 'js/sessionViewer.js' %}"></script>
+  {% endif %}
 {% endblock %}

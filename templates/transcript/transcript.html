@@ -4,4 +4,18 @@
 
 {% block content%}
   <h1>Transcript</h1>
+  <div>
+    <p><b>Doctor: </b>{{transcript.doctor}}</p>
+    <p><b>Patient: </b>{{transcript.patient}}</p>
+    <p><b>Drugs: </b></p>
+    <ul>
+      {% for drug in transcript.drugs%}
+        <li>
+          <b>{{ drug.name }}</b><br />
+          Amount: {{ drug.amount }}<br />
+          Usage: {{ drug.usage }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock%}

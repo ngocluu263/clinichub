@@ -25,12 +25,10 @@ session_urlpatterns = [
 ]
 
 transcript_urlpatterns = [
-    url(r'^create$', views.transcript_create, name='transcript_create'),
     url(r'^(?P<transcript_id>[a-f0-9]+)$', views.transcript, name='transcript'),
 ]
 
 appointment_urlpatterns = [
-    url(r'^create$', views.appointment_create, name='appointment_create'),
     url(r'^(?P<appointment_id>[a-f0-9]+)$', views.appointment, name='appointment'),
 ]
 
