@@ -153,3 +153,62 @@ def send_message(request):
     except Exception as e:
         return JsonResponse({ 'error_message': e.args[0] })
     return JsonResponse({ 'messages': messages })
+
+@csrf_exempt
+def get_clinic(request):
+    body = json.loads(request.body.decode("utf-8"))
+    try:
+        clinic_id = body['clinic_id']
+        clinic = Clinic.objects(id=clinic_id).first()
+        if not clinic:
+            raise Exception('Clinic not found')
+        clinic_ = {
+            'id': str(clinic.id),
+            'name': clinic.name,
+            'description': clinic.description
+        }
+    except Exception as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse({ 'clinic': clinic_ })
+
+@csrf_exempt
+def get_available_doctors(request):
+    body = json.loads(request.body.decode("utf-8"))
+    try:
+        doctors = Doctor.objects(clinic=None)
+        print(doctors)
+        doctors_ = [{
+            'id': str(doctor.id),
+            'name': doctor.username,
+        } for doctor in doctors]
+    except Exception as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse({ 'doctors': doctors_ })
+
+@csrf_exempt
+def set_clinic_to_doctors(request):
+    body = json.loads(request.body.decode("utf-8"))
+    try:
+        doctors = body['doctors']
+        clinic_id = body['clinic_id']
+        clinic = Clinic.objects(id=clinic_id).first()
+        for doctor_id in doctors:
+            doctor = Doctor.objects(id=doctor_id).first()
+            doctor.clinic = clinic
+            doctor.save()
+    except Exception as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse({ })
+
+@csrf_exempt
+def leave_clinic(request):
+    body = json.loads(request.body.decode("utf-8"))
+    try:
+        doctor_id = body['doctor_id']
+        doctor = Doctor.objects(id=doctor_id).first()
+        doctor.clinic = None
+        doctor.save()
+    except Exception as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse({ })
+
