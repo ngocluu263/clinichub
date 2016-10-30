@@ -4,6 +4,8 @@ from mongoengine.django.auth import User
 class User(User):
     firstname = StringField(max_length=50)
     lastname = StringField(max_length=50)
+    birthdate = DateTimeField()
+    id_no = StringField(max_length=20)
 
     @classmethod
     def login(cls, request):

@@ -3,6 +3,8 @@ from .User import *
         
 class Patient(User):
     balance = FloatField()
+    phone_no = StringField(max_length=20)
+    address = StringField(max_length=100)
 
     @classmethod
     def register(cls, request):
