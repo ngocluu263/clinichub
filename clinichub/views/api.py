@@ -115,7 +115,7 @@ def create_appointment(request):
             'time': appointment.time}
     except Exception as e:
         return JsonResponse({ 'error_message': e.args[0] })
-    return JsonResponse(appointment_)
+    return JsonResponse({'appointment': appointment_})
 
 @csrf_exempt
 def delete_session(request):

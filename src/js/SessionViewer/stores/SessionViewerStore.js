@@ -34,6 +34,18 @@ export default class SessionViewerStore {
     })
   }
 
+  submitAppointment(data) {
+    myFetch('/api/create_appointment', {
+      note: data.note,
+      patient: this.session.patient.id,
+      doctor: this.session.doctor.id,
+      time: data.date
+    }).then(data => {
+      console.log(data)
+      this.sendMessage('/create-appointment '+ data.appointment.id)
+    })
+  }
+
   changePage(page) {
     this.page = page
   }

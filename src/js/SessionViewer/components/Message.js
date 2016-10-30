@@ -5,8 +5,14 @@ let modifyMessage = (msg, sender) => {
   if (sender == 'D') {
     if (msg.match(/^\/create-transcript/)) {
       return (
-        <span>Create&nbsp; 
-          <a href={"/transcript/"+ msg.split(' ')[1]}>Transcript</a>
+        <span>Create a&nbsp; 
+          <a href={"/transcript/"+ msg.split(' ')[1]}>transcript</a>
+        </span>
+      )
+    } else if (msg.match(/^\/create-appointment/)) {
+      return (
+        <span>Create an&nbsp; 
+          <a href={"/appointment/"+ msg.split(' ')[1]}>appointment</a>
         </span>
       )
     }
@@ -27,6 +33,7 @@ let MessageBox = ({msg, sender, sender_name, time, side}) => {
 export default class Message extends Component {
   sendMessage() {
     this.props.sendMessage(this.refs.messageBox.value.trim())
+    this.refs.messageBox.value = ""
   }
 
   render() {
@@ -52,7 +59,8 @@ export default class Message extends Component {
           <div className="form-group">
             <label>
               <span>Message:</span>
-              <input type="text" ref="messageBox" className="form-control" />
+              <input type="text" ref="messageBox" className="form-control"
+                onKeyPress={e => { if (e.charCode == 13) this.sendMessage()}}/>
             </label>
           </div>
           <button className="btn btn-primary"
@@ -67,7 +75,8 @@ export default class Message extends Component {
               <div style={{'textAlign': 'center'}}>
                 <button className="btn btn-default"
                   onClick={this.props.changePage.bind(null, 'transcript')}>Create Transcript</button>
-                <button className="btn btn-default">Create Appointment</button>
+                <button className="btn btn-default"
+                  onClick={this.props.changePage.bind(null, 'appointment')}>Create Appointment</button>
                 <button className="btn btn-danger">Delete Session</button>
               </div>
             )

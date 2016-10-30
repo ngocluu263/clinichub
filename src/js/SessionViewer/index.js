@@ -28,4 +28,3 @@ function init() {
 
   ReactDOM.render(<SessionViewer store={store} />, document.getElementById('session-viewer'))
 }
-
