@@ -77,7 +77,8 @@ export default class Message extends Component {
                   onClick={this.props.changePage.bind(null, 'transcript')}>Create Transcript</button>
                 <button className="btn btn-default"
                   onClick={this.props.changePage.bind(null, 'appointment')}>Create Appointment</button>
-                <button className="btn btn-danger">Delete Session</button>
+                <button className="btn btn-danger"
+                  onClick={() => this.props.deleteSession()}>Delete Session</button>
               </div>
             )
           })(me == 'doctor')}

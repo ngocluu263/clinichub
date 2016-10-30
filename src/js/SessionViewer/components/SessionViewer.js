@@ -23,6 +23,7 @@ export default class SessionViewer extends Component {
             sendMessage={this.sendMessage.bind(this)}
             fetchSession={store.fetchSession.bind(store)}
             changePage={store.changePage.bind(store)}
+            deleteSession={store.deleteSession.bind(store)}
           />
         )
         case 'transcript': return (

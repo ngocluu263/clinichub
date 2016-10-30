@@ -46,6 +46,15 @@ export default class SessionViewerStore {
     })
   }
 
+  deleteSession() {
+    myFetch('/api/delete_session', { session_id: this.session.id}).then(data => {
+      if (!data.error_message) {
+        if (this.me == 'patient') window.location = '/profile/sessions'
+        else window.location = '/doctor/profile/sessions'
+      }
+    })
+  }
+
   changePage(page) {
     this.page = page
   }
