@@ -1,5 +1,6 @@
 from mongoengine import *
 from .User import *
+import datetime
         
 class Patient(User):
     balance = FloatField()
@@ -15,6 +16,10 @@ class Patient(User):
             email = request.POST.get('email', '')
             firstname = request.POST.get('firstname', '')
             lastname = request.POST.get('lastname', '')
+            birthdate = request.POST.get('birthdate', '')
+            id_no = request.POST.get('id_no', '')
+            phone_no = request.POST.get('phone_no', '')
+            address = request.POST.get('address', '')
 
             if (password != password_confirm):
                 raise ValidationError('PasswordNotMatched')
@@ -23,7 +28,12 @@ class Patient(User):
             user.email = email
             user.firstname = firstname
             user.lastname = lastname
-            user.balance = 0
+            user.balance = 100000.01
+            user.birthdate = datetime.datetime.strptime(birthdate, '%Y-%M-%d')
+            user.id_no = id_no
+            user.phone_no = phone_no
+            user.address = address
+            
             user.save()
         except ValidationError:
             raise
