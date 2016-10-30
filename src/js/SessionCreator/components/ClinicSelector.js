@@ -2,11 +2,17 @@ import React from 'react'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
 
-const ClinicItem = ({id, name, selectClinic, isSelected}) => {
+const ClinicItem = ({clinic, selectClinic, isSelected}) => {
   return (
-    <li className={isSelected? 'select': ''}>
-      <a href="javascript:;" onClick={selectClinic}>{id}: {name}</a>
-    </li>
+    <a className={"list-group-item"+ (isSelected? ' active': '')}
+      href="javascript:;" onClick={selectClinic}>
+      <h4 className="list-group-item-heading">{clinic.name}</h4>
+      <p className="list-group-item-heading">
+        {clinic.description}<br />
+        Available fields: {clinic.fields.join(', ')}<br />
+        Price: {clinic.price}
+      </p>
+    </a>
   )
 }
 
@@ -20,21 +26,23 @@ export default class ClinicSelector extends React.Component {
     const clinicList = this.props.clinics.map(clinic => {
       return (
         <ClinicItem
+          clinic={clinic}
           key={clinic.id}
-          id={clinic.id}
-          name={clinic.name}
           selectClinic={this.selectClinic.bind(this, clinic)}
           isSelected={clinic==this.props.store.selectedClinic} />
       )
     })
     return (
       <div>
-        <p>Seleted field: {this.props.store.selectedField}</p>
-        <ul>
+        <h4>Seleted field: {this.props.store.selectedField}</h4>
+        <div className="list-group">
           { clinicList }
-        </ul>
-        <button onClick={() => this.props.store.step++} disabled={!this.props.store.selectedClinic}>Confirm</button>
-        <button onClick={() => this.props.store.step--}>Back</button>
+        </div>
+        <button className="btn btn-primary"
+          onClick={() => this.props.store.step++}
+          disabled={!this.props.store.selectedClinic}>Next</button>
+        <button className="btn btn-default"
+          onClick={() => this.props.store.step--}>Back</button>
       </div>
     )
   }

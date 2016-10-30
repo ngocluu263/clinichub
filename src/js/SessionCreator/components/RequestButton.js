@@ -7,7 +7,8 @@ export default class RequestButton extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.props.store.step++}>Request</button>
+        <button className="btn btn-primary"
+          onClick={() => this.props.store.step++}>Request</button>
       </div>
     )
   }

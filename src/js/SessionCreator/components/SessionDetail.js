@@ -12,17 +12,17 @@ export default class SessionDetail extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="form">
+        <div className="form-group">
           <label htmlFor="session-topic">Topic</label>
-          <input type="text" ref="topic" id="session-topic" placeholder="Topic" />
+          <input className="form-control" type="text" ref="topic" id="session-topic" placeholder="Topic" />
         </div>
         <div>
           <label htmlFor="session-description">Description</label>
-          <textarea ref="description" id="session-description"></textarea>
+          <textarea className="form-control" ref="description" id="session-description"></textarea>
         </div>
-        <button onClick={this.submit}>Confirm</button>
-        <button onClick={() => this.props.store.step--}>Back</button>
+        <button className="btn btn-success"
+          onClick={this.submit}>Confirm</button>
       </div>
     )
   }

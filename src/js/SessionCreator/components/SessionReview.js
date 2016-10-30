@@ -15,7 +15,8 @@ export default class PaymentReview extends React.Component {
           Doctor: {doctor.name}<br />
           Field: {doctor.field}<br />
         </p>
-        <button onClick={() => window.location = `/session/${session_id}` }>Go to session</button>
+        <button className="btn btn-success"
+          onClick={() => window.location = `/session/${session_id}` }>Go to session</button>
       </div>
     )
   }

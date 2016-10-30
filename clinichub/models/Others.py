@@ -9,6 +9,7 @@ class Message(EmbeddedDocument):
 class Clinic(Document):
     name = StringField(required = True, max_length=50)
     description = StringField(max_length=100)
+    price = FloatField()
 	
 class Session(Document):
     topic = StringField(max_length=50)

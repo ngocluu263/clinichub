@@ -3,8 +3,10 @@
 {% block title %}Create Session{% endblock %}
 
 {% block content%}
-  <h1>Create Session</h1>
-  <div id="session-creator"></div>
+  <div class="col-md-8 col-md-offset-2">
+    <h1>Create Session</h1>
+    <div id="session-creator"></div>
+  </div>
 {% endblock%}
 
 {% load static %}
@@ -12,6 +14,7 @@
   <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
   <script type="text/javascript">
     window.patient = '{{request.session.username}}'
+    window.balance = {{balance}}
   </script>
   <script type="text/javascript" src="{% static 'js/sessionCreator.js' %}"></script>
 {% endblock %}

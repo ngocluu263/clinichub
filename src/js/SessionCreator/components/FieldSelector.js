@@ -3,14 +3,17 @@ import { observer } from 'mobx-react'
 
 const FieldItem = ({name, selectField, isSelected}) => {
   return (
-    <li className={isSelected? 'select': ''}>
-      <a href="javascript:;" onClick={selectField}>{name}</a>
-    </li>
+    <a className={"list-group-item"+ (isSelected? ' active': '')}
+      href="javascript:;" onClick={selectField}>{name}</a>
   )
 }
 
 @observer
 export default class FieldSelector extends React.Component {
+  componentDidMount() {
+    this.props.store.selectedField = ""
+  }
+  
   filter(e) {
     this.props.store.fieldFilter = e.target.value.trim()
   }
@@ -31,10 +34,14 @@ export default class FieldSelector extends React.Component {
     })
     return (
       <div>
-        <input type="text" onChange={this.filter.bind(this)} />
-        <ul>{ fieldList }</ul>
-        <button onClick={() => this.props.store.step++} disabled={!this.props.store.selectedField}>Confirm</button>
-        <button onClick={() => this.props.store.step--}>Back</button>
+        <input type="text" className="form-control" placeholder="Type field name..."
+          onChange={this.filter.bind(this)} />
+        <div className="list-group">{ fieldList }</div>
+        <button className="btn btn-primary"
+          onClick={() => this.props.store.step++}
+          disabled={!this.props.store.selectedField}>Next</button>
+        <button className="btn btn-default"
+          onClick={() => this.props.store.step--}>Back</button>
       </div>
     )
   }

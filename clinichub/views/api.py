@@ -23,7 +23,12 @@ def format_date(date):
 
 @csrf_exempt
 def get_all_clinics(request):
-    clinic_list = [{'id': str(clinic.id), 'name': clinic.name, 'description': clinic.description, 'fields': get_fields_by_clinic(clinic)} for clinic in Clinic.objects.all()]
+    clinic_list = [{
+        'id': str(clinic.id),
+        'name': clinic.name,
+        'price': clinic.price,
+        'description': clinic.description,
+        'fields': get_fields_by_clinic(clinic)} for clinic in Clinic.objects.all()]
     return JsonResponse({ 'clinics': clinic_list })
     
 @csrf_exempt
@@ -43,6 +48,10 @@ def create_session(request):
         if not doctor:
             raise ValidtionError('Doctor not found')
         patient = Patient.objects(username=patient_username).first()
+
+        patient.balance = patient.balance - clinic.price
+        patient.save()
+
         session = Session.objects.create(topic=topic, patient=patient, doctor=doctor)
         message = Message(msg=description, sender='P', time=datetime.datetime.now())
         session.messages.append(message)

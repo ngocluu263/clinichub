@@ -30,6 +30,9 @@ def session(request, session_id):
 
 def session_create(request):
     if 'username' in request.session and request.session.get('user_type') == 'patient':
-        return render(request, 'session/create.html')
+        user = Patient.objects(username=request.session.get('username')).first()
+        return render(request, 'session/create.html', {
+            'balance': user.balance 
+        })
     else:
         return redirect(reverse('index'))

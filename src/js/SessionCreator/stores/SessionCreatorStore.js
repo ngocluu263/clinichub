@@ -70,7 +70,7 @@ export default class SessionCreatorStore {
           clinic_name: data.clinic.name
         }
       })
-      this.step++;
+      this.step++
     })
   }
 
@@ -78,6 +78,7 @@ export default class SessionCreatorStore {
     const store = new SessionCreatorStore()
     store.step = data.step
     store.clinics = data.clinics
+    store.balance = data.balance
     store.deriveFields()
     return store
   }
