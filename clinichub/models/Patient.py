@@ -6,6 +6,7 @@ class Patient(User):
     balance = FloatField()
     phone_no = StringField(max_length=20)
     address = StringField(max_length=100)
+    allergy = StringField(max_length=200)
 
     @classmethod
     def register(cls, request):
@@ -20,6 +21,7 @@ class Patient(User):
             id_no = request.POST.get('id_no', '')
             phone_no = request.POST.get('phone_no', '')
             address = request.POST.get('address', '')
+            allergy = request.POST.get('allergy', '')
 
             if (password != password_confirm):
                 raise ValidationError('PasswordNotMatched')
@@ -33,6 +35,7 @@ class Patient(User):
             user.id_no = id_no
             user.phone_no = phone_no
             user.address = address
+            user.allergy = allergy
             
             user.save()
         except ValidationError:
