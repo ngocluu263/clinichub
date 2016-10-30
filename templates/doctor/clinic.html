@@ -1,16 +1,25 @@
 {% extends './base.html' %}
 
 {% block innercontent %}
-  <div id="clinic-manager"></div>
+  {% if doctor.clinic %}
+    <div id="clinic-manager"></div>
+  {% else %}
+    <div style="text-align: center;">
+      <h3>You do not belong to any clinic.<br />You have to wait for invitation or create a clinic.</h3>
+      <a href="{% url 'doctor_create_clinic' %}" class="btn btn-primary">Create clinic</a>
+    </div>
+  {% endif %}
   {{error_message}}
 {% endblock %}
 
 {% load static %}
 {% block js %}
-  <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
-  <script type="text/javascript">
-    window.clinicId = '{{doctor.clinic}}'
-    window.doctorId = '{{doctor.id}}'
-  </script>
-  <script type="text/javascript" src="{% static 'js/clinicManager.js' %}"></script>
+  {% if doctor.clinic %}
+    <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
+    <script type="text/javascript">
+      window.clinicId = '{{doctor.clinic}}'
+      window.doctorId = '{{doctor.id}}'
+    </script>
+    <script type="text/javascript" src="{% static 'js/clinicManager.js' %}"></script>
+  {% endif %}
 {% endblock %}

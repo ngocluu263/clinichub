@@ -1,0 +1,23 @@
+{% extends './base.html' %}
+
+{% block innercontent %}
+  <h3>Create clinic</h3>
+  <form class="form" action="" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="clinic-name">Clinic name</label>
+      <input type="text" id="clinic-name" class="form-control"  name="name" />
+    </div>
+    <div class="form-group">
+      <label for="clinic-description">Clinic description</label>
+      <textarea type="text" id="clinic-description" class="form-control" rows="5" name="description"></textarea>
+    </div>
+    <input type="submit" class="btn btn-success" value="Create clinic" />
+    <a href="{% url 'doctor_clinic' %}" class="btn btn-default">Back</a>
+    {% if error_message %}
+      <div class="alert alert-danger">
+        {{error_message}}
+      </div>
+    {% endif %}
+  </form>
+{% endblock %}

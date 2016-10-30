@@ -16,6 +16,7 @@ doctor_urlpatterns = [
     url(r'^sessions$', views.doctor_sessions, name='doctor_sessions'),
     url(r'^info$', views.doctor_info, name='doctor_info'),
     url(r'^clinic$', views.doctor_clinic, name='doctor_clinic'),
+    url(r'^create_clinic$', views.doctor_create_clinic, name='doctor_create_clinic'),
     url(r'^appointments$', views.doctor_appointments, name='doctor_appointments'),
 ]
 

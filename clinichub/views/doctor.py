@@ -56,10 +56,15 @@ def doctor_clinic(request):
         else:
             try:
                 user = Doctor.objects(username=request.session.get('username')).first()
-                doctor_ = {
-                    'id': user.id, 
-                    'clinic': user.clinic.id, 
-                }
+                if user.clinic:
+                    doctor_ = {
+                        'id': user.id, 
+                        'clinic': user.clinic.id, 
+                    }
+                else :
+                    doctor_ = {
+                        'id': user.id
+                    }
                 return render(request, 'doctor/clinic.html', {
                     'page': 'clinic',
                     'doctor': doctor_
@@ -70,6 +75,47 @@ def doctor_clinic(request):
                 })
     else:
         return redirect(reverse('doctor_login'))
+
+def doctor_create_clinic(request):
+    if 'username' in request.session:
+        if request.session.get('user_type') != 'doctor':
+            return redirect(reverse('patient_profile'))
+        else:
+
+            if request.method == 'POST':
+                try:
+                    name = request.POST.get('name', 'Unnamed clinic')
+                    description = request.POST.get('description', '')
+
+                    clinic = Clinic.objects.create(name=name, description=description, price=100)
+                    if not clinic:
+                        raise Exception('Create clinic fail')
+
+                    doctor = Doctor.objects(username=request.session.get('username')).first()
+                    if not doctor:
+                        raise Exception('Doctor not found')
+                    doctor.clinic = clinic
+                    doctor.save()
+                    return redirect(reverse('doctor_clinic'))
+                except Exception as e:
+                    return render('doctor/create_clinic.html', {
+                        'error_message': e.args[0]
+                    })
+            else:
+                try:
+                    doctor = Doctor.objects(username=request.session.get('username')).first()
+                    if doctor.clinic:
+                        return redirect(reverse('doctor_clinic'))
+                    return render(request, 'doctor/create_clinic.html', {
+                        'page': 'clinic'    
+                    })
+                except Exception as e:
+                    return render(request, 'doctor/create_clinic.html', {
+                        'error_message': e.args[0]
+                    })
+    else:
+        return redirect(reverse('doctor_login'))
+
 
 def doctor_appointments(request):
     if 'username' in request.session:
