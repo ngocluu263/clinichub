@@ -6,13 +6,13 @@ let modifyMessage = (msg, sender) => {
     if (msg.match(/^\/create-transcript/)) {
       return (
         <span>Create a&nbsp; 
-          <a href={"/transcript/"+ msg.split(' ')[1]}>transcript</a>
+          <a href={"/transcript/"+ msg.split(' ')[1]} target="_black">transcript</a>
         </span>
       )
     } else if (msg.match(/^\/create-appointment/)) {
       return (
         <span>Create an&nbsp; 
-          <a href={"/appointment/"+ msg.split(' ')[1]}>appointment</a>
+          <a href={"/appointment/"+ msg.split(' ')[1]} target="_black">appointment</a>
         </span>
       )
     }

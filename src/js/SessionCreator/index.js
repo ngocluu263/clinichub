@@ -9,7 +9,7 @@ import SessionCreatorStore from './stores/SessionCreatorStore'
 let initialData = {
   step: 1,
   clinics: [],
-  balance: window.balance || 12345.67
+  balance: window.balance === undefined? 12345.67: window.balance
 }
 
 myFetch('/api/get_all_clinics').then(data => {
@@ -19,9 +19,7 @@ myFetch('/api/get_all_clinics').then(data => {
 
 function init() {
   let store = SessionCreatorStore.fromJS(initialData)
-  console.log(store.clinics)
 
   ReactDOM.render(<SessionCreator store={store} />, document.getElementById('session-creator'))
   window.store = store
 }
-

@@ -33,12 +33,13 @@ export default class TranscriptCreator extends Component {
   }
 
   handleChange(data) {
-    this.state.drugs[data.id][data.key] = data.value.trim()
+    this.state.drugs[data.id][data.key] = data.value
     this.setState(this.state)
   }
 
   handleDelete(index) {
     this.state.drugs = this.state.drugs.filter(item => item.id != index)
+    console.log(this.state.drugs)
     this.setState(this.state)
   }
 
@@ -52,7 +53,7 @@ export default class TranscriptCreator extends Component {
   submit() {
     let drugs = _.cloneDeep(this.state.drugs)
       .filter(drug => drug.name != '' && drug.amount != "0")
-      .map(drug => ({ name: drug.name, amount: parseInt(drug.amount), usage: drug.usage }))
+      .map(drug => ({ name: drug.name.trim(), amount: parseInt(drug.amount), usage: drug.usage.trim() }))
     let data = { drugs, note: this.refs.note.value.trim() }
     this.props.submitTranscript(data)
   }
