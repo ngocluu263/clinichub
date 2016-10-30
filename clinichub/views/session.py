@@ -16,7 +16,9 @@ def session(request, session_id):
             else:
                 user = Doctor.objects(username=username).first()
             if user == session.patient or user == session.doctor:
-                return render(request, 'session/session.html')
+                return render(request, 'session/session.html', {
+                    'topic': session.topic    
+                })
             else:
                 raise Exception('You do not have a permission to view this session.')
         except Exception as e:

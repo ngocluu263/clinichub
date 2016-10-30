@@ -1,5 +1,32 @@
 {% extends './base.html' %}
 
 {% block innercontent %}
-  <div>Transcripts</div>
+  <table class="table table-hover user-table">
+    <thead>
+      <tr>
+        <th>Doctor</th>
+        <th>Clinic</th>
+        <th>Drugs</th>
+        <th width="10%">View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transcript in transcripts %}
+        <tr>
+          <td>{{transcript.doctor}}</td>
+          <td>{{transcript.clinic}}</td>
+          <td>
+            <ul>
+            {% for drug in transcript.drugs %}
+              <li>{{drug.name}} ({{drug.amount}})</li> 
+            {% endfor %}
+            </ul>
+          </td>
+          <td class="view-button">
+            <a href="{% url 'transcript' transcript.id %}" class="btn btn-info" target="_blank"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span> View</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

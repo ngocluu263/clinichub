@@ -4,9 +4,11 @@
 
 {% block content%}
   <h1>Transcript</h1>
+  {% if not error_message%}
   <div>
     <p><b>Doctor: </b>{{transcript.doctor}}</p>
     <p><b>Patient: </b>{{transcript.patient}}</p>
+    <p><b>Note: </b>{{transcript.note}}</p>
     <p><b>Drugs: </b></p>
     <ul>
       {% for drug in transcript.drugs%}
@@ -18,4 +20,7 @@
       {% endfor %}
     </ul>
   </div>
+  {% else %}
+    {{error_message}}
+  {% endif %}
 {% endblock%}

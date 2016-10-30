@@ -55,8 +55,10 @@ def patient_payment(request):
         if request.session.get('user_type') != 'patient':
             return redirect(reverse('doctor_profile'))
         else:
+            user = Patient.objects(username=request.session.get('username')).first()
             return render(request, 'patient/payment.html', {
                 'page': 'payment',
+                'balance': user.balance
             })
     else:
         return redirect(reverse('login'))
@@ -66,9 +68,24 @@ def patient_appointments(request):
         if request.session.get('user_type') != 'patient':
             return redirect(reverse('doctor_profile'))
         else:
-            return render(request, 'patient/appointments.html', {
-                'page': 'appointments',
-            })
+            try:
+                user = Patient.objects(username=request.session.get('username')).first()
+                appointments = Appointment.objects(patient=user)
+                appointments_ = [{
+                    'id': appointment.id, 
+                    'doctor': appointment.doctor.username, 
+                    'clinic': appointment.doctor.clinic.name, 
+                    'time': appointment.time, 
+                    'note': appointment.note, 
+                } for appointment in appointments]
+                return render(request, 'patient/appointments.html', {
+                    'page': 'appointments',
+                    'appointments': appointments_
+                })
+            except Exception as e:
+                return render(request, 'patient/appointments.html', {
+                    'error_message': e.args[0]
+                })
     else:
         return redirect(reverse('login'))
 
@@ -77,8 +94,23 @@ def patient_transcripts(request):
         if request.session.get('user_type') != 'patient':
             return redirect(reverse('doctor_profile'))
         else:
-            return render(request, 'patient/transcripts.html', {
-                'page': 'transcripts',
-            })
+            try:
+                user = Patient.objects(username=request.session.get('username')).first()
+                transcripts = Transcript.objects(patient=user)
+                transcripts_ = [{
+                    'id': transcript.id, 
+                    'doctor': transcript.doctor.username, 
+                    'clinic': transcript.doctor.clinic.name, 
+                    'drugs': transcript.drugs, 
+                    'note': transcript.note, 
+                } for transcript in transcripts]
+                return render(request, 'patient/transcripts.html', {
+                    'page': 'transcripts',
+                    'transcripts': transcripts_
+                })
+            except Exception as e:
+                return render(request, 'patient/transcripts.html', {
+                    'error_message': e.args[0]
+                })
     else:
         return redirect(reverse('login'))

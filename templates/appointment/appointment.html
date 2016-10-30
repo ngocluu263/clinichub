@@ -2,6 +2,17 @@
 
 {% block title %}Appointment{% endblock %}
 
-{% block content%}
+{% block content %}
   <h1>Appointment</h1>
+  {% if not error_message %}
+    <div>
+      <p><b>Doctor: </b>{{appointment.doctor}}</p>
+      <p><b>Patient: </b>{{appointment.patient}}</p>
+      <p><b>Note: </b>{{appointment.note}}</p>
+      <p><b>Date: </b>{{appointment.time}}</p>
+    </div>
+  {% else %}
+    {{error_message}}
+  {% endif %}
 {% endblock%}
+

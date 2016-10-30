@@ -4,6 +4,7 @@
 
 .nav-menu-center {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .nav-menu-center li {
@@ -17,4 +18,25 @@
 
 #message-list .right {
   text-align: right;
+}
+
+.user-table {
+}
+
+.user-table th {
+  text-align: center;
+}
+
+.user-table .view-button {
+  text-align: center;
+}
+
+#balance-big {
+  text-align: center;
+  font-size: 48px;
+}
+
+#balance-big small {
+  font-size: 36px;
+  color: #666;
 }

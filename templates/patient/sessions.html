@@ -1,12 +1,29 @@
 {% extends './base.html' %}
 
 {% block innercontent %}
-  <div>Sessions</div>
-  {% for session in sessions %}
-    <div>
-      <b><a href="{% url 'session' session.id %}">{{session.topic}}</a></b><br />
-      <b>Doctor: {{session.doctor}}</b><br />
-      <b>Clinic: {{session.clinic}}</b><br />
-    </div>
-  {% endfor %}
+  <div>
+    <a href="{% url 'session_create' %}" class="btn btn-primary" target="_blanck">Create Session</a>
+  </div>
+  <table class="table table-hover user-table" style="margin-top: 10px;">
+    <thead>
+      <tr>
+        <th>Topic</th>
+        <th>Doctor</th>
+        <th>Clinic</th>
+        <th width="10%">View</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for session in sessions %}
+        <tr>
+          <td>{{session.topic}}</td>
+          <td>{{session.doctor}}</td>
+          <td>{{session.clinic}}</td>
+          <td class="view-button">
+            <a href="{% url 'session' session.id %}" class="btn btn-info" target="_blank"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span> View</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
