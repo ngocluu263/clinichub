@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     sessionCreator: './SessionCreator/index',
     sessionViewer: './SessionViewer/index',
+    clinicManager: './ClinicManager/index',
     vendors: ['react', 'react-dom', 'lodash']
   },
   output: {

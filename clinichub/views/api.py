@@ -172,11 +172,27 @@ def get_clinic(request):
     return JsonResponse({ 'clinic': clinic_ })
 
 @csrf_exempt
-def get_available_doctors(request):
+def set_clinic(request):
     body = json.loads(request.body.decode("utf-8"))
     try:
+        clinic_id = body['clinic_id']
+        name = body['name']
+        description = body['description']
+        clinic = Clinic.objects(id=clinic_id).first()
+        if not clinic:
+            raise Exception('Clinic not found')
+        clinic.name = name
+        clinic.description = description
+        clinic.save()
+    except Exception as e:
+        return JsonResponse({ 'error_message': e.args[0] })
+    return JsonResponse({})
+
+
+@csrf_exempt
+def get_available_doctors(request):
+    try:
         doctors = Doctor.objects(clinic=None)
-        print(doctors)
         doctors_ = [{
             'id': str(doctor.id),
             'name': doctor.username,

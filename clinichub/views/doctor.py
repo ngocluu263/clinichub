@@ -54,9 +54,20 @@ def doctor_clinic(request):
         if request.session.get('user_type') != 'doctor':
             return redirect(reverse('patient_profile'))
         else:
-            return render(request, 'doctor/clinic.html', {
-                'page': 'clinic',
-            })
+            try:
+                user = Doctor.objects(username=request.session.get('username')).first()
+                doctor_ = {
+                    'id': user.id, 
+                    'clinic': user.clinic.id, 
+                }
+                return render(request, 'doctor/clinic.html', {
+                    'page': 'clinic',
+                    'doctor': doctor_
+                })
+            except Exception as e:
+                return render(request, 'doctor/clinic.html', {
+                    'error_message': e.args[0]
+                })
     else:
         return redirect(reverse('doctor_login'))
 

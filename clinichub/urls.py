@@ -41,6 +41,7 @@ api_urlpatterns = [
     url(r'^delete_session$', views.api.delete_session),
     url(r'^send_message$', views.api.send_message),
     url(r'^get_clinic$', views.api.get_clinic),
+    url(r'^set_clinic$', views.api.set_clinic),
     url(r'^get_available_doctors$', views.api.get_available_doctors),
     url(r'^set_clinic_to_doctors$', views.api.set_clinic_to_doctors),
     url(r'^leave_clinic$', views.api.leave_clinic),
