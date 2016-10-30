@@ -1,5 +1,37 @@
 {% extends './base.html' %}
 
 {% block innercontent %}
-  <div>Clinic management</div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="" class="list-group-item">Edit clinic</a>
+        <a href="" class="list-group-item">Invite doctor</a>
+        <a href="" class="list-group-item">Leave clinic</a>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div>
+        <div class="form-group">
+          <label for="clinic-name">Clinic name</label>
+          <input type="text" id="clinic-name" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="clinic-description">Clinic description</label>
+          <textarea id="clinic-description" class="form-control" rows="5"></textarea>
+        </div>
+        <button class="btn btn-success">Edit clinic</button>
+      </div>
+      <div>
+        <input type="text" id="find-doctor" class="form-control" placeholder="Find doctor..." />
+        <div class="list-group">
+          <a href="" class="list-group-item">Doctor4</a>
+          <a href="" class="list-group-item">Doctor5</a>
+          <a href="" class="list-group-item">Doctor6</a>
+        </div>
+        <button class="btn btn-success">Add doctors</button>
+      </div>
+      <div>
+        <button class="btn btn-danger">Leave clinic</button>
+      </div>
+    </div>
 {% endblock %}
