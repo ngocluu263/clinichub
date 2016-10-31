@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-<div class="jumbotron">
-  <h1>For Doctor</h1>
-  <p>Description</p>
+<div class="jumbotron" style="text-align: center; background: url('{% static 'img/doctor-banner.jpg' %}'); height: 500px;">
+  <h1>Wanna Be Doctor?</h1>
+  <p><big>A good chance to make your own clinic is already here.</big></p>
   <p><a class="btn btn-primary btn-lg" href="/doctor/register" role="button">Join us</a></p>
 </div>
 {% endblock %}
