@@ -1,6 +1,6 @@
 {
   "name": "clinichub",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/jenwich/clinichub.git"
   },
   "author": "Jenwich Rattanayenjai",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jenwich/clinichub/issues"
   },
