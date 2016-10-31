@@ -1,5 +1,17 @@
 {% extends './base.html' %}
 
 {% block innercontent %}
-  <div>Information</div>
+  <h3>Doctor Information</h3>
+  <p style="font-size: 20px;">
+    <b>Username: </b> {{user.username}}<br />
+    <b>Email: </b> {{user.username}}<br />
+    <b>Name: </b> {{user.firstname}} {{user.lastname}}<br />
+    <b>Date of birth: </b> {{user.birthdate}}<br />
+    <b>ID Number: </b> {{user.id_no}}<br />
+    <b>Field: </b> {{user.field}}<br />
+    <b>Clinic: </b> {{user.clinic.name}}<br />
+    <b>MD Number: </b> {{user.md_no}}<br />
+  </p>
+  <button class="btn btn-primary">Edit</button>
 {% endblock %}
+

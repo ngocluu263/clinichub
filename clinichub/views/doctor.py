@@ -43,8 +43,10 @@ def doctor_info(request):
         if request.session.get('user_type') != 'doctor':
             return redirect(reverse('patient_profile'))
         else:
+            user = Doctor.objects(username=request.session.get('username')).first()
             return render(request, 'doctor/info.html', {
                 'page': 'info',
+                'user': user
             })
     else:
         return redirect(reverse('doctor_login'))
