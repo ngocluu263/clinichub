@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %} Register - ClinicHub {% endblock %}
+
+{% block content %}
+<div class="col-sm-6 col-sm-offset-3">
+  <h2 style="text-align: center;">Register for doctor</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" type="text" name="username" maxlength="30" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="password_confirm">Confirm Password</label>
+          <input id="password_confirm" type="password" name="password_confirm" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" maxlength="50" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input id="firstname" type="text" name="firstname" maxlength="50" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input id="lastname" type="text" name="lastname" maxlength="50" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="birthdate">Date of birth</label>
+          <input id="birthdate" type="date" name="birthdate" maxlength="50" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="id_no">ID Number</label>
+          <input id="id_no" type="text" name="id_no" maxlength="50" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="field">Field</label>
+          <input id="field" type="text" name="field" maxlength="50" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="md_no">MD Number</label>
+          <input id="md_no" type="text" name="md_no" maxlength="50" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Register" class="btn btn-success" />
+        </div>
+        {% if error_message %}
+          <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

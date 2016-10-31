@@ -30,6 +30,10 @@ def register(request):
                 return render(request, 'account/register.html', {
                     'error_message': 'Password and confirm password must be same.'
                 })
+            else:
+                return render(request, 'account/register_doctor.html', {
+                    'error_message': e.args[0]
+                })
         except NotUniqueError as e:
             return render(request, 'account/register.html', {
                 'error_message': "Username must be unique."
@@ -71,4 +75,27 @@ def doctor_login(request):
             return redirect('/doctor/profile')
 
 def doctor_register(request):
-    return HttpResponse('Doctor_register')
+    if request.method == 'POST':
+        try:
+            result = Doctor.register(request)
+        except ValidationError as e:
+            if e.args[0] == 'PasswordNotMatched':
+                return render(request, 'account/register_doctor.html', {
+                    'error_message': 'Password and confirm password must be same.'
+                })
+            else:
+                return render(request, 'account/register_doctor.html', {
+                    'error_message': e.args[0]
+                })
+
+        except NotUniqueError as e:
+            return render(request, 'account/register_doctor.html', {
+                'error_message': "Username must be unique."
+            })
+        else:
+            return redirect('/doctor/login')
+    else:
+        if 'username' not in request.session:
+            return render(request, 'account/register_doctor.html')
+        else:
+            return redirect('/doctor/profile')
