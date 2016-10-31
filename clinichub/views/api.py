@@ -192,10 +192,11 @@ def set_clinic(request):
 @csrf_exempt
 def get_available_doctors(request):
     try:
-        doctors = Doctor.objects(clinic=None)
+        doctors = Doctor.objects(clinic=None,activate=True)
         doctors_ = [{
             'id': str(doctor.id),
             'name': doctor.username,
+            'field': doctor.field,
         } for doctor in doctors]
     except Exception as e:
         return JsonResponse({ 'error_message': e.args[0] })

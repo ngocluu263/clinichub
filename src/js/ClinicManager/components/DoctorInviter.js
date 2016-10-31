@@ -42,7 +42,10 @@ export default class ClinicEditor extends Component {
               <a href="javascript:;" key={item.id}
                 onClick={this.toggleDoctor.bind(this, index)}
                 className={"list-group-item" + (item.selected? ' active': '')}
-              >{item.name} {item.selected}</a>
+              >
+                <h4 className="list-group-item-heading">{item.name}</h4>
+                <p className="list-group-item-text">Field: {item.field}</p>
+              </a>
             )
           })
         }
