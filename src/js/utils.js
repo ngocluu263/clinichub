@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-fetch'
 
 export function myFetch(url, data) {
-  return fetch('http://localhost:8000' + url, {
+  return fetch((process.env.NODE_ENV == 'production'? '': `http://${window.location.hostname}:8000`) + url, {
     header: {
-      'content-type': 'applicatino/json'
+      'content-type': 'application/json'
     },
     method: 'POST',
     body: JSON.stringify(data)
