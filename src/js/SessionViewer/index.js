@@ -26,5 +26,23 @@ function init() {
   let store = SessionViewerStore.fromJS(initialData)
   window.store = store
 
+  initSocket(store)
+
   ReactDOM.render(<SessionViewer store={store} />, document.getElementById('session-viewer'))
+}
+
+function initSocket(store) {
+  let socket = new WebSocket("ws://" + window.location.hostname + ":8000/chat/"+ session_id);
+
+  store.socket = socket
+
+  socket.onmessage = function(e) {
+    store.pushMessage(JSON.parse(e.data).message)
+  }
+
+  socket.onopen = function() {
+
+  }
+  
+  if (socket.readyState == WebSocket.OPEN) socket.onopen();
 }

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'mongoengine.django.mongo_auth',
     'mongoengine.django',
     'corsheaders',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -138,6 +139,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "dist")
 ]
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgiref.inmemory.ChannelLayer',
+        'ROUTING': 'clinichub.routing.channel_routing'
+    }
+}
 
 connect(MONGODB_DATABASE,
         host=MONGODB_HOST,

@@ -12,8 +12,12 @@ export default class SessionViewerStore {
       msg: msg,
       sender: this.me == 'patient'? 'P': 'D'
     }).then(data => {
-      this.fetchSession()
+      this.socket.send(JSON.stringify(data))
     })
+  }
+
+  pushMessage(msg) {
+    this.session.messages.push(msg)
   }
 
   fetchSession() {
@@ -31,6 +35,7 @@ export default class SessionViewerStore {
       doctor: this.session.doctor.id
     }).then(data => {
       this.sendMessage('/create-transcript '+ data.transcript.id)
+      this.page = 'message'
     })
   }
 
@@ -41,8 +46,8 @@ export default class SessionViewerStore {
       doctor: this.session.doctor.id,
       time: data.date
     }).then(data => {
-      console.log(data)
       this.sendMessage('/create-appointment '+ data.appointment.id)
+      this.page = 'message'
     })
   }
 

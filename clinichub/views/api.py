@@ -149,10 +149,14 @@ def send_message(request):
             raise Exception('Session not found')
         session.messages.append(message)
         session.save()
-        messages = [ { 'msg': msg.msg, 'sender': msg.sender, 'time': format_date(msg.time) } for msg in session.messages ]
+        message_ = {
+            'msg': message.msg,
+            'sender': message.sender,
+            'time': format_date(message.time)
+        }
     except Exception as e:
         return JsonResponse({ 'error_message': e.args[0] })
-    return JsonResponse({ 'messages': messages })
+    return JsonResponse({ 'message': message_})
 
 @csrf_exempt
 def get_clinic(request):
