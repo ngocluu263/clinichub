@@ -9,7 +9,7 @@ module.exports = {
     sessionCreator: './SessionCreator/index',
     sessionViewer: './SessionViewer/index',
     clinicManager: './ClinicManager/index',
-    vendors: ['react', 'react-dom', 'lodash']
+    vendors: ['react', 'react-dom', 'mobx', 'mobx-react', 'lodash', 'moment', 'isomorphic-fetch']
   },
   output: {
     path: path.resolve(__dirname, 'dist/js'),
