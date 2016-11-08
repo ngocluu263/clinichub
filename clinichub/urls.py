@@ -62,4 +62,5 @@ urlpatterns = [
     url(r'^transcript/', include(transcript_urlpatterns)),
     url(r'^appointment/', include(appointment_urlpatterns)),
     url(r'^api/', include(api_urlpatterns)),
+    url(r'^rest/', include('clinichub.api.urls')),
 ]

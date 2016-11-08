@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'mongoengine.django',
     'corsheaders',
     'channels',
+    'rest_framework',
+    'rest_framework_mongoengine'
 ]
 
 MIDDLEWARE = [
