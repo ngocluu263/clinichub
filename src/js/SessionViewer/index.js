@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import path from 'path'
-import { autorun, toJS } from 'mobx'
+import { autorun } from 'mobx'
 
 import { myFetch } from '../utils'
 import SessionViewerStore from './stores/SessionViewerStore'

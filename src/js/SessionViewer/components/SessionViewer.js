@@ -21,7 +21,6 @@ export default class SessionViewer extends Component {
             me={store.me}
             session={toJS(store.session)}
             sendMessage={this.sendMessage.bind(this)}
-            fetchSession={store.fetchSession.bind(store)}
             changePage={store.changePage.bind(store)}
             deleteSession={store.deleteSession.bind(store)}
           />

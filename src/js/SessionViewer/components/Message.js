@@ -65,8 +65,6 @@ export default class Message extends Component {
           </div>
           <button className="btn btn-primary"
             onClick={this.sendMessage.bind(this)}>Send</button>
-          <button className="btn btn-default"
-            onClick={this.props.fetchSession}>Refresh</button>
         </div>
         <hr />
         <div>

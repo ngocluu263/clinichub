@@ -20,13 +20,6 @@ export default class SessionViewerStore {
     this.session.messages.push(msg)
   }
 
-  fetchSession() {
-    myFetch('/api/get_session', { session_id: this.session.id }).then(data => {
-      Object.assign(this, data)
-    })
-    this.page = 'message'
-  }
-
   submitTranscript(data) {
     myFetch('/api/create_transcript', {
       drugs: data.drugs, 
