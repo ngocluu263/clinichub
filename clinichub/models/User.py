@@ -7,6 +7,10 @@ class User(User):
     birthdate = DateTimeField()
     id_no = StringField(max_length=20)
 
+    @property
+    def fullname(self):
+        return str(self.firstname) + " " + str(self.lastname)
+
     @classmethod
     def login(cls, request):
         username = request.POST.get('username', '')
