@@ -12,6 +12,10 @@ class DoctorViewSet(viewsets.ModelViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
 
+class SessionViewSet(viewsets.ModelViewSet):
+    queryset = Session.objects.all()
+    serializer_class = SessionSerializer
+
 class ClinicViewSet(viewsets.ModelViewSet):
     queryset = Clinic.objects.all()
     serializer_class = ClinicSerializer
