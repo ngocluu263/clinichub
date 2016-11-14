@@ -35,6 +35,13 @@ class SessionViewSet(viewsets.ModelViewSet):
             }
         ]
         data.pop('description', None)
+
+        clinic = Clinic.objects(id=data['clinic']).first()
+        doctor = Doctor.objects(clinic=clinic, field=data['field']).first()
+        data['doctor'] = doctor.id
+        patient = Patient.objects(id=data['patient']).first()
+        patient.balance = patient.balance - clinic.price
+        patient.save()
         
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
