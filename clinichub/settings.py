@@ -57,6 +57,10 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = default_headers
+
 ROOT_URLCONF = 'clinichub.urls'
 
 TEMPLATES = [
