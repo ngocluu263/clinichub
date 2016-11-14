@@ -45,11 +45,11 @@ class PatientPrimaryKeyRelatedField(PrimaryKeyRelatedField):
 class SessionSerializer(DocumentSerializer):
     doctor = DoctorPrimaryKeyRelatedField(queryset=Doctor.objects)
     patient = PatientPrimaryKeyRelatedField(queryset=Patient.objects)
-    # messages = ListField(child=MessageSerializer())
+    messages = ListField(child=MessageSerializer())
+
     class Meta:
         model = Session
-        # fields = ('id', 'topic', 'doctor', 'patient', 'messages')
-        fields = ('id', 'topic', 'doctor', 'patient')
+        fields = ('id', 'topic', 'doctor', 'patient', 'messages')
 
 class ClinicSerializer(DocumentSerializer):
     name = CharField(max_length=50)
