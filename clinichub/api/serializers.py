@@ -50,7 +50,12 @@ class DoctorPrimaryKeyRelatedField(PrimaryKeyRelatedField):
 
     def to_representation(self, obj):
         serializer = DoctorSerializer(obj)
-        return serializer.data
+        data = serializer.data
+        doctor_include = ['id', 'username', 'fullname', 'field', 'clinic']
+        clinic_include = ['id', 'name', 'desciption']
+        data = { key: data[key] for key in data if key in doctor_include }
+        data['clinic'] = { key: data['clinic'][key] for key in data['clinic'] if key in clinic_include }
+        return data
 
 class PatientPrimaryKeyRelatedField(PrimaryKeyRelatedField):
     def to_internal_value(self, data):
@@ -61,7 +66,10 @@ class PatientPrimaryKeyRelatedField(PrimaryKeyRelatedField):
 
     def to_representation(self, obj):
         serializer = PatientSerializer(obj)
-        return serializer.data
+        data = serializer.data
+        patient_include = ['id', 'username', 'fullname', 'phone_no']
+        data = { key: data[key] for key in data if key in patient_include }
+        return  data
 
 class SessionSerializer(DocumentSerializer):
     doctor = DoctorPrimaryKeyRelatedField(queryset=Doctor.objects)

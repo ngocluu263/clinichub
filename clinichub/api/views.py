@@ -60,6 +60,23 @@ class SessionViewSet(viewsets.ModelViewSet):
             'sender': message.sender,
             'time': message.time.isoformat()
         })
+    
+    def get_queryset(self):
+        queryset = self.queryset
+        patient = self.request.query_params.get('patient', None)
+        doctor = self.request.query_params.get('doctor', None)
+        is_short = self.request.query_params.get('short', None)
+
+        if is_short == 'true':
+            queryset = queryset.exclude('messages')
+
+        if patient is not None:
+            queryset = queryset.filter(patient=patient)
+
+        if doctor is not None:
+            queryset = queryset.filter(doctor=doctor)
+
+        return queryset
 
 class ClinicViewSet(viewsets.ModelViewSet):
     queryset = Clinic.objects.all()
@@ -68,7 +85,33 @@ class ClinicViewSet(viewsets.ModelViewSet):
 class AppointmentViewSet(viewsets.ModelViewSet):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
+    
+    def get_queryset(self):
+        queryset = self.queryset
+        patient = self.request.query_params.get('patient', None)
+        doctor = self.request.query_params.get('doctor', None)
+
+        if patient is not None:
+            queryset = queryset.filter(patient=patient)
+
+        if doctor is not None:
+            queryset = queryset.filter(doctor=doctor)
+
+        return queryset
 
 class TranscriptViewSet(viewsets.ModelViewSet):
     queryset = Transcript.objects.all()
     serializer_class = TranscriptSerializer
+
+    def get_queryset(self):
+        queryset = self.queryset
+        patient = self.request.query_params.get('patient', None)
+        doctor = self.request.query_params.get('doctor', None)
+
+        if patient is not None:
+            queryset = queryset.filter(patient=patient)
+
+        if doctor is not None:
+            queryset = queryset.filter(doctor=doctor)
+
+        return queryset
