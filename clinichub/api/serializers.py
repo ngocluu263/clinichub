@@ -3,6 +3,15 @@ from rest_framework.serializers import *
 from rest_framework_mongoengine.serializers import *
 from rest_framework.exceptions import *
 
+class ClinicSerializer(DocumentSerializer):
+    name = CharField(max_length=50)
+    description = CharField(max_length=100, allow_blank=True)
+    price = FloatField(min_value=0)
+
+    class Meta:
+        model = Clinic
+        fields = ('id', 'name', 'description', 'price', 'fields')
+
 class PatientSerializer(DocumentSerializer):
     fullname = ReadOnlyField()
     class Meta:
@@ -11,6 +20,7 @@ class PatientSerializer(DocumentSerializer):
 
 class DoctorSerializer(DocumentSerializer):
     fullname = ReadOnlyField()
+    clinic = ClinicSerializer()
     class Meta:
         model = Doctor
         fields = ('id', 'username', 'email', 'firstname', 'lastname', 'fullname', 'birthdate', 'id_no', 'field', 'clinic', 'md_no', 'activate')
@@ -50,12 +60,3 @@ class SessionSerializer(DocumentSerializer):
     class Meta:
         model = Session
         fields = ('id', 'topic', 'doctor', 'patient', 'messages')
-
-class ClinicSerializer(DocumentSerializer):
-    name = CharField(max_length=50)
-    description = CharField(max_length=100, allow_blank=True)
-    price = FloatField(min_value=0)
-
-    class Meta:
-        model = Clinic
-        fields = ('id', 'name', 'description', 'price')

@@ -10,6 +10,10 @@ class Clinic(Document):
     name = StringField(required = True, max_length=50)
     description = StringField(max_length=100)
     price = FloatField()
+
+    @property
+    def fields(self):
+        return list(set([doctor.field for doctor in filter(lambda doctor: doctor.clinic == self, Doctor.objects.all())]))
 	
 class Session(Document):
     topic = StringField(max_length=50)
