@@ -1,6 +1,7 @@
 from clinichub.models import *
 from rest_framework.serializers import *
 from rest_framework_mongoengine.serializers import *
+from rest_framework.exceptions import *
 
 class PatientSerializer(DocumentSerializer):
     fullname = ReadOnlyField()
@@ -19,13 +20,36 @@ class MessageSerializer(EmbeddedDocumentSerializer):
         model = Message
         fields = ('msg', 'sender', 'time')
 
+class DoctorPrimaryKeyRelatedField(PrimaryKeyRelatedField):
+    def to_internal_value(self, data):
+        doctor = Doctor.objects(id=data).first()
+        if not doctor:
+            raise NotFound()
+        return doctor
+
+    def to_representation(self, obj):
+        serializer = DoctorSerializer(obj)
+        return serializer.data
+
+class PatientPrimaryKeyRelatedField(PrimaryKeyRelatedField):
+    def to_internal_value(self, data):
+        patient = Patient.objects(id=data).first()
+        if not patient:
+            raise NotFound()
+        return patient
+
+    def to_representation(self, obj):
+        serializer = PatientSerializer(obj)
+        return serializer.data
+
 class SessionSerializer(DocumentSerializer):
-    doctor = DoctorSerializer()
-    patient = PatientSerializer()
-    messages = ListField(child=MessageSerializer())
+    doctor = DoctorPrimaryKeyRelatedField(queryset=Doctor.objects)
+    patient = PatientPrimaryKeyRelatedField(queryset=Patient.objects)
+    # messages = ListField(child=MessageSerializer())
     class Meta:
         model = Session
-        fields = ('id', 'topic', 'doctor', 'patient', 'messages')
+        # fields = ('id', 'topic', 'doctor', 'patient', 'messages')
+        fields = ('id', 'topic', 'doctor', 'patient')
 
 class ClinicSerializer(DocumentSerializer):
     name = CharField(max_length=50)
