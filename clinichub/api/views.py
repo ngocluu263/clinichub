@@ -11,9 +11,15 @@ class PatientViewSet(viewsets.ModelViewSet):
     serializer_class = PatientSerializer
 
 class DoctorViewSet(viewsets.ModelViewSet):
-    http_method_names = ['get']
+    http_method_names = ['get', 'patch']
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+
+    @list_route()
+    def noclinic(self, request):
+        queryset = self.filter_queryset(list(filter(lambda doctor: doctor.clinic == None and doctor.activate == True, self.get_queryset())))
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 class SessionViewSet(viewsets.ModelViewSet):
     queryset = Session.objects.all()
@@ -30,7 +36,7 @@ class SessionViewSet(viewsets.ModelViewSet):
         ]
         data.pop('description', None)
         
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
@@ -58,3 +64,11 @@ class SessionViewSet(viewsets.ModelViewSet):
 class ClinicViewSet(viewsets.ModelViewSet):
     queryset = Clinic.objects.all()
     serializer_class = ClinicSerializer
+
+class AppointmentViewSet(viewsets.ModelViewSet):
+    queryset = Appointment.objects.all()
+    serializer_class = AppointmentSerializer
+
+class TranscriptViewSet(viewsets.ModelViewSet):
+    queryset = Transcript.objects.all()
+    serializer_class = TranscriptSerializer

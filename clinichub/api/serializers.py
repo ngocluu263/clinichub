@@ -18,9 +18,20 @@ class PatientSerializer(DocumentSerializer):
         model = Patient
         fields = ('id', 'username', 'email', 'firstname', 'lastname', 'fullname', 'birthdate', 'id_no', 'balance', 'phone_no', 'address', 'allergy')
 
+class ClinicPrimaryKeyRelatedField(PrimaryKeyRelatedField):
+    def to_internal_value(self, data):
+        clinic = Clinic.objects(id=data).first()
+        if not clinic:
+            raise NotFound()
+        return clinic
+
+    def to_representation(self, obj):
+        serializer = ClinicSerializer(obj)
+        return serializer.data
+
 class DoctorSerializer(DocumentSerializer):
     fullname = ReadOnlyField()
-    clinic = ClinicSerializer()
+    clinic = ClinicPrimaryKeyRelatedField(queryset=Clinic.objects, allow_null=True)
     class Meta:
         model = Doctor
         fields = ('id', 'username', 'email', 'firstname', 'lastname', 'fullname', 'birthdate', 'id_no', 'field', 'clinic', 'md_no', 'activate')
@@ -60,3 +71,25 @@ class SessionSerializer(DocumentSerializer):
     class Meta:
         model = Session
         fields = ('id', 'topic', 'doctor', 'patient', 'messages')
+
+class AppointmentSerializer(DocumentSerializer):
+    doctor = DoctorPrimaryKeyRelatedField(queryset=Doctor.objects)
+    patient = PatientPrimaryKeyRelatedField(queryset=Patient.objects)
+
+    class Meta:
+        model = Appointment
+        fields = ('id', 'doctor', 'patient', 'time', 'note')
+
+class DrugSerializer(EmbeddedDocumentSerializer):
+    class Meta:
+        model = Drug
+        fields = ('name', 'amount', 'usage')
+
+class TranscriptSerializer(DocumentSerializer):
+    doctor = DoctorPrimaryKeyRelatedField(queryset=Doctor.objects)
+    patient = PatientPrimaryKeyRelatedField(queryset=Patient.objects)
+    drugs = ListField(child=DrugSerializer())
+
+    class Meta:
+        model = Transcript
+        fields = ('id', 'doctor', 'patient', 'note', 'drugs')
