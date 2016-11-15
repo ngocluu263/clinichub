@@ -9,32 +9,33 @@ export default class ClinicManagerStore {
   @observable doctorId
   @observable msg = ""
 
-
   showMessage(msg) {
     this.msg = msg
     setTimeout(() => {
       this.msg = ""
     }, 2000) 
   }
+
   editClinic(data) {
-    data.clinic_id = this.clinicId
-    myFetch('/api/set_clinic', data).then(data => {
+    myFetch.patch(`/rest/clinics/${this.clinicId}/`, data).then(data => {
         this.fetchClinic()
         this.showMessage("Edit clinic successfully")
     })
   }
 
   inviteDoctors(doctors) {
-    myFetch('/api/set_clinic_to_doctors', {clinic_id: this.clinicId, doctors}).then(data => {
-      if (!data.error_message) {
-        this.fetchDoctors()
-        this.showMessage("Invite doctors successfully")
-      }
+    let inviterPromises = doctors.map(doctor => {
+      return myFetch.patch(`/rest/doctors/${doctor}/`, {clinic: this.clinicId})
+    })
+
+    Promise.all(inviterPromises).then(() => {
+      this.fetchDoctors()
+      this.showMessage("Invite doctors successfully")
     })
   }
 
   leaveClinic() {
-    myFetch('/api/leave_clinic', { doctor_id: this.doctorId}).then(data => {
+    myFetch.patch(`/rest/doctors/${this.doctorId}/`, { clinic: null }).then(data => {
       if (!data.error_message) {
         this.showMessage("Leave clinic successfully")
         window.location = '/doctor/profile/clinic'
@@ -43,15 +44,15 @@ export default class ClinicManagerStore {
   }
 
   fetchClinic() {
-    myFetch('/api/get_clinic', { clinic_id: this.clinicId }).then(data => {
-      this.clinic = data.clinic
+    myFetch.get(`/rest/clinics/${this.clinicId}/`).then(data => {
+      this.clinic = data
       this.pageReady = 'edit' 
     })
   }
 
   fetchDoctors() {
-    myFetch('/api/get_available_doctors').then(data => {
-      this.doctors = data.doctors
+    myFetch.get('/rest/doctors/noclinic/').then(data => {
+      this.doctors = data
       this.pageReady = 'invite' 
     })
   }

@@ -9,7 +9,7 @@ import ClinicManager from './components/ClinicManager'
 let initialData = {
   page: 'edit', // edit, invite, leave
   clinicId: window.clinicId || '58151bc65a95ef28bb6567f3',
-  doctorId: window.doctorId || '5815bc1f5a95ef3b8dc28d95',
+  doctorId: window.doctorId || '580f6de35a95ef3bbb446033',
 }
 
 init()

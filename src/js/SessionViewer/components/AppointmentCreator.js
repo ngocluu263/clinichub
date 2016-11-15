@@ -5,7 +5,7 @@ import _ from 'lodash'
 export default class AppointmentCreator extends Component {
   submit() {
     this.props.submitAppointment({
-      date: moment(this.refs.date.value).unix(),
+      date: moment(this.refs.date.value).format('YYYY-MM-DDTHH:mm:ss.SSS'),
       note: this.refs.note.value.trim()
     }) 
   }

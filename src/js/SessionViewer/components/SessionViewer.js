@@ -27,16 +27,16 @@ export default class SessionViewer extends Component {
         )
         case 'transcript': return (
           <TranscriptCreator
-            doctor={store.session.doctor.name}
-            patient={store.session.patient.name}
+            doctor={store.session.doctor.fullname}
+            patient={store.session.patient.fullname}
             submitTranscript={store.submitTranscript.bind(store)}
             changePage={store.changePage.bind(store)}
           />
         )
         case 'appointment': return (
           <AppointmentCreator
-            doctor={store.session.doctor.name}
-            patient={store.session.patient.name}
+            doctor={store.session.doctor.fullname}
+            patient={store.session.patient.fullname}
             submitAppointment={store.submitAppointment.bind(store)}
             changePage={store.changePage.bind(store)}
           />

@@ -2,19 +2,24 @@ import fetch from 'isomorphic-fetch'
 
 export let myFetch = (() => {
   function myFetch(method, url, data) {
-    return fetch((process.env.NODE_ENV == 'production'? '': `http://${window.location.hostname}:8000`) + url, {
+    let fetchObj = fetch((process.env.NODE_ENV == 'production'? '': `http://${window.location.hostname}:8000`) + url, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       method,
       body: JSON.stringify(data)
-    }).then(res => {
-      if (res.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return res.json()
     })
+    
+    if (method == 'DELETE') return fetchObj
+    else {
+      return fetchObj.then(res => {
+        if (res.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return res.json()
+      })
+    }
   }
 
   myFetch.post = (url, data) => myFetch('POST', url, data)

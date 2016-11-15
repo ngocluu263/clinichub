@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-
+window.moment = moment
 let modifyMessage = (msg, sender) => {
   if (sender == 'D') {
     if (msg.match(/^\/create-transcript/)) {
@@ -46,9 +46,9 @@ export default class Message extends Component {
           key={index}
           msg={item.msg}
           sender={item.sender}
-          sender_name={item.sender=='P'? session.patient.name: session.doctor.name}
+          sender_name={item.sender=='P'? session.patient.fullname: session.doctor.fullname}
           side={side}
-          time={moment.unix(item.time)}/>
+          time={moment(item.time)}/>
       )
     })
     return (

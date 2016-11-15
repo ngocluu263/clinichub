@@ -14,6 +14,12 @@ export default class ClinicEditor extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      doctors: nextProps.doctors.map(item => Object.assign(item, { selected: false}))
+    })
+  }
+
   toggleDoctor(i) {
     let doctors = this.state.doctors
     doctors[i].selected = !doctors[i].selected
@@ -43,7 +49,7 @@ export default class ClinicEditor extends Component {
                 onClick={this.toggleDoctor.bind(this, index)}
                 className={"list-group-item" + (item.selected? ' active': '')}
               >
-                <h4 className="list-group-item-heading">{item.name}</h4>
+                <h4 className="list-group-item-heading">{item.fullname}</h4>
                 <p className="list-group-item-text">Field: {item.field}</p>
               </a>
             )

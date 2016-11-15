@@ -7,48 +7,51 @@ export default class SessionViewerStore {
   @observable session
 
   sendMessage(msg) {
-    myFetch('/api/send_message', {
-      session_id: this.session.id,
+    myFetch.post(`/rest/sessions/${this.session.id}/push_message/`, {
       msg: msg,
       sender: this.me == 'patient'? 'P': 'D'
     }).then(data => {
+      // console.log(data)
       this.socket.send(JSON.stringify(data))
     })
   }
 
   pushMessage(msg) {
+    // console.log(msg)
     this.session.messages.push(msg)
   }
 
   submitTranscript(data) {
-    myFetch('/api/create_transcript', {
+    myFetch.post('/rest/transcripts/', {
       drugs: data.drugs, 
       note: data.note,
       patient: this.session.patient.id,
       doctor: this.session.doctor.id
     }).then(data => {
-      this.sendMessage('/create-transcript '+ data.transcript.id)
+      this.sendMessage('/create-transcript '+ data.id)
       this.page = 'message'
     })
   }
 
   submitAppointment(data) {
-    myFetch('/api/create_appointment', {
+    myFetch.post('/rest/appointments/', {
       note: data.note,
       patient: this.session.patient.id,
       doctor: this.session.doctor.id,
       time: data.date
     }).then(data => {
-      this.sendMessage('/create-appointment '+ data.appointment.id)
+      this.sendMessage('/create-appointment '+ data.id)
       this.page = 'message'
     })
   }
 
   deleteSession() {
-    myFetch('/api/delete_session', { session_id: this.session.id}).then(data => {
-      if (!data.error_message) {
+    myFetch.delete(`/rest/sessions/${this.session.id}/`).then(res => {
+      if (res.status < 400) {
         if (this.me == 'patient') window.location = '/profile/sessions'
         else window.location = '/doctor/profile/sessions'
+      } else {
+        throw new Error("Bad response from server");
       }
     })
   }
