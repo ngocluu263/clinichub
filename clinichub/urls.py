@@ -33,21 +33,6 @@ appointment_urlpatterns = [
     url(r'^(?P<appointment_id>[a-f0-9]{24})$', views.appointment, name='appointment'),
 ]
 
-api_urlpatterns = [
-    url(r'^get_all_clinics$', views.api.get_all_clinics),
-    url(r'^create_session$', views.api.create_session),
-    url(r'^get_session$', views.api.get_session),
-    url(r'^create_transcript$', views.api.create_transcript),
-    url(r'^create_appointment$', views.api.create_appointment),
-    url(r'^delete_session$', views.api.delete_session),
-    url(r'^send_message$', views.api.send_message),
-    url(r'^get_clinic$', views.api.get_clinic),
-    url(r'^set_clinic$', views.api.set_clinic),
-    url(r'^get_available_doctors$', views.api.get_available_doctors),
-    url(r'^set_clinic_to_doctors$', views.api.set_clinic_to_doctors),
-    url(r'^leave_clinic$', views.api.leave_clinic),
-]
-
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^login$', views.login, name='login'),
@@ -61,6 +46,5 @@ urlpatterns = [
     url(r'^session/', include(session_urlpatterns)),
     url(r'^transcript/', include(transcript_urlpatterns)),
     url(r'^appointment/', include(appointment_urlpatterns)),
-    url(r'^api/', include(api_urlpatterns)),
-    url(r'^rest/', include('clinichub.api.urls')),
+    url(r'^api/', include('clinichub.api.urls')),
 ]

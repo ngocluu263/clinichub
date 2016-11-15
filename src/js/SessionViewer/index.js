@@ -17,7 +17,7 @@ let initialData = {
 let session_id = '5814d04c5a95ef673f893b60'
 if (process.env.NODE_ENV == 'production') session_id = path.basename(window.location)
 
-myFetch.get(`/rest/sessions/${session_id}/`).then(data => {
+myFetch.get(`/api/sessions/${session_id}/`).then(data => {
   Object.assign(initialData.session, data)
   init()
 })

@@ -17,7 +17,7 @@ export default class ClinicManagerStore {
   }
 
   editClinic(data) {
-    myFetch.patch(`/rest/clinics/${this.clinicId}/`, data).then(data => {
+    myFetch.patch(`/api/clinics/${this.clinicId}/`, data).then(data => {
         this.fetchClinic()
         this.showMessage("Edit clinic successfully")
     })
@@ -25,7 +25,7 @@ export default class ClinicManagerStore {
 
   inviteDoctors(doctors) {
     let inviterPromises = doctors.map(doctor => {
-      return myFetch.patch(`/rest/doctors/${doctor}/`, {clinic: this.clinicId})
+      return myFetch.patch(`/api/doctors/${doctor}/`, {clinic: this.clinicId})
     })
 
     Promise.all(inviterPromises).then(() => {
@@ -35,7 +35,7 @@ export default class ClinicManagerStore {
   }
 
   leaveClinic() {
-    myFetch.patch(`/rest/doctors/${this.doctorId}/`, { clinic: null }).then(data => {
+    myFetch.patch(`/api/doctors/${this.doctorId}/`, { clinic: null }).then(data => {
       if (!data.error_message) {
         this.showMessage("Leave clinic successfully")
         window.location = '/doctor/profile/clinic'
@@ -44,14 +44,14 @@ export default class ClinicManagerStore {
   }
 
   fetchClinic() {
-    myFetch.get(`/rest/clinics/${this.clinicId}/`).then(data => {
+    myFetch.get(`/api/clinics/${this.clinicId}/`).then(data => {
       this.clinic = data
       this.pageReady = 'edit' 
     })
   }
 
   fetchDoctors() {
-    myFetch.get('/rest/doctors/noclinic/').then(data => {
+    myFetch.get('/api/doctors/noclinic/').then(data => {
       this.doctors = data
       this.pageReady = 'invite' 
     })

@@ -7,7 +7,7 @@ export default class SessionViewerStore {
   @observable session
 
   sendMessage(msg) {
-    myFetch.post(`/rest/sessions/${this.session.id}/push_message/`, {
+    myFetch.post(`/api/sessions/${this.session.id}/push_message/`, {
       msg: msg,
       sender: this.me == 'patient'? 'P': 'D'
     }).then(data => {
@@ -22,7 +22,7 @@ export default class SessionViewerStore {
   }
 
   submitTranscript(data) {
-    myFetch.post('/rest/transcripts/', {
+    myFetch.post('/api/transcripts/', {
       drugs: data.drugs, 
       note: data.note,
       patient: this.session.patient.id,
@@ -34,7 +34,7 @@ export default class SessionViewerStore {
   }
 
   submitAppointment(data) {
-    myFetch.post('/rest/appointments/', {
+    myFetch.post('/api/appointments/', {
       note: data.note,
       patient: this.session.patient.id,
       doctor: this.session.doctor.id,
@@ -46,7 +46,7 @@ export default class SessionViewerStore {
   }
 
   deleteSession() {
-    myFetch.delete(`/rest/sessions/${this.session.id}/`).then(res => {
+    myFetch.delete(`/api/sessions/${this.session.id}/`).then(res => {
       if (res.status < 400) {
         if (this.me == 'patient') window.location = '/profile/sessions'
         else window.location = '/doctor/profile/sessions'

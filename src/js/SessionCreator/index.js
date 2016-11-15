@@ -12,7 +12,7 @@ let initialData = {
   balance: window.balance === undefined? 12345.67: window.balance
 }
 
-myFetch.get('/rest/clinics/').then(data => {
+myFetch.get('/api/clinics/').then(data => {
   initialData.clinics = data
   init()
 })

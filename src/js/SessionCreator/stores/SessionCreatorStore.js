@@ -58,7 +58,7 @@ export default class SessionCreatorStore {
       field: this.selectedField,
       patient: window.patient || "5808aae05a95ef4211820cbd"
     }
-    myFetch.post('/rest/sessions/', summary).then(data => {
+    myFetch.post('/api/sessions/', summary).then(data => {
       this.completedSession = Object.assign(this.completedSession, {
         session_id: data.id,
         topic: data.topic,
