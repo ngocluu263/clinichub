@@ -1,8 +1,7 @@
 {
   "name": "clinichub",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "./manage.py runserver",
     "build": "NODE_ENV=production webpack -p",
@@ -13,7 +12,14 @@
     "type": "git",
     "url": "git+https://github.com/jenwich/clinichub.git"
   },
-  "author": "Jenwich Rattanayenjai",
+  "author": "Jenwich Rattanayenjai <pamjeavrat@gmail.com>",
+  "contributors": [
+    "Jenwich Rattanayenjai <pamjeavrat@gmail.com>",
+    "Krittin Meenrattanakorn <whatevermarch@gmail.com>",
+    "Cheevarit Rodnuson <xtachee@icloud.com>",
+    "Panupong Maneerut <nack_dragon_Evil@hotmail.com@gmail.com>",
+    "Sithichai Tharkulmaiphol <star_dust_remove@hotmail.com"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jenwich/clinichub/issues"
