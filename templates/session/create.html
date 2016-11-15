@@ -13,7 +13,7 @@
 {% block js %}
   <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
   <script type="text/javascript">
-    window.patient = '{{request.session.username}}'
+    window.patient = '{{patientId}}'
     window.balance = {{balance}}
   </script>
   <script type="text/javascript" src="{% static 'js/sessionCreator.js' %}"></script>
