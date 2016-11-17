@@ -26,6 +26,8 @@ class Appointment(Document):
     patient = ReferenceField(Patient)
     time = DateTimeField()
     note = StringField(max_length=100)
+    location = StringField(max_length=100)
+    state = StringField(max_length=10)
 
 class Drug(EmbeddedDocument):
     name = StringField(max_length=50)

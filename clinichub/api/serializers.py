@@ -86,7 +86,7 @@ class AppointmentSerializer(DocumentSerializer):
 
     class Meta:
         model = Appointment
-        fields = ('id', 'doctor', 'patient', 'time', 'note')
+        fields = ('id', 'doctor', 'patient', 'time', 'note', 'location', 'state')
 
 class DrugSerializer(EmbeddedDocumentSerializer):
     class Meta:
