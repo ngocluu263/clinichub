@@ -8,6 +8,7 @@ import AppointmentList from './components/AppointmentList'
 
 let initialData = {
   page: 'active', // active, cancel, history
+  me: window.me || 'patient'
 }
 
 let doctor = window.user || '582bc4ca5a95ef40981b50bc'

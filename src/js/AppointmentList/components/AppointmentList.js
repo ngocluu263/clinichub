@@ -21,7 +21,8 @@ let SubMenuList = ({page, changePage}) => {
 @observer
 export default class AppointmentList extends Component {
   render() {
-    let { page, appointments } = this.props.store
+    let { store } = this.props
+    let { page, appointments } = store
     switch (page) {
       case 'active': var list = appointments.filter(item => item.state == 'active'); break
       case 'cancel': var list = appointments.filter(item => item.state == 'cancel'); break
@@ -31,12 +32,14 @@ export default class AppointmentList extends Component {
     return (
       <div className="row">
         <div className="col-md-3">
-          <SubMenuList page={page} changePage={(page) => this.props.store.page = page} />
+          <SubMenuList page={page} changePage={(page) => store.page = page} />
         </div>
         <div className="col-md-9">
           <AppointmentFilteredList
-            page={page} list={list}
-            changePage={(page) => this.props.store.page = page} />
+            page={page} list={list} me={store.me}
+            changePage={(page) => this.props.store.page = page}
+            doneAppointment={store.doneAppointment.bind(store)}
+            cancelAppointment={store.cancelAppointment.bind(store)} />
         </div>
       </div>
     )
