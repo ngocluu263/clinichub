@@ -80,13 +80,28 @@ class SessionSerializer(DocumentSerializer):
         model = Session
         fields = ('id', 'topic', 'doctor', 'patient', 'messages')
 
+class SessionPrimaryKeyRelatedField(PrimaryKeyRelatedField):
+    def to_internal_value(self, data):
+        session = Session.objects(id=data).first()
+        if not session:
+            raise NotFound()
+        return session
+
+    def to_representation(self, obj):
+        serializer = SessionSerializer(obj)
+        data = serializer.data
+        session_include = ['id', 'topic']
+        data = { key: data[key] for key in data if key in session_include }
+        return data
+
 class AppointmentSerializer(DocumentSerializer):
     doctor = DoctorPrimaryKeyRelatedField(queryset=Doctor.objects)
     patient = PatientPrimaryKeyRelatedField(queryset=Patient.objects)
+    session = SessionPrimaryKeyRelatedField(queryset=Session.objects)
 
     class Meta:
         model = Appointment
-        fields = ('id', 'doctor', 'patient', 'time', 'note', 'location', 'state')
+        fields = ('id', 'doctor', 'patient', 'time', 'note', 'location', 'state', 'session')
 
 class DrugSerializer(EmbeddedDocumentSerializer):
     class Meta:

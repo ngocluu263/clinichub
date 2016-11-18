@@ -24,6 +24,7 @@ class Session(Document):
 class Appointment(Document):
     doctor = ReferenceField(Doctor)
     patient = ReferenceField(Patient)
+    session = ReferenceField(Session)
     time = DateTimeField()
     note = StringField(max_length=100)
     location = StringField(max_length=100)
