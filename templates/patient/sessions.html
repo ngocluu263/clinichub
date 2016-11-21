@@ -1,8 +1,49 @@
 {% extends './base.html' %}
-
+{% load static %}
 {% block innercontent %}
-  <div>
+  <!-- <div>
     <a href="{% url 'session_create' %}" class="btn btn-primary" target="_blanck">Create Session</a>
+  </div> -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6" style="height:600px; weight:400px" >
+        <div class="NotiPane">
+              <div class="Gapper_UltraSmall"></div>
+              <div class="NotiPane_HeaderText"> Session </div>
+              <div class="NotiPane_Space" style="top: 50px; bottom: 80px">
+                  <div class="colorgray1 ExpandableList">
+                      <div class="ExpandableList_TopLabel">&nbsp;All Session</div>
+                      <div class="BigSpaceList BigSpaceList_Grey BigSpaceList_GreyBorder1">
+                          <div class="MultiLineLabel LabelManual_Font_Medium" style="margin: 10px"> My Thoart Is Hurt<br> <span style="color: red">Clinic : Hellgate</span> </div>
+                          <div class="Square_Tiny RoundImage RoundButton RoundButton_Red" style="position: absolute; top: 10px; right: 10px">
+                              <img src="{% static "resource/ArrowRed.png" %}" class="RoundButton_Arrow">
+                          </div>
+                          <div class="LabelManual LabelManual_Font_Small Unique_SessionPage_RedDateLabel">13:05 PM</div>
+                      </div>
+                  </div>
+                  <div class="colorgray1 ExpandableList">
+                      <div class="ExpandableList_TopLabel">&nbsp;History Session</div>
+                      <div class="BigSpaceList BigSpaceList_UltraGrey BigSpaceList_UltraGreyBorder1">
+                          <div class="MultiLineLabel LabelManual_Font_Medium" style="margin: 10px; color: #cdcdcd"> My Thoart Is Hurt<br> Clinic : Hellgate </div>
+                          <div class="Square_Tiny RoundImage RoundButton RoundButton_Grey RoundButton_Grey_Dot"> ... </div>
+                          <div class="LabelManual LabelManual_Font_Small Unique_SessionPage_DateLabel">15 July 2018</div>
+                      </div>
+                  </div>
+              </div>
+              <div class="NotiPane_Space" style="background-color: transparent; top: auto;bottom: 0px;height: 80px">
+                  <div style="text-align: center">
+                      <div class="Gapper_Medium"></div>
+                      <a href="{% url 'session_create' %}" style="display: inline-block; text-decoration: none;" class="ButtonStandard ButtonHeight_OneLineText_Medium ButtonWidth_Large Button_NormalColor ButtonStandard_RoundCorner">Add New Session</a>
+                      <!-- <div class="ButtonStandard ButtonHeight_OneLineText_Medium ButtonWidth_Large Button_NormalColor ButtonStandard_RoundCorner" style="display: inline-block">Add New Session</div> -->
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-3">
+      </div>
+    </div>
   </div>
   <table class="table table-hover user-table" style="margin-top: 10px;">
     <thead>
