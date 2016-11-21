@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import { getTimeDiff }  from '../../utils'
 
 let Item = ({appointment, page, me, selected, toggleDetail, doneAppointment, cancelAppointment}) => {
   let time_ = moment(appointment.time)
@@ -7,32 +8,39 @@ let Item = ({appointment, page, me, selected, toggleDetail, doneAppointment, can
   let userStr = (me == 'doctor')?
     `Patient: ${appointment.patient.fullname}`:
     `Doctor: ${appointment.doctor.fullname}`
-  let now = moment()
-  
+  // console.log(getTimeDiff(time_))
   const active = selected == appointment.id
-  const isTimeUp = time_.isBefore(now)
+  switch (appointment.state) {
+    case 'active': var title = getTimeDiff(time_); break;
+    case 'cancel': var title = "Canceled"; break;
+    case 'history': var title = "Completed"; break;
+  }
   return (
     <li className="list-group-item row">
       <div className="col-sm-9">
+        <h3 className="list-group-item-heading">
+          <span>{title}</span>
+        </h3>
         <h4 className="list-group-item-heading">
-          <span>{timeStr}</span>
-          <small>&nbsp;&nbsp;{appointment.session.topic} Session</small>
+          <span>{timeStr}<br /></span>
+          <span>Session: </span>
+          <a href={'/session/'+ appointment.id}>{appointment.session.topic}</a>
         </h4>
         <p className="list-group-item-text">
-          <span>{userStr}<br /></span>
           {(active & me == 'patient')?
             <span>Clinic: {appointment.doctor.clinic.name}<br /></span>: false}
           {(active)?
-            <span>Location: {appointment.location}<br /></span>: false}
+            <span>{userStr}<br /></span>: false}
+          {(active)?
+            <span>Adress: {appointment.location}<br /></span>: false}
+        </p>
+        <p>
           {(active)?
             <span>Note: {appointment.note}<br /></span>: false}
         </p>
-        { (page == 'active')?
+        { (page == 'active' && active)?
           (<p>
-            {(active && isTimeUp)?
-              <button className="btn btn-success" onClick={() => doneAppointment(appointment.id)}>Done</button>: false}
-            {(active)?
-              <button className="btn btn-danger" onClick={() => cancelAppointment(appointment.id)}>Discard</button>: false}
+            <button className="btn btn-danger" onClick={() => cancelAppointment(appointment.id)}>Discard</button>
           </p>): false
         }
       </div>

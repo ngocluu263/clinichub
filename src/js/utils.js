@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import moment from 'moment'
 
 export let myFetch = (() => {
   function myFetch(method, url, data) {
@@ -30,3 +31,15 @@ export let myFetch = (() => {
 
   return myFetch
 })()
+
+export function getTimeDiff(time) {
+  let now = moment()
+  let timeDiff = moment.duration((time.unix() - now.unix()) * 1000, 'milliseconds')
+  let str = ""
+  if (timeDiff.years()) str += timeDiff.years() + " years "
+  if (timeDiff.months()) str += timeDiff.months() + " months "
+  if (timeDiff.days()) str += timeDiff.days() + " days "
+  if (timeDiff.hours()) str += timeDiff.hours() + " hours "
+  if (timeDiff.minutes()) str += timeDiff.minutes() + " minutes "
+  return str
+}

@@ -9,9 +9,6 @@ let SubMenuList = ({page, changePage}) => {
         className={`list-group-item${page == 'active'? ' active': ''}`}
         onClick={() => changePage('active')}>Active</a>
       <a href="javascript:;"
-        className={`list-group-item${page == 'cancel'? ' active': ''}`}
-        onClick={() => changePage('cancel')}>Cancel</a>
-      <a href="javascript:;"
         className={`list-group-item${page == 'history'? ' active': ''}`}
         onClick={() => changePage('history')}>History</a>
     </div>
@@ -25,8 +22,7 @@ export default class AppointmentList extends Component {
     let { page, appointments } = store
     switch (page) {
       case 'active': var list = appointments.filter(item => item.state == 'active'); break
-      case 'cancel': var list = appointments.filter(item => item.state == 'cancel'); break
-      case 'history': var list = appointments.filter(item => item.state == 'history'); break
+      case 'history': var list = appointments.filter(item => item.state == 'history' || item.state == 'cancel'); break
     }
     
     return (

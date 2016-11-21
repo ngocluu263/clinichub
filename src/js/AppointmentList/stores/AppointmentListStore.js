@@ -1,6 +1,7 @@
 import { observable, computed, autorun } from 'mobx'
 import { myFetch } from '../../utils'
 import { toJS } from 'mobx'
+import moment from 'moment'
 
 export default class AppointmentListStore {
   @observable page
@@ -25,6 +26,14 @@ export default class AppointmentListStore {
 
   static fromJS(data) {
     let store = new AppointmentListStore()
+    let appointments = data.appointments.map(app => {
+      let time = moment(app.time)
+      let now = moment()
+      if (time.isBefore(now)) {
+        app.state = 'history'
+      }
+      return app
+    })
     Object.assign(store, data)
     return store
   }
