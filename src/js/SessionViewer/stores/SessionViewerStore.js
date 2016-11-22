@@ -1,6 +1,6 @@
 import { observable, computed } from 'mobx'
 import _ from 'lodash'
-import { myFetch } from '../../utils'
+import { myFetch, getTimeDiff } from '../../utils'
 
 export default class SessionViewerStore {
   @observable page
@@ -11,13 +11,11 @@ export default class SessionViewerStore {
       msg: msg,
       sender: this.me == 'patient'? 'P': 'D'
     }).then(data => {
-      // console.log(data)
       this.socket.send(JSON.stringify(data))
     })
   }
 
   pushMessage(msg) {
-    // console.log(msg)
     this.session.messages.push(msg)
   }
 
@@ -63,7 +61,10 @@ export default class SessionViewerStore {
   }
 
   static fromJS(data) {
-    const store = new SessionViewerStore()   
+    const store = new SessionViewerStore()
+    data.appointmentList = data.appointmentList.filter(app => {
+      return app.state == 'active' && getTimeDiff(app.time).as('milliseconds') > 0
+    })
     Object.assign(store, data)
     return store
   }

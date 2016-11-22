@@ -90,7 +90,7 @@ class ClinicViewSet(viewsets.ModelViewSet):
     serializer_class = ClinicSerializer
 
 class AppointmentViewSet(viewsets.ModelViewSet):
-    queryset = Appointment.objects.all()
+    queryset = Appointment.objects.all().order_by('-time')
     serializer_class = AppointmentSerializer
     
     def get_queryset(self):

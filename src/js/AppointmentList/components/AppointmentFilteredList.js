@@ -2,16 +2,26 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import { getTimeDiff }  from '../../utils'
 
+function durationToString(duration) {
+  let str = ""
+  if (duration.years()) str += duration.years() + " years "
+  if (duration.months()) str += duration.months() + " months "
+  if (duration.days()) str += duration.days() + " days "
+  if (duration.hours()) str += duration.hours() + " hours "
+  if (duration.minutes()) str += duration.minutes() + " minutes "
+  return str
+}
+
 let Item = ({appointment, page, me, selected, toggleDetail, doneAppointment, cancelAppointment}) => {
   let time_ = moment(appointment.time)
   let timeStr = time_.format('ddd, DD MMM YYYY HH:mm')
   let userStr = (me == 'doctor')?
     `Patient: ${appointment.patient.fullname}`:
     `Doctor: ${appointment.doctor.fullname}`
-  // console.log(getTimeDiff(time_))
+  
   const active = selected == appointment.id
   switch (appointment.state) {
-    case 'active': var title = getTimeDiff(time_); break;
+    case 'active': var title = durationToString(getTimeDiff(time_)); break;
     case 'cancel': var title = "Canceled"; break;
     case 'history': var title = "Completed"; break;
   }
