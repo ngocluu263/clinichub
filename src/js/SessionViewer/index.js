@@ -22,7 +22,7 @@ myFetch.get(`/api/sessions/${session_id}/`).then(data => {
 
   let filterUrl = initialData.me == 'doctor'? 'doctor='+ data.doctor.id: 'patient='+ data.patient.id
   let sessionsUrl = '/api/sessions/?' + filterUrl
-  let appointmentsUrl = '/api/appointments/?' + filterUrl
+  let appointmentsUrl = '/api/appointments/?session='+ data.id
 
   let sessionsPromise = myFetch.get(sessionsUrl)
   let appointmentsPromise = myFetch.get(appointmentsUrl)

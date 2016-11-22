@@ -97,12 +97,16 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         queryset = self.queryset
         patient = self.request.query_params.get('patient', None)
         doctor = self.request.query_params.get('doctor', None)
+        session = self.request.query_params.get('session', None)
 
         if patient is not None:
             queryset = queryset.filter(patient=patient)
 
         if doctor is not None:
             queryset = queryset.filter(doctor=doctor)
+            
+        if session is not None:
+            queryset = queryset.filter(session=session)
 
         return queryset
 
