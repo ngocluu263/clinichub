@@ -16,37 +16,39 @@ let Item = ({appointment, page, me, selected, toggleDetail, doneAppointment, can
     case 'history': var title = "Completed"; break;
   }
   return (
-    <li className="list-group-item row">
-      <div className="col-sm-9">
-        <h3 className="list-group-item-heading">
-          <span>{title}</span>
-        </h3>
-        <h4 className="list-group-item-heading">
-          <span>{timeStr}<br /></span>
-          <span>Session: </span>
-          <a href={'/session/'+ appointment.id}>{appointment.session.topic}</a>
-        </h4>
-        <p className="list-group-item-text">
-          {(active & me == 'patient')?
-            <span>Clinic: {appointment.doctor.clinic.name}<br /></span>: false}
-          {(active)?
-            <span>{userStr}<br /></span>: false}
-          {(active)?
-            <span>Adress: {appointment.location}<br /></span>: false}
-        </p>
-        <p>
-          {(active)?
-            <span>Note: {appointment.note}<br /></span>: false}
-        </p>
-        { (page == 'active' && active)?
-          (<p>
-            <button className="btn btn-danger" onClick={() => cancelAppointment(appointment.id)}>Discard</button>
-          </p>): false
-        }
-      </div>
-      <div className="col-sm-3" style={{'textAlign': 'right'}}>
-        <button className="btn btn-default" onClick={() => toggleDetail(appointment.id)}>
-          {(active)? 'Hide Detail': 'Show Detail'}</button>
+    <li className="list-group-item">
+      <div className="row">
+        <div className="col-sm-9">
+          <h3 className="list-group-item-heading">
+            <span>{title}</span>
+          </h3>
+          <h4 className="list-group-item-heading">
+            <span>{timeStr}<br /></span>
+            <span>Session: </span>
+            <a href={'/session/'+ appointment.session.id}>{appointment.session.topic}</a>
+          </h4>
+          <p className="list-group-item-text">
+            {(active & me == 'patient')?
+              <span>Clinic: {appointment.doctor.clinic.name}<br /></span>: false}
+            {(active)?
+              <span>{userStr}<br /></span>: false}
+            {(active)?
+              <span>Adress: {appointment.location}<br /></span>: false}
+          </p>
+          <p>
+            {(active)?
+              <span>Note: {appointment.note}<br /></span>: false}
+          </p>
+          { (page == 'active' && active)?
+            (<p>
+              <button className="btn btn-danger" onClick={() => cancelAppointment(appointment.id)}>Discard</button>
+            </p>): false
+          }
+        </div>
+        <div className="col-sm-3" style={{'textAlign': 'right'}}>
+          <button className="btn btn-default" onClick={() => toggleDetail(appointment.id)}>
+            {(active)? 'Hide Detail': 'Show Detail'}</button>
+        </div>
       </div>
     </li>
   )

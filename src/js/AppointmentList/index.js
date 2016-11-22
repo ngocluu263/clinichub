@@ -11,11 +11,11 @@ let initialData = {
   me: window.me || 'patient'
 }
 
-let doctor = window.user || '582bc4ca5a95ef40981b50bc'
+let doctor = window.doctor || '582bc4ca5a95ef40981b50bc'
 let patient = window.patient
 
-if (doctor) var filter = `?doctor=${doctor}`
-else if (patient) var filter = `?patient=${patient}`
+if (patient) var filter = `?patient=${patient}`
+else if (doctor) var filter = `?doctor=${doctor}`
 
 myFetch.get(`/api/appointments/${filter}`).then((data) => {
   initialData.appointments = data

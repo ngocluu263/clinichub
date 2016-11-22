@@ -2,17 +2,10 @@ import React, { Component } from 'react'
 import { observer } from 'mobx-react'
 import AppointmentFilteredList from './AppointmentFilteredList'
 
-let SubMenuList = ({page, changePage}) => {
-  return (
-    <div className="list-group">
-      <a href="javascript:;"
-        className={`list-group-item${page == 'active'? ' active': ''}`}
-        onClick={() => changePage('active')}>Active</a>
-      <a href="javascript:;"
-        className={`list-group-item${page == 'history'? ' active': ''}`}
-        onClick={() => changePage('history')}>History</a>
-    </div>
-  )
+let TabLink = ({enable, pageName, changePage}) => {
+  return (enable)?
+    <a href="javascript:;" onClick={() => changePage()}>{pageName}</a>:
+    <span>{pageName}</span>
 }
 
 @observer
@@ -24,19 +17,21 @@ export default class AppointmentList extends Component {
       case 'active': var list = appointments.filter(item => item.state == 'active'); break
       case 'history': var list = appointments.filter(item => item.state == 'history' || item.state == 'cancel'); break
     }
-    
+
     return (
-      <div className="row">
-        <div className="col-md-3">
-          <SubMenuList page={page} changePage={(page) => store.page = page} />
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <span>Appointment: &nbsp;</span>
+          <span style={{'position': 'absolute', 'float': 'right'}}>
+            <TabLink enable={store.page != 'active'} pageName="Active" changePage={() => store.page = 'active'} />  | &nbsp;
+            <TabLink enable={store.page != 'history'} pageName="History" changePage={() => store.page = 'history'} />  
+          </span>
         </div>
-        <div className="col-md-9">
-          <AppointmentFilteredList
-            page={page} list={list} me={store.me}
-            changePage={(page) => this.props.store.page = page}
-            doneAppointment={store.doneAppointment.bind(store)}
-            cancelAppointment={store.cancelAppointment.bind(store)} />
-        </div>
+        <AppointmentFilteredList
+          page={page} list={list} me={store.me}
+          changePage={(page) => this.props.store.page = page}
+          doneAppointment={store.doneAppointment.bind(store)}
+          cancelAppointment={store.cancelAppointment.bind(store)} />
       </div>
     )
   }

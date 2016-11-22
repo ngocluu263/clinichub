@@ -82,7 +82,8 @@ def patient_appointments(request):
                 } for appointment in appointments]
                 return render(request, 'patient/appointments.html', {
                     'page': 'appointments',
-                    'appointments': appointments_
+                    'appointments': appointments_,
+                    'user_id': user.id
                 })
             except Exception as e:
                 return render(request, 'patient/appointments.html', {
