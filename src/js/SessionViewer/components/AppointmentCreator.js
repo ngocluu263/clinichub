@@ -6,7 +6,8 @@ export default class AppointmentCreator extends Component {
   submit() {
     this.props.submitAppointment({
       date: moment(this.refs.date.value).format('YYYY-MM-DDTHH:mm:ss.SSS'),
-      note: this.refs.note.value.trim()
+      note: this.refs.note.value.trim(),
+      location: this.refs.location.value.trim()
     }) 
   }
 
@@ -28,6 +29,10 @@ export default class AppointmentCreator extends Component {
             <label>Date</label>
             <input type="datetime-local" className="form-control" ref="date"
               defaultValue={now} min={now} />
+          </div>
+          <div className="form-group">
+            <label>Location</label>
+            <input type="text" className="form-control" ref="location" />
           </div>
           <div className="form-group">
             <label>Note</label>

@@ -38,7 +38,9 @@ export default class SessionViewerStore {
       note: data.note,
       patient: this.session.patient.id,
       doctor: this.session.doctor.id,
-      time: data.date
+      time: data.date,
+      location: data.location,
+      session: this.session.id
     }).then(data => {
       this.sendMessage('/create-appointment '+ data.id)
       this.page = 'message'

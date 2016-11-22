@@ -98,6 +98,9 @@ class AppointmentSerializer(DocumentSerializer):
     doctor = DoctorPrimaryKeyRelatedField(queryset=Doctor.objects)
     patient = PatientPrimaryKeyRelatedField(queryset=Patient.objects)
     session = SessionPrimaryKeyRelatedField(queryset=Session.objects)
+    note = CharField(allow_blank=True)
+    location = CharField(allow_blank=True)
+    state = CharField(default='active')
 
     class Meta:
         model = Appointment
