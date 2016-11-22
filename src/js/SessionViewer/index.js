@@ -14,12 +14,24 @@ let initialData = {
   session: {}
 }
 
-let session_id = '5814d04c5a95ef673f893b60'
+let session_id = '582bc58c5a95ef40981b50be'
 if (process.env.NODE_ENV == 'production') session_id = path.basename(window.location)
 
 myFetch.get(`/api/sessions/${session_id}/`).then(data => {
   Object.assign(initialData.session, data)
-  init()
+
+  let filterUrl = initialData.me == 'doctor'? 'doctor='+ data.doctor.id: 'patient='+ data.patient.id
+  let sessionsUrl = '/api/sessions/?' + filterUrl
+  let appointmentsUrl = '/api/appointments/?' + filterUrl
+
+  let sessionsPromise = myFetch.get(sessionsUrl)
+  let appointmentsPromise = myFetch.get(appointmentsUrl)
+
+  Promise.all([sessionsPromise, appointmentsPromise]).then(data => {
+    initialData.sessionList = data[0]
+    initialData.appointmentList = data[1]
+    init()
+  })
 })
 
 function init() {

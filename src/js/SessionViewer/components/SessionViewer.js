@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
 import Message from './Message'
+import SessionList from './SessionList'
 import TranscriptCreator from './TranscriptCreator'
 import AppointmentCreator from './AppointmentCreator'
+import UserInfo from './UserInfo'
+import Appointments from './Appointments'
 
 @observer
 export default class SessionViewer extends Component {
@@ -45,8 +48,23 @@ export default class SessionViewer extends Component {
     })(this.props.store.page)
 
     return (
-      <div>
-        { innerComponent }
+      <div className="row">
+        <div className="col-md-3">
+          <SessionList sessions={store.sessionList} currentSession={store.session} />
+        </div>
+        <div className="col-md-6">
+          <div className="panel panel-default">
+            <div className="panel-heading">{store.session.topic}</div>
+            <div className="panel-body">
+              { innerComponent }
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3">
+          <UserInfo me={store.me == 'patient'? 'doctor': 'patient'}
+            info={store.me == 'patient'? store.session.doctor: store.session.patient} />
+          <Appointments list={store.appointmentList} />
+        </div>
       </div>
     )
   }

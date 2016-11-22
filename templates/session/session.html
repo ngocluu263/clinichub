@@ -4,16 +4,7 @@
 
 {% block content%}
   {% if not error_message %}
-    <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="panel-title">Session: {{topic}}</div>
-        </div>
-        <div class="panel-body">
-          <div id="session-viewer"></div>
-        </div>
-      </div>
-    </div>
+    <div id="session-viewer"></div>
   {% else %}
     {{ error_message }}
   {% endif %}
