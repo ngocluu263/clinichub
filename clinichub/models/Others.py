@@ -35,6 +35,7 @@ class Drug(EmbeddedDocument):
     name = StringField(max_length=50)
     amount = IntField()
     usage = StringField(max_length=100)
+    time = StringField(max_length=50)
 	
 class Transcript(Document):
     doctor = ReferenceField(Doctor)
