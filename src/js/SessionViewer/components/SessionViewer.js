@@ -10,10 +10,6 @@ import Appointments from './Appointments'
 
 @observer
 export default class SessionViewer extends Component {
-  sendMessage(msg) {
-    if (msg) this.props.store.sendMessage(msg)
-  }
-  
   render() {
     let { store } = this.props
 
@@ -23,7 +19,7 @@ export default class SessionViewer extends Component {
           <Message
             me={store.me}
             session={toJS(store.session)}
-            sendMessage={this.sendMessage.bind(this)}
+            sendMessage={store.sendMessage.bind(store)}
             changePage={store.changePage.bind(store)}
             deleteSession={store.deleteSession.bind(store)}
           />
@@ -50,7 +46,8 @@ export default class SessionViewer extends Component {
     return (
       <div className="row">
         <div className="col-md-3">
-          <SessionList sessions={store.sessionList} currentSession={store.session} />
+          <SessionList title="My Session" sessions={store.sessionList} currentSession={store.session} />
+          <SessionList title="Archive Session" sessions={store.sessionListArchive} currentSession={store.session} />
         </div>
         <div className="col-md-6">
           <div className="panel panel-default">
@@ -63,7 +60,9 @@ export default class SessionViewer extends Component {
         <div className="col-md-3">
           <UserInfo me={store.me == 'patient'? 'doctor': 'patient'}
             info={store.me == 'patient'? store.session.doctor: store.session.patient} />
-          <Appointments list={store.appointmentList} />
+          {(store.session.state == 'active')? (
+            <Appointments list={store.appointmentList} />
+          ): false }
         </div>
       </div>
     )

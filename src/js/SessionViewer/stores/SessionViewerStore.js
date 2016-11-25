@@ -46,12 +46,10 @@ export default class SessionViewerStore {
   }
 
   deleteSession() {
-    myFetch.delete(`/api/sessions/${this.session.id}/`).then(res => {
-      if (res.status < 400) {
+    myFetch.patch(`/api/sessions/${this.session.id}/`, { state: 'archive' }).then(data => {
+      if (data) {
         if (this.me == 'patient') window.location = '/profile/sessions'
         else window.location = '/doctor/profile/sessions'
-      } else {
-        throw new Error("Bad response from server");
       }
     })
   }

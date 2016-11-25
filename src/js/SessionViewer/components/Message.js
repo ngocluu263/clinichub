@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-window.moment = moment
+
 let modifyMessage = (msg, sender) => {
   if (sender == 'D') {
     if (msg.match(/^\/create-transcript/)) {
@@ -20,22 +20,7 @@ let modifyMessage = (msg, sender) => {
   return msg
 }
 
-let MessageBox = ({msg, sender, sender_name, time, side}) => {
-  return (
-    <div className={side} style={{'marginButtom': '10px'}}>
-      <big>{modifyMessage(msg, sender)}</big><br />
-      <b>{sender_name}</b>
-      <small>{time.format('ddd, DD MMM YYYY HH:mm')}</small>
-    </div>
-  )
-}
-
 export default class Message extends Component {
-  sendMessage() {
-    this.props.sendMessage(this.refs.messageBox.value.trim())
-    this.refs.messageBox.value = ""
-  }
-
   render() {
     let { session, me } = this.props
     let MessageList = session.messages.map((item, index) => {
@@ -54,34 +39,68 @@ export default class Message extends Component {
     return (
       <div>
         <div id="message-list">{MessageList}</div>
-        <hr />
-        <div className="form-inline" style={{'textAlign': 'center'}}>
-          <div className="form-group">
-            <label>
-              <span>Message:</span>
-              <input type="text" ref="messageBox" className="form-control"
-                onKeyPress={e => { if (e.charCode == 13) this.sendMessage()}}/>
-            </label>
+        {(session.state == 'active')? (
+          <div>
+            <hr />
+              <MessageForm sendMessage={this.props.sendMessage} />
+            <hr />
+            <div>
+              {(shouldShow => {
+                if (shouldShow) return (
+                  <ToolsBox  changePage={this.props.changePage} deleteSession={this.props.deleteSession} />
+                )
+              })(me == 'doctor')}
+            </div>
           </div>
-          <button className="btn btn-primary"
-            onClick={this.sendMessage.bind(this)}>Send</button>
-        </div>
-        <hr />
-        <div>
-          {(shouldShow => {
-            if (shouldShow) return (
-              <div style={{'textAlign': 'center'}}>
-                <button className="btn btn-default"
-                  onClick={this.props.changePage.bind(null, 'transcript')}>Create Transcript</button>
-                <button className="btn btn-default"
-                  onClick={this.props.changePage.bind(null, 'appointment')}>Create Appointment</button>
-                <button className="btn btn-danger"
-                  onClick={() => this.props.deleteSession()}>Delete Session</button>
-              </div>
-            )
-          })(me == 'doctor')}
-        </div>
+        ): false}
       </div>
     )
   }
+}
+
+let MessageBox = ({msg, sender, sender_name, time, side}) => {
+  return (
+    <div className={side} style={{'marginButtom': '10px'}}>
+      <big>{modifyMessage(msg, sender)}</big><br />
+      <b>{sender_name}</b>
+      <small>{time.format('ddd, DD MMM YYYY HH:mm')}</small>
+    </div>
+  )
+}
+
+class MessageForm extends Component {
+  sendMessage() {
+    var msg = this.refs.messageBox.value.trim()
+    if (msg) this.props.sendMessage(msg)
+    this.refs.messageBox.value = ""
+  }
+
+  render() {
+    return (
+      <div className="form-inline" style={{'textAlign': 'center'}}>
+        <div className="form-group">
+          <label>
+            <span>Message:</span>
+            <input type="text" ref="messageBox" className="form-control"
+              onKeyPress={e => { if (e.charCode == 13) this.sendMessage()}}/>
+          </label>
+        </div>
+        <button className="btn btn-primary"
+          onClick={this.sendMessage.bind(this)}>Send</button>
+      </div>
+    )
+  }
+}
+
+let ToolsBox = ({changePage, deleteSession}) => {
+  return (
+    <div style={{'textAlign': 'center'}}>
+      <button className="btn btn-default"
+        onClick={() => changePage('transcript')}>Create Transcript</button>
+      <button className="btn btn-default"
+        onClick={() => changePage('appointment')}>Create Appointment</button>
+      <button className="btn btn-danger"
+        onClick={() => deleteSession()}>Delete Session</button>
+    </div>
+  )
 }

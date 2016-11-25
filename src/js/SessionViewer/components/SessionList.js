@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-export default function SessionList({sessions, currentSession}) {
+export default function SessionList({title, sessions, currentSession}) {
   return (
     <div className="panel panel-default">
-      <div className="panel-heading">My Sessions</div>
+      <div className="panel-heading">{title}</div>
       <div className="list-group">
         {(() => {
           return sessions.map(session => {

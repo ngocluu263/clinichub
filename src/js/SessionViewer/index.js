@@ -28,7 +28,8 @@ myFetch.get(`/api/sessions/${session_id}/`).then(data => {
   let appointmentsPromise = myFetch.get(appointmentsUrl)
 
   Promise.all([sessionsPromise, appointmentsPromise]).then(data => {
-    initialData.sessionList = data[0]
+    initialData.sessionList = data[0].filter(item => item.state == 'active')
+    initialData.sessionListArchive = data[0].filter(item => item.state == 'archive')
     initialData.appointmentList = data[1]
     init()
   })
