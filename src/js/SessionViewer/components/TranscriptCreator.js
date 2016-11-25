@@ -1,28 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-
-let DrugForm = ({index, drug, handleChange, handleDelete}) => {
-  return (
-    <tr>
-      <td>
-        <input type="text" className="form-control" value={drug.name || ""} placeholder="Drug name"
-          onChange={e => handleChange({id: index, key: 'name', value: e.target.value})} />
-      </td>
-      <td>
-        <input type="number" className="form-control" min="0" value={drug.amount || 0}
-          onChange={e => handleChange({id: index, key: 'amount', value: e.target.value})} />
-      </td>
-      <td>
-        <input type="text" className="form-control" value={drug.usage || ""} placeholder="Usage"
-          onChange={e => handleChange({id: index, key: 'usage', value: e.target.value})} />
-      </td>
-      <td>
-      <button className="btn btn-default"
-        onClick={() => handleDelete(drug.id)}>Delete</button>
-      </td>
-    </tr>
-  )
-}
+import DrugForm from './DrugForm' 
 
 export default class TranscriptCreator extends Component {
   constructor() {
@@ -45,15 +23,19 @@ export default class TranscriptCreator extends Component {
 
   addDrugForm() {
     let lastId = !this.state.drugs.length? 0: this.state.drugs[this.state.drugs.length-1].id
-    this.state.drugs.push({ id: lastId+1, name: '', amount: 0, usage: ''})
+    this.state.drugs.push({ id: lastId+1, name: '', amount: 0, usage: '', time: ''})
     this.setState(this.state)
   }
-
 
   submit() {
     let drugs = _.cloneDeep(this.state.drugs)
       .filter(drug => drug.name != '' && drug.amount != "0")
-      .map(drug => ({ name: drug.name.trim(), amount: parseInt(drug.amount), usage: drug.usage.trim() }))
+      .map(drug => ({
+        name: drug.name.trim(),
+        amount: parseInt(drug.amount),
+        time: drug.time,
+        usage: drug.usage.trim()
+      }))
     let data = { drugs, note: this.refs.note.value.trim() }
     this.props.submitTranscript(data)
   }
@@ -82,19 +64,7 @@ export default class TranscriptCreator extends Component {
           </div>
           <div className="form-group">
             <label>Drugs</label>
-            <table className="table table-bordered">
-              <thead>
-                <tr>
-                  <th width="30%">Name</th>
-                  <th width="20%">Amount</th>
-                  <th width="40%">Usage</th>
-                  <th width="10%">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                {drugList}
-              </tbody>
-            </table>
+            {drugList}
           </div> 
           <div className="form-group" style={{'textAlign': 'center'}}>
             <button className="btn btn-default"
