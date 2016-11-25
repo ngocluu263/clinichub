@@ -26,8 +26,11 @@ def patient_sessions(request):
                     'id': session.id,
                     'topic': session.topic,
                     'doctor': session.doctor.username,
-                    'clinic': session.doctor.clinic.name
+                    'clinic': session.doctor.clinic.name,
+                    'state': session.state
                 } for session in sessions] 
+                sessions_active = [ session for session in sessions_ if session['state'] == 'active' ]
+                sessions_archive = [ session for session in sessions_ if session['state'] == 'archive' ]
             except Exception as e:
                 return render(request, 'patient/sessions.html', {
                     'error_message': e.args[0]

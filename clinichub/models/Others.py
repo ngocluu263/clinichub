@@ -20,6 +20,7 @@ class Session(Document):
     patient = ReferenceField(Patient)
     doctor = ReferenceField(Doctor)
     messages = ListField(EmbeddedDocumentField(Message))
+    state = StringField(max_length=10)
 
 class Appointment(Document):
     doctor = ReferenceField(Doctor)

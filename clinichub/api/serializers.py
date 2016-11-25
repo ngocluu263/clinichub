@@ -75,10 +75,11 @@ class SessionSerializer(DocumentSerializer):
     doctor = DoctorPrimaryKeyRelatedField(queryset=Doctor.objects)
     patient = PatientPrimaryKeyRelatedField(queryset=Patient.objects)
     messages = ListField(child=MessageSerializer())
+    state = CharField(default='active')
 
     class Meta:
         model = Session
-        fields = ('id', 'topic', 'doctor', 'patient', 'messages')
+        fields = ('id', 'topic', 'doctor', 'patient', 'state', 'messages')
 
 class SessionPrimaryKeyRelatedField(PrimaryKeyRelatedField):
     def to_internal_value(self, data):
@@ -90,7 +91,7 @@ class SessionPrimaryKeyRelatedField(PrimaryKeyRelatedField):
     def to_representation(self, obj):
         serializer = SessionSerializer(obj)
         data = serializer.data
-        session_include = ['id', 'topic']
+        session_include = ['id', 'topic', 'state']
         data = { key: data[key] for key in data if key in session_include }
         return data
 
