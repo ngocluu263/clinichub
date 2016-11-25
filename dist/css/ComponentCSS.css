@@ -173,11 +173,12 @@ input:checked + .slider:before {
     padding-right: 20px;
     font-size: 17px;
     border: 2px solid lightgray;
-    color: grey;
+    color: grey !important;
     border-radius: 13px;
     -webkit-box-sizing: border-box;
     outline: none;
     transition: 0.2s;
+    margin-bottom: 6px;
 }
 .InputMultiline {
     height: 400px;

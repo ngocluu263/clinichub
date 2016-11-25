@@ -1,10 +1,14 @@
+
 .NotiPane {
     position: relative;
     border-radius: 20px;
     height: 100%;
     background-color: white;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 30%;
     /*display: inline-block;*/
+
 }
 
 .NotiPane_Space {
