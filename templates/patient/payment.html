@@ -1,7 +1,14 @@
 {% extends './base.html' %}
 
 {% block innercontent %}
-  <div id="balance-big">
-    <span><small>Your balance is<br /></small>{{balance}}</span>
-  </div>
+  <div id="balance-adder"></div>
+{% endblock %}
+
+{% load static %}
+{% block js %}
+  <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
+  <script type="text/javascript">
+    window.patient = "{{ user_id }}"
+  </script>
+  <script type="text/javascript" src="{% static 'js/balanceAdder.js' %}"></script>
 {% endblock %}

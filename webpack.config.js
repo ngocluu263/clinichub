@@ -10,6 +10,7 @@ module.exports = {
     sessionViewer: './SessionViewer/index',
     clinicManager: './ClinicManager/index',
     appointmentList: './AppointmentList/index',
+    balanceAdder: './BalanceAdder/index',
     vendors: ['react', 'react-dom', 'mobx', 'mobx-react', 'lodash', 'moment', 'isomorphic-fetch']
   },
   output: {
