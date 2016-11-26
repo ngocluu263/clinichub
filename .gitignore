@@ -1,7 +1,5 @@
 **/__pychache__
 **/*.pyc
-dist/*
--dist/css/*.css
 db.sqlite3
 **/npm-debug.log
 **/*.swp
