@@ -2,10 +2,79 @@
 
 {% load static %}
 
-{% block content %}
-<div class="jumbotron" style="text-align: center; background: url('{% static 'img/doctor-banner.jpg' %}'); height: 500px;">
-  <h1>Wanna Be Doctor?</h1>
-  <p><big>A good chance to make your own clinic is already here.</big></p>
-  <p><a class="btn btn-primary btn-lg" href="/doctor/register" role="button">Join us</a></p>
+{% block style %}
+<style>
+  #main{
+    margin-top: 0px;
+  }
+  .img-responsive{
+    max-width: 50%;
+    margin: 0 auto;
+  }
+  .btn-primary{
+    color: #4db6ae;
+    background-color: transparent;
+    border-color: #4db6ae;
+  }
+  .btn-primary:hover{
+    color: white;
+    background-color: #4db6ae;
+    border-color: #4db6ae;
+  }
+</style>
+{% endblock %}
+
+{% block homepage %}
+<div class="" style="text-align: right; background: url('{% static 'img/forDrBanner.jpg' %}'); background-size: cover; height: 500px; padding-top: 120px; padding-right: 120px; margin-top: 50px;">
+  <h1 style="font-size: 70px;">We Need You!</h1>
+  <p style="font-size: 30px;">Participate as doctor with benefit</p>
+  <p><a class="btn btn-primary btn-lg" href="/doctor/register" role="button">Join Us</a></p>
+</div>
+<div class="container home-info">
+  <h1>A New Opportunity Awaits</h1>
+  <p>ClinicHub is the website providing a health information and advice. In order to give an advice to the patients, we need the doctor to make this happen. We provides the opportunity for any doctor to make an online virtual clinic which is the communities of the doctors to provide the health information and advice to the patients. The doctors can also provide additional health advice such as recommended drugs or physical self-treatment, and appoint the patient to additonally diagnosed. And absolutely, the service charges you want to determine is possible.</p>
+  <hr style="width: 100px; margin: 40px auto">
+  <div class="row">
+    <div class="col-sm-6">
+      <img class="img-responsive" src="{% static 'img/clinic-party.png' %}">
+      <h3>Clinic Party</h3>
+      <p>The doctor can create his own online virtual clinic to be the office-like place the doctor works on. The doctor can also invite other doctor in the system that hasn't had the clinic to participate yet to his own clinic to work together.</p>
+    </div>
+    <div class="col-sm-6">
+      <img class="img-responsive" src="{% static 'img/free-lance.png' %}">
+      <h3>Freelance Consultant</h3>
+      <p>The doctor can set up the rates (or you can called service charges) to his own clinic and get the wages when the patient has requested for consulting. The consulting is made to be like chatting room, so you can work your job anytime and anywhere like a freelancer.</p>
+    </div>
+  </div>
+  <hr style="width: 100px; margin: 40px auto">
+  <div class="row">
+    <h1>3 Steps to Participate with Us</h1>
+    <div class="col-sm-4">
+      <img class="img-responsive" src="{% static 'img/step1.png' %}">
+      <h3>Register</h3>
+      <p>Assign the personal information, username, password, and medical license number for a verification process.</p>
+    </div>
+    <div class="col-sm-4">
+      <img class="img-responsive" src="{% static 'img/step2.png' %}">
+      <h3>Wait for Verification</h3>
+      <p>After the registration, you cannot immidiately sign into the system. You need to wait your information to be verified by the medical council of Thailand to make sure that you are a legal doctor in the real world.</p>
+    </div>
+    <div class="col-sm-4">
+      <img class="img-responsive" src="{% static 'img/step3.png' %}">
+      <h3>Surf The System</h3>
+      <p>After your information is verified, you can now sign into the system and surf on the system as you wish.</p>
+    </div>
+  </div>
+  <hr style="width: 100px; margin: 40px auto">
+  <div class="row">
+    <h1>What are you waiting for?</h1>
+    <br>
+    <a class="btn btn-primary btn-lg" href="/doctor/register" role="button">Sign Up</a>
+  </div>
+</div>
+<div style="background-color: #4db6ae;">
+  <div class="container" style="padding-top: 50px; padding-bottom: 50px;">
+    <p style="color: white;">ClinicHub™ Operated by AK-47<br>Copyright© AK-47 Corporation</p>
+  </div>
 </div>
 {% endblock %}

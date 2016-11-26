@@ -40,3 +40,9 @@
   font-size: 36px;
   color: #666;
 }
+
+.home-info{
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}

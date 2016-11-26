@@ -2,10 +2,65 @@
 
 {% load static %}
 
-{% block content %}
-<div class="jumbotron" style="text-align: center; background: url('{% static 'img/hospital.jpg' %}'); height: 500px;">
-  <h1>ClinicHub</h1>
-  <p><big>The Best Clinic for You. Already Here.</big></p>
-  <p><a class="btn btn-primary btn-lg" href="/register" role="button">Join us</a></p>
+{% block style %}
+<style>
+  #main{
+    margin-top: 0px;
+  }
+  .img-responsive{
+    max-width: 70%;
+    margin: 0 auto;
+  }
+  .btn-primary{
+    color: #4db6ae;
+    background-color: transparent;
+    border-color: #4db6ae;
+  }
+  .btn-primary:hover{
+    color: white;
+    background-color: #4db6ae;
+    border-color: #4db6ae;
+  }
+</style>
+{% endblock %}
+
+{% block homepage %}
+<div class="" style="text-align: right; background: url('{% static 'img/homeBanner.jpg' %}'); background-size: cover; height: 500px; padding-top: 120px; padding-right: 120px; margin-top: 50px;">
+  <h1 style="font-size: 100px;">ClinicHub</h1>
+  <p style="font-size: 30px;">Meet your best health consultant HERE!</p>
+  <p><a class="btn btn-primary btn-lg" href="/register" role="button">Get Start</a></p>
+</div>
+<div class="container home-info">
+  <h1>What is ClinicHub</h1>
+  <p>ClinicHub is an E-commerce website designed to be the center of community between doctors and patients, the health information center and the health utility center. The Doctors can contribute to the clinic seen as a station and the patients can create the private virtual room (called session) that the doctor will enter the room by the system algorithm operating depend on something such as illness type, priority, available doctors and instruments, then the doctor will perform a health advisory.</p>
+  <hr style="width: 100px; margin: 40px auto">
+  <div class="row">
+    <div class="col-sm-4">
+      <img class="img-responsive" src="{% static 'img/online-clinic.png' %}">
+      <h3>Online Clinic</h3>
+      <p>Meet the clinic that can solve your health problem based on the type of the problem on the internet. Ask the doctor from everywhere, and everytime.</p>
+    </div>
+    <div class="col-sm-4">
+      <img class="img-responsive" src="{% static 'img/real-time.png' %}">
+      <h3>Real-time Session</h3>
+      <p>Communicate with the doctor lively. The doctor can recognize you immidiately. No need to refresh like you are surfing on a webboard.</p>
+    </div>
+    <div class="col-sm-4">
+      <img class="img-responsive" src="{% static 'img/drug-app.png' %}">
+      <h3>Drugs 'n Appointment</h3>
+      <p>You can request for recommended drugs or physical treatments that you can do by yourself at home. Moreover, you can also request for additional diagnosing by appoint the doctor to meet up at the real world.</p>
+    </div>
+  </div>
+  <hr style="width: 100px; margin: 40px auto">
+  <div class="row">
+    <h1>Get the best consulting NOW!</h1>
+    <br>
+    <a class="btn btn-primary btn-lg" href="/register" role="button">Sign Up</a>
+  </div>
+</div>
+<div style="background-color: #4db6ae;">
+  <div class="container" style="padding-top: 50px; padding-bottom: 50px;">
+    <p style="color: white;">ClinicHub™ Operated by AK-47<br>Copyright© AK-47 Corporation</p>
+  </div>
 </div>
 {% endblock %}
