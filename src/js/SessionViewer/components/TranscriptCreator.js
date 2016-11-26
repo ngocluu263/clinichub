@@ -2,50 +2,56 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import DrugForm from './DrugForm' 
 
+function deriveTimeString(drug) {
+  let str = ""
+  if (drug.timeType == 'time') {
+    let arr = []
+    for (var t in drug.time) {
+      if (drug.time[t]) arr.push(t)
+    }
+    str += "Eat at " + arr.join(', ')
+  } else if (drug.timeType == 'interval') {
+    str += "Eat every "+ drug.interval +" hours"
+  }
+  return str
+}
+
 export default class TranscriptCreator extends Component {
   constructor() {
     super()
     this.state = {
-      drugs: []
+      drugs: [],
+      currentId: 0
     }
+    window.obj = this
   }
 
-  handleChange(data) {
-    this.state.drugs[data.id][data.key] = data.value
+  handleDelete(id) {
+    this.state.drugs = this.state.drugs.filter(item => item.id != id)
     this.setState(this.state)
   }
-
-  handleDelete(index) {
-    this.state.drugs = this.state.drugs.filter(item => item.id != index)
-    console.log(this.state.drugs)
-    this.setState(this.state)
-  }
-
-  addDrugForm() {
-    let lastId = !this.state.drugs.length? 0: this.state.drugs[this.state.drugs.length-1].id
-    this.state.drugs.push({ id: lastId+1, name: '', amount: 0, usage: '', time: ''})
-    this.setState(this.state)
-  }
-
+  
   submit() {
     let drugs = _.cloneDeep(this.state.drugs)
       .filter(drug => drug.name != '' && drug.amount != "0")
       .map(drug => ({
         name: drug.name.trim(),
         amount: parseInt(drug.amount),
-        time: drug.time,
+        time: deriveTimeString(drug),
         usage: drug.usage.trim()
       }))
     let data = { drugs, note: this.refs.note.value.trim() }
     this.props.submitTranscript(data)
   }
 
+  handleSubmitDrug(data) {
+    this.setState({
+      drugs: [...this.state.drugs, Object.assign(data, { id: this.state.currentId })],
+      currentId: this.state.currentId+1
+    })
+  }
+
   render() {
-    let drugList = this.state.drugs.map((item, index) => (
-      <DrugForm key={item.id} drug={item} index={index}
-        handleChange={this.handleChange.bind(this)}
-        handleDelete={this.handleDelete.bind(this)} />
-    ))
     return (
       <div>
         <h4>Create Transcript</h4>
@@ -64,11 +70,32 @@ export default class TranscriptCreator extends Component {
           </div>
           <div className="form-group">
             <label>Drugs</label>
-            {drugList}
-          </div> 
-          <div className="form-group" style={{'textAlign': 'center'}}>
-            <button className="btn btn-default"
-              onClick={this.addDrugForm.bind(this)}>Add drug</button>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Amount</th>
+                  <th>Usage</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+              {((list) => list.map((item, index) => (
+                <tr key={item.id}>
+                  <td>{index+1}</td>
+                  <td>{item.name}</td>
+                  <td>{item.amount}</td>
+                  <td>{deriveTimeString(item)}<br />{item.usage}</td>
+                  <td><button className="btn btn-warning"
+                    onClick={this.handleDelete.bind(this, item.id)}>Delete</button></td>
+                </tr>
+              )))(this.state.drugs)}
+              </tbody>
+            </table>
+            <DrugForm
+              handleSubmit={this.handleSubmitDrug.bind(this)}
+              handleCancel={() => console.log('cancel')} />
           </div>
           <div className="form-group" style={{'textAlign': 'center'}}>
             <button className="btn btn-success"
