@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 
-export default class DrugForm extends Component {
+export default ({handleSubmit, handleCancel}) => {
+  return (
+    <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div className="modal-dialog" role="document">
+        <DrugForm handleSubmit={handleSubmit} handleCancel={handleCancel} />
+      </div>
+    </div>
+  )
+}
+
+class DrugForm extends Component {
   constructor() {
     super()
     this.initialState = {
@@ -60,15 +70,19 @@ export default class DrugForm extends Component {
   }
 
   reset() {
+    $('#myModal').modal('hide')
     this.setState(_.cloneDeep(this.initialState))
   }
 
   render() {
     let { drug } = this.state
     return (
-      <div className="panel panel-default">
-        <div className="panel-body">
-          <h4>{drug.name.trim() || 'Drug name'}</h4>
+      <div className="modal-content">
+        <div className="modal-header">
+          <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 className="modal-title" id="myModalLabel">{drug.name.trim() || 'Unnamed drug'}</h4>
+        </div>
+        <div className="modal-body">
           <div className="form-group">
             <input type="text" className="form-control" value={drug.name || ""} placeholder="Drug name"
               onChange={e => this.setState({ drug: Object.assign(drug, { name: e.target.value }) })} />
@@ -141,11 +155,13 @@ export default class DrugForm extends Component {
             <textarea className="form-control" value={drug.usage || ""} placeholder="Usage"
               onChange={e => this.setState({ drug: Object.assign(drug, { usage: e.target.value }) })} />
           </div>
-          <button className="btn btn-success"
-            onClick={this.submit.bind(this)}>Add</button>
-          <button className="btn btn-default"
-            onClick={() => this.reset()}>Cancel</button>
-          {(this.state.msg)? <div className="alert alert-danger">{this.state.msg}</div>: false}
+          <div className="modal-footer">
+            <button className="btn btn-default"
+              onClick={() => this.reset()}>Cancel</button>&nbsp;
+            <button className="btn btn-success"
+              onClick={this.submit.bind(this)}>Add</button>
+            {(this.state.msg)? <div className="alert alert-danger" style={{'textAlign': 'left'}}>{this.state.msg}</div>: false}
+          </div>
         </div>
       </div>
     )

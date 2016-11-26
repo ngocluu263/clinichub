@@ -87,15 +87,17 @@ export default class TranscriptCreator extends Component {
                   <td>{item.name}</td>
                   <td>{item.amount}</td>
                   <td>{deriveTimeString(item)}<br />{item.usage}</td>
-                  <td><button className="btn btn-warning"
+                  <td><button className="btn btn-default"
                     onClick={this.handleDelete.bind(this, item.id)}>Delete</button></td>
                 </tr>
               )))(this.state.drugs)}
               </tbody>
             </table>
-            <DrugForm
-              handleSubmit={this.handleSubmitDrug.bind(this)}
-              handleCancel={() => console.log('cancel')} />
+            <div style={{'textAlign': 'center'}}>
+              <button type="button" className="btn btn-default" data-toggle="modal" data-target="#myModal">
+                Add drug
+              </button>
+            </div>
           </div>
           <div className="form-group" style={{'textAlign': 'center'}}>
             <button className="btn btn-success"
@@ -104,6 +106,9 @@ export default class TranscriptCreator extends Component {
               onClick={this.props.changePage.bind(null, 'message')}>Cancel</button>
           </div>
         </div>
+        <DrugForm
+          handleSubmit={this.handleSubmitDrug.bind(this)}
+          handleCancel={() => console.log('cancel')} />
       </div>
     )
   }
