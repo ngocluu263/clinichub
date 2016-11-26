@@ -3,28 +3,42 @@
 {% block title %} Sign in - ClinicHub {% endblock %}
 
 {% block content %}
-<div class="col-sm-6 col-sm-offset-3">
-  <h2 style="text-align: center;">Sign in as Doctor</h2>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <form action="" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input id="username" type="text" name="username" maxlength="30" class="form-control" required autofocus />
+<div class="container">
+  <div class="row">
+    <div class="box-center" style=" display: flex; justify-content: center;">
+      <div class="NotiPane" style=" height:270px; width:600px; margin-top:10%; overflow:hidden">
+            <div class="Gapper_UltraSmall"></div>
+            <div class="NotiPane_HeaderText"> Sign in As Doctor</div>
+            <div class="Gapper_Medium"></div>
+            <div class="box-center" style="bottom: 80px">
+            <div class="panel panel-default" style="border:hidden">
+              <div class="panel-body">
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <div class="box-center">
+                    <div  class="col-md-12 col-xs-12">
+                      <div class="form-group">
+                        <label class="sr-only" for="username">Username</label>
+                        <input id="username" type="text" name="username" maxlength="30" class="form-control InputStandard" placeholder="Username" style="width:100%; text-align:center" required autofocus />
+                      </div>
+                      <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input id="password" type="password" name="password" class="form-control InputStandard" placeholder="Password" style="width:100%; text-align:center" required />
+                      </div>
+                      <div class="form-group" style="text-align:center">
+                        <input type="submit" value="Login" class="ButtonStandard Button_RedColor ButtonHeight_OneLineText_Medium ButtonWidth_Medium ButtonStandard_RoundCorner" style="padding-top:1px;" />
+                      </div>
+                      {% if error_message %}
+                        <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+                    </div>
+                  </div>
+                  {% endif %}
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input id="password" type="password" name="password" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Login" class="btn btn-primary" />
-        </div>
-        {% if error_message %}
-          <div class="alert alert-danger" role="alert">{{ error_message }}</div>
-        {% endif %}
-      </form>
+      </div>
     </div>
   </div>
-</div>
 {% endblock %}
