@@ -1,0 +1,323 @@
+MenuBar_Global_IconSize {
+
+    top: -3px;
+
+    position: relative;
+
+    width: 25px;
+
+    height: 25px;
+
+    filter: invert(50%);
+
+    -webkit-filter: invert(50%);
+
+}
+
+
+
+.MenuBoxShadowSmall {
+
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.1);
+
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.1);
+
+    -moz-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.1);
+
+}
+
+.MenuBar {
+
+    -webkit-backdrop-filter: blur(5px);
+
+    position: fixed;
+
+    width: 101% ;
+
+    background-color: rgba(255, 255, 255,1);
+
+    height: 60px;
+
+    -webkit-user-select: none;
+
+    -ms-user-select: none;
+
+    cursor: default;
+
+    top: 0px;
+
+}
+
+.MenuBar_BlackEdition {
+
+    background-color: rgba(0,0,0,1) !important;
+
+    border-bottom: 1px solid white;
+
+}
+
+.MenuBar_BlackEdition div {
+
+    color: rgba(255,255,255,1) !important;
+
+}
+
+.MenuBar_BlackEdition_MenuNotSelect{
+
+    color: rgba(255, 255, 255, 0.7) !important;
+
+}
+
+.MenuBar_BlackEdition_MenuSelect{
+
+     font-weight: bold;
+
+ }
+
+.MenuBar_BlackEdition_MenuSelect:hover{
+
+    color: white !important;
+
+}
+
+.MenuBar_BlackEdition_MenuNotSelect:hover {
+
+    color: white !important;
+
+}
+
+.MenuBar2Level {
+
+    -webkit-backdrop-filter: blur(5px);
+
+    position: fixed;
+
+
+
+    width: 101% ;
+
+    background-color: rgba(255, 255, 255,1);
+
+    height: 80px;
+
+    top: 0px;
+
+}
+
+
+
+.MenuBar2Level div {
+
+    color: rgba(0, 0, 0, 0.3)
+
+}
+
+.MenuBar div {
+
+    color: rgba(0, 0, 0, 0.5)
+
+}
+
+.MenuBar_Text:hover {
+
+    cursor: pointer;
+
+    color: rgba(0,0,0,1);
+
+}
+
+
+
+#MenuBar_LeftLegion {
+
+    position: absolute ;
+
+    top: 5px;
+
+    left: 20px;
+
+    height: 50px;
+
+    width: 450px;
+
+}
+
+#MenuBar_LeftLegion_1 {
+
+    position: absolute;
+
+    top: -24px ;
+
+    left: 0px ;
+
+    height: 40px;
+
+    width: 50px;
+
+    font-size: 52px ;
+
+    text-align: left;
+
+    font-family: AvenirNext-Regular, serif;
+
+}
+
+#MenuBar_LeftLegion_Topic {
+
+    position: absolute;
+
+    background-color: transparent;
+
+    top:8px ;
+
+    left: 50px ;
+
+    height: 40px;
+
+    width: 300px;
+
+    font-size: 25px ;
+
+    text-align: left;
+
+    color: rgba(0, 0, 0,0.8);
+
+}
+
+
+
+#MenuBar_CenterLegion {
+
+    margin: auto ;
+
+    left: 150px;
+
+    height: 60px ;
+
+    width: 900px;
+
+}
+
+#MenuBar_CenterLegionLevel2 {
+
+    margin: auto ;
+
+    left: 150px;
+
+    height: 80px ;
+
+    width: 900px;
+
+
+
+}
+
+.MenuBar_CenterLegion_OneLevel_GapStart {
+
+    height: 5px;
+
+}
+
+.MenuBar_CenterLegion_Multilevel_GapStart {
+
+    height: 11px;
+
+}
+
+.MenuBar_CenterLegion_Multilevel_GapBetweenLevel {
+
+    height: 1px;
+
+}
+
+#MenuBar_CenterLegion_TextMenu {
+
+    margin: auto;
+
+    height: 50px;
+
+    width: 900px;
+
+    display: table-cell;
+
+    vertical-align: middle;
+
+    line-height: 30px;
+
+    font-size: 17px; text-align: center;
+
+}
+
+
+
+#MenuBar_RightLegion {
+
+    position: absolute ;
+
+    text-align: right;
+
+    top: 20px;
+
+    right: 35px;
+
+    height: 50px ;
+
+    width: 150px;
+
+}
+
+#MenuBar_RightLegion_ClinicHub{
+
+    position: relative;
+
+    top:8px ;
+
+    height: 50px;
+
+    width: 30px;
+
+    font-size: 10px ;
+
+    text-align: right;
+
+}
+
+#MenuBar_RightLegion_User {
+
+    position: relative;
+
+    top:0px ;
+
+    height: 50px;
+
+    width: 30px;
+
+    font-size: 10px ;
+
+    text-align: right;
+
+}
+
+#MenuBar_UserIcon{
+
+    opacity: 0.2;
+
+}
+
+#MenuBar_UserIcon:hover {
+
+    opacity: 1;
+
+}
+
+#MenubarBlackEdition_UserIcon{
+
+    opacity: 0.6;
+
+}
+
+#MenubarBlackEdition_UserIcon:hover{
+
+    opacity: 1;
+
+}

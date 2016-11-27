@@ -1,0 +1,583 @@
+.ButtonStandard{
+    text-align: center ;
+    position: relative;
+    font-size: 16px;
+    /*background-color: transparent;*/
+/*    height: 50px;
+    width: 180px;*/
+    padding-top:11px;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    cursor: pointer;
+}
+
+/*----------------------------*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    display: none;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before{
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left:4px;
+    bottom:4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+/*----------------------------*/
+
+.dropdown {
+    position: relative;
+    display: block;
+}
+
+.dropdown-content {
+    display: block;
+    visibility: hidden;
+    position: absolute;
+    background-color: white;
+
+    border-radius: 10px;
+    overflow: hidden;
+    top: 60px;
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.dropdown:hover .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+.LabelStandard {
+    text-align: left ;
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top:11px;
+    padding-bottom: 10px;
+    color: grey;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.LabelManual {
+    text-align: center ;
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top:11px;
+    padding-bottom: 10px;
+    color: grey;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.LabelManual a:hover {
+    color:blue !important;
+    text-decoration: none;
+}
+
+.MultiLineLabel {
+    text-align: left;
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+    line-height: 20px;
+    color: grey;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    background-color: transparent;
+    height: auto;
+    width: 300px;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+.LabelManual_Expand {
+    width: 100% !important;
+}
+.LabelManual_Font_Smaller {
+    font-size: 12px;
+}
+.LabelManual_Font_Small {
+    font-size: 14px;
+}
+.LabelManual_Font_Medium {
+    font-size: 16px;
+}
+.LabelManual_Font_MediumLarger {
+    font-size: 18px;
+}
+.LabelManual_Font_Large {
+    font-size: 22px;
+}
+.LabelManual_Font_Larger {
+    font-size: 30px;
+}
+.LabelManual_Font_Gigantic {
+    font-size: 36px;
+}
+.InputStandard:focus {
+    border-color: #9b9b9b;
+    border-width: 2px;
+    outline:none !important;
+    box-shadow: none !important;
+}
+.InputStandard {
+    height: 50px;
+    width: 300px;
+    background-color: transparent;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 17px;
+    border: 2px solid lightgray;
+    color: grey !important;
+    border-radius: 13px;
+    -webkit-box-sizing: border-box;
+    outline: none !important;
+    transition: 0.2s;
+    margin-bottom: 6px;
+}
+.InputMultiline {
+    height: 400px;
+    width: 300px;
+    background-color: transparent;
+    padding: 20px;
+    font-size: 17px;
+    border: 2px solid lightgray;
+    color: grey;
+    border-radius: 13px;
+    -webkit-box-sizing: border-box;
+    outline: none;
+    resize: none;
+    transition: 0.2s;
+}
+.ButtonStandard_RoundCorner {
+    border-radius: 12px;
+}
+.Button_RedColor{
+    border: double;
+    color: red;
+    border-width: 3px;
+    border-color: red;
+    background-color: white;
+}
+.Button_RedColor:hover{
+
+    border-width: 3px;
+    border: solid;
+    border-color: #ff0e00;
+    color: white;
+    background-color: #ff0800;
+}
+.Button_GreyColor {
+    background-color: #f2f2f2;
+    color: grey;
+}
+.Button_GreyColor:hover {
+    background-color: #bfbfbf;
+}
+
+.Button_NormalColor {
+    border: double;
+    border-width: 3px;
+    border-color: #cbcbcb;
+    background-color: white;
+    color: #9b9b9b;
+}
+.Button_NormalColor:hover{
+
+    border-width: 3px;
+    border: solid;
+    border-color: #a7a6ff;
+
+    color: #4245f0;
+
+    background-color: white;
+}
+.Button_NormalColor:active {
+    background-color: #4245f0;
+    color: white;
+}
+
+
+
+
+.TextStackSpan{
+    text-align: center ;
+    position: relative;
+    font-size: 14px;
+    height: 30px;
+    padding:8px;
+    color: rgb(174, 174, 174);
+}
+.SelectBox{
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.SelectBox:hover  img{
+    filter: brightness(110%);
+}
+.SelectBox_Selected {
+    border: 4px solid #8589ff;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#598dd6+1,1860dd+100 */
+
+}
+.RoundImage {
+    display: block;
+    margin: auto;
+    border-radius: 100%;
+}
+.Square_Tiny {
+    width: 50px;
+    height: 50px;
+}
+.Square_Smaller {
+    width: 150px;
+    height: 150px;
+}
+.Square_Small {
+    width: 200px;
+    height: 200px;
+}
+.Square_Medium {
+    width: 250px;
+    height: 250px;
+}
+.Square_MediumLarger {
+    width: 300px;
+    height: 300px;
+}
+.Square_Large {
+    width: 350px;
+    height: 350px;
+}
+.Square_Larger {
+    width: 400px;
+    height: 400px;
+}
+.SelectSquareBox:hover{
+    background-color: lightgray;
+}
+.ButtonStackSpan{
+    text-align: center;
+    position: relative;
+    font-size: 16px;
+    background-color: #f2f2f2;
+    /*height: 50px;
+    padding:14px;*/
+    cursor: pointer;
+}
+.ButtonHeight_OneLineText_Medium {
+    height: 50px;
+    padding-top: 10px;
+}
+.ButtonHeight_OneLineText_Small {
+    height: 40px;
+    padding-top: 5px;
+}
+.ButtonHeight_OneLineText_Smaller {
+    height: 30px;
+    padding-top: 2px;
+}
+.ButtonHeight_OneLineText_Large {
+    height: 60px;
+    padding-top: 15px;
+}
+.ButtonHeight_OneLineText_Larger {
+    height: 70px;
+    padding-top: 20px;
+}
+.ButtonHeight_OneLineText_Gigantic {
+    height: 80px;
+    padding-top: 25px;
+}
+.ButtonWidth_Smaller {
+    width: 60px;
+}
+.ButtonWidth_Small {
+    width: 80px;
+}
+.ButtonWidth_Medium {
+    width: 120px;
+}
+.ButtonWidth_BiggerMedium {
+    width: 150px;
+}
+.ButtonWidth_Large {
+    width: 180px;
+}
+.ButtonWidth_Larger {
+    width: 220px;
+}
+.ButtonWidth_Gigantic {
+    width: 250px;
+}
+.ButtonWidth_Span {
+    width: auto;
+}
+
+
+
+.RedButtonStackSpan{
+    text-align: center ;
+    position: relative;
+    font-size: 16px;
+    color: red;
+    background-color: white;
+    height: 50px;
+    padding:14px;
+    cursor: pointer;
+}
+.ButtonStackSpan:hover {
+    background-color: #bfbfbf;
+}
+.RedButtonStackSpan:hover{
+    background-color: rgb(255, 158, 163);
+}
+
+.ExpandableList {
+    width: auto;
+    position: relative ;
+
+    height: auto
+}
+.ExpandableList_listButton {
+    text-align: left ;
+    padding-left: 20px;
+    position: relative;
+    font-size: 16px;
+    background-color: #f2f2f2;
+    border: 1px #d6d6d6 solid;
+    border-collapse: collapse;
+    /*height: 50px;
+    padding:14px;*/
+    cursor: pointer;
+}
+.ExpandableList_Selected {
+    color: #f7fcff;
+    background-color: #5156ff;
+}
+
+.ExpandableList_listButton:hover {
+    color: #f7fcff;
+    background-color: #6a6bff;
+}
+.ExpandableList_GapLeft {
+    left: 30px;
+}
+.ExpandableList_TopLabel {
+    font-size: 17px;
+    text-align: center;
+    padding-top: 3px;
+    height: 30px
+}
+.BigSpaceList{
+    position: relative ;
+    height: auto;
+    width: 100% ;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-top: 2px solid #f6f6f6;
+    border-bottom: 2px solid #f6f6f6;
+
+}
+.BigSpaceList_Grey{
+    background-color: #ebebeb !important;
+}
+.BigSpaceList_GreyBorder1 {
+    border-color: #dcdcdc !important;
+    border-width: 1px !important;
+}
+.BigSpaceList_Grey:hover {
+    background-color: #f5f5f5 !important;
+}
+.BigSpaceList_UltraGrey{
+    background-color: #f5f5f5 !important;
+}
+.BigSpaceList_UltraGreyBorder1 {
+    border-color: #ebebeb !important;
+    border-width: 1px !important;
+}
+.BigSpaceList_UltraGrey:hover {
+    background-color: #ffffff !important;
+}
+
+.BigSpaceList:hover {
+    background-color: #f0f0f0;
+}
+.BigSpaceList_AddressSection{
+    position:relative;
+    background-color: transparent;
+    padding-left: 20px;
+    left: 0px;
+    height: auto;
+    width: 370px;
+    word-wrap: break-word;
+    white-space: pre-line;
+    font-size: 18px
+}
+.BigSpaceList_RedTopSection{
+    position: relative;
+    padding-left: 20px;
+    font-size: 33px;
+    color: red;
+    font-weight: bold;
+}
+.BigSpaceList_UnderTopSection1{
+    position: relative;
+    padding-left: 20px;
+    font-size: 22px;
+    line-height: 18px
+}
+.BigSpaceList_RightSection {
+    position: absolute;
+    height: 150px;
+    width: 320px;
+    top: 0px;
+    right: 0px;
+    background-color: transparent;
+    text-align: right;
+}
+.Gapper_UltraSmall{
+    position: relative;
+    height: 10px;
+}
+.Gapper_Small{
+    position: relative;
+    height: 13px;
+}
+.Gapper_Medium{
+    position: relative;
+    height: 20px;
+}
+.Gapper_MediumBigger{
+    position: relative;
+    height: 25px;
+}
+.Gapper_Big{
+    position: relative;
+    height: 35px;
+}
+.Gapper_Bigger{
+    position: relative;
+    height: 45px;
+}
+.Gapper_Gigantic{
+    position: relative;
+    height: 100px;
+}
+.Gapper_SuperGigantic{
+    position: relative;
+    height: 200px;
+}
+.RoundButton {
+    position: relative;
+    background-color: white;
+    border: 2px solid black;
+    cursor: pointer;
+}
+.RoundButton_Arrow {
+    position: absolute;
+    width: 40px;
+    top:3px;
+    left: 3px;
+}
+.RoundButton_Red {
+    border-color: #ff9290;
+}
+.RoundButton_Red:active {
+    border-color: red;
+    border-width: 2.5px;
+}
+.RoundButton_Grey {
+    border-color: #c8c8c8;
+}
+.RoundButton_Grey:active {
+    border-color: #9b9b9b;
+    border-width: 2.5px;
+}
+.RoundButton_Grey_Dot {
+    position: absolute ;
+    top: 10px ;
+    right: 10px ;
+    font-size: 25px;
+    text-align: center;
+    line-height: 30px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.Unique_SessionPage_DateLabel{
+    position: absolute;
+    top: 13px;
+    right: 45px;
+    color: rgba(0,0,0,0.2);
+}
+.Unique_SessionPage_RedDateLabel{
+    position: absolute;
+    top: 13px;
+    right: 45px;
+    color: rgba(255,0,0,0.2);
+}
+.Unique_LoginPage{
+    color:#e4caca;
+}
+.Unique_LoginPage:hover{
+    color:#e3b1b1;
+}

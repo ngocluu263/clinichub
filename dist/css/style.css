@@ -1,3 +1,4 @@
+
 #main {
   margin-top: 70px;
 }
@@ -45,4 +46,44 @@
   text-align: center;
   padding-top: 50px;
   padding-bottom: 50px;
+}
+  
+body{
+  position: relative;
+  height: 100%;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ededed+0,bfbfbf+100 */
+  background: #ededed; /* Old browsers */
+  background: -moz-linear-gradient(top,   #c6c6c6 0%, #d0d0d0 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,   #c6c6c6 0%, #d0d0d0 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #c6c6c6 0%, #d0d0d0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#bfbfbf',GradientType=0 ); /* IE6-9 */
+  overflow-y: auto;
+  overflow-x: hidden; !important;
+  font-family: AvenirNext-Regular !important;
+  }
+
+.MenuBar_Text:hover {
+  cursor: pointer;
+  color: #6c6c6c;
+        }
+.InfoTitleBox{
+  padding-left: 15%;
+  min-width: 145px;
+}
+
+.LineSpace{
+  margin-bottom: 0.9em;
+}
+
+.UserMenuCustomize{
+  color:#9b9b9b;
+  padding-left: 20px;
+}
+.UserMenuCustomize:hover{
+  color:#454545;
+  text-decoration: none;
+}
+
+.activeMenu{
+  color:#454545;
 }

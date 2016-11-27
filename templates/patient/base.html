@@ -1,16 +1,17 @@
 {% extends '../base.html' %}
 
 {% block content %}
-  <div class="col-md-8 col-md-offset-2">
+  <div>
     <div class="nav-menu-center">
-      <ul class="nav nav-pills">
-        <li role="presentation" class="{% if page == "info" %}active{% endif %}"><a href="{% url 'patient_info' %}">Information</a></li>
-        <li role="presentation" class="{% if page == "sessions" %}active{% endif %}"><a href="{% url 'patient_sessions' %}">Sessions</a></li>
-        <li role="presentation" class="{% if page == "payment" %}active{% endif %}"><a href="{% url 'patient_payment' %}">Payment</a></li>
-        <li role="presentation" class="{% if page == "appointments" %}active{% endif %}"><a href="{% url 'patient_appointments' %}">Appointments</a></li>
-        <li role="presentation" class="{% if page == "transcripts" %}active{% endif %}"><a href="{% url 'patient_transcripts' %}">Transcripts</a></li>
+      <ul style="margin-top: -10px;position: fixed;text-align: center;width: 100%;height: 30px;top: 60px;left: 0px;color: #9b9b9b;background-color: #eeeeee;font-size:14px; padding-top:5px">
+            <li role="presentation" ><a href="{% url 'patient_info' %}" class="UserMenuCustomize {% if page == "info" %}activeMenu{% endif %} ">Information</a></li>
+            <li role="presentation" ><a href="{% url 'patient_sessions' %}" class="UserMenuCustomize {% if page == "sessions" %}activeMenu{% endif %} ">Sessions</a></li>
+            <li role="presentation" ><a href="{% url 'patient_payment' %}" class="UserMenuCustomize {% if page == "payment" %}activeMenu{% endif %} ">Payment</a></li>
+            <li role="presentation" ><a href="{% url 'patient_appointments' %}" class="UserMenuCustomize {% if page == "appointments" %}activeMenu{% endif %}">Appointments</a></li>
+            <li role="presentation" ><a href="{% url 'patient_transcripts' %}" class="UserMenuCustomize {% if page == "transcripts" %}activeMenu{% endif %}">Transcripts</a></li>
       </ul>
     </div>
+    <div style="margin-bottom:20px"></div>
     {% block innercontent %}
     {% endblock innercontent %}
   </div>

@@ -1,0 +1,37 @@
+
+.NotiPane {
+    position: relative;
+    border-radius: 20px;
+    height: 100%;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 30%;
+    /*display: inline-block;*/
+
+}
+
+.NotiPane_Space {
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    width: 100%;
+    /*background-color: red;*/
+    /*overflow: auto;*/
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.NotiPane_Gap {
+    width: 20px;
+}
+.NotiPane_HeaderText {
+    font-size: 17px;
+    text-align: center;
+    color: #c3c3c3;
+}
+.colorgray1 {
+    color: #7f7f7f;
+}
+.colorgrayDark {
+    color: #383838;
+}

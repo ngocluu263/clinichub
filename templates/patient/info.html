@@ -1,16 +1,86 @@
 {% extends './base.html' %}
 
 {% block innercontent %}
-  <h3>Patient Information</h3>
-  <p style="font-size: 20px;">
-    <b>Username: </b> {{user.username}}<br />
-    <b>Email: </b> {{user.username}}<br />
-    <b>Name: </b> {{user.firstname}} {{user.lastname}}<br />
-    <b>Date of birth: </b> {{user.birthdate}}<br />
-    <b>ID Number: </b> {{user.id_no}}<br />
-    <b>Phone Number: </b> {{user.phone_no}}<br />
-    <b>Address: </b> {{user.address}}<br />
-    <b>Allergy Information: </b> {{user.allergy}}<br />
-  </p>
-  <button class="btn btn-primary">Edit</button>
+<div class="container">
+  <div class="row LineSpace">
+    <div class="box-center" style=" display: flex; justify-content: center;">
+      <div class="NotiPane" style=" height:500px; width:650px">
+            <div class="Gapper_UltraSmall"></div>
+            <div class="col-md-12 NotiPane_HeaderText"> Patient Information </div>
+            <!-- <div class="Gapper_Medium"></div>   -->
+            <div class="NotiPane_Space" style="bottom: 40px; overflow:visible">
+              <div class="container LabelManual_Font_Medium" style="width:100%">
+                <div class="row LineSpace" style="margin-top:10%;" >
+                  <div class="col-md-5 col-xs-5 InfoTitleBox">
+                    <b>Username: </b>
+                  </div>
+                  <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
+                    {{user.username}}
+                  </div>
+                </div>
+                <div class="row LineSpace" >
+                  <div class="col-md-5 col-xs-5 InfoTitleBox">
+                    <b>Email: </b>
+                  </div>
+                  <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
+                    {{user.email}}
+                  </div>
+                </div>
+                <div class="row LineSpace"  >
+                  <div class="col-md-5 col-xs-5 InfoTitleBox">
+                    <b>Name: </b>
+                  </div>
+                  <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
+                     {{user.firstname}} {{user.lastname}}
+                  </div>
+                </div>
+                <div class="row LineSpace"  >
+                  <div class="col-md-5 col-xs-5 InfoTitleBox">
+                    <b>Date of birth: </b>
+                  </div>
+                  <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
+                    {{user.birthdate}}
+                  </div>
+                </div>
+                <div class="row LineSpace"  >
+                  <div class="col-md-5 col-xs-5 InfoTitleBox">
+                    <b>ID Number: </b>
+                  </div>
+                  <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
+                    {{user.id_no}}
+                  </div>
+                </div>
+                <div class="row LineSpace"  >
+                  <div class="col-md-5 col-xs-5 InfoTitleBox">
+                    <b>Phone Number: </b>
+                  </div>
+                  <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
+                     {{user.phone_no}}
+                  </div>
+                </div>
+                <div class="row LineSpace"  >
+                  <div class="col-md-5 col-xs-5 InfoTitleBox">
+                    <b>Address: </b>
+                  </div>
+                  <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
+                     {{user.address}}
+                  </div>
+                </div>
+                <div class="row LineSpace"  >
+                  <div class="col-md-5 col-xs-5 InfoTitleBox">
+                    <b>Allergy Information: </b>
+                  </div>
+                  <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
+                     {{user.allergy}}
+                  </div>
+                </div>
+                <div class="row LineSpace" style="text-align:center; margin-top:10%">
+                  <button class="ButtonStandard Button_RedColor ButtonStandard_RoundCorner ButtonHeight_OneLineText_Small ButtonWidth_Small" style="padding-top:1px" >Edit</button>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
