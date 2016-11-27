@@ -39,7 +39,7 @@ export default class AppointmentCreator extends Component {
             <textarea ref="note" className="form-control" rows="5"></textarea>
           </div>
           <div className="form-group" style={{'textAlign': 'center'}}>
-            <button className="btn btn-success"
+            <button className="btn btn-success" style={{'marginRight': '10px'}}
               onClick={this.submit.bind(this)}>Create Appointment</button>
             <button className="btn btn-default"
               onClick={this.props.changePage.bind(null, 'message')}>Cancel</button>

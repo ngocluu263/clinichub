@@ -2,6 +2,7 @@
 **/*.pyc
 dist/js
 dist/css/themes/
+dist/user
 db.sqlite3
 **/npm-debug.log
 **/*.swp

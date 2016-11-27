@@ -100,7 +100,7 @@ export default class TranscriptCreator extends Component {
             </div>
           </div>
           <div className="form-group" style={{'textAlign': 'center'}}>
-            <button className="btn btn-success"
+            <button className="btn btn-success" style={{'marginRight': '10px'}}
               onClick={this.submit.bind(this)}>Create Transcript</button>
             <button className="btn btn-default"
               onClick={this.props.changePage.bind(null, 'message')}>Cancel</button>

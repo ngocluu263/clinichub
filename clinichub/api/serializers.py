@@ -113,6 +113,7 @@ class AppointmentSerializer(DocumentSerializer):
         fields = ('id', 'doctor', 'patient', 'time', 'note', 'location', 'state', 'session')
 
 class DrugSerializer(EmbeddedDocumentSerializer):
+    time = CharField(allow_blank=True)
     usage = CharField(allow_blank=True)
 
     class Meta:

@@ -13,15 +13,17 @@
   display: inline-block;
 }
 
-#message-list .left {
-  text-align: left;
+#message-list {
+  height: 50vh;
+  overflow-y: auto;
 }
 
-#message-list .right {
-  text-align: right;
+#user-info {
+  text-align: center;
 }
-
-.user-table {
+#user-info img {
+  width: 150px;
+  margin: 0px auto 10px auto;
 }
 
 .user-table th {
