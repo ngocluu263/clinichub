@@ -8,9 +8,7 @@ def patient_profile(request):
         if request.session.get('user_type') != 'patient':
             return redirect(reverse('doctor_profile'))
         else:
-            return render(request, 'patient/profile.html', {
-                'page': 'profile',
-            })
+            return redirect(reverse('patient_info'))
     else:
         return redirect(reverse('login'))
 
