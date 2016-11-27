@@ -36,30 +36,40 @@ export default class BalanceAdder extends Component {
     let { patient, topupList } = this.props.store
     return (
       <div>
-        <div id="balance-big">
+        <div id="balance-big" style={{'marginBottom': '40px'}}>
           <span><small>Your balance is<br /></small>{patient.balance}</span>
         </div>
-        <div className="form">
+        <div className="form-horizontal">
           <div className="form-group">
-            <label htmlFor="card-number">Card Number</label>
-            <input type="text" id="card-number" ref="cardNumber" size="20" maxLength="19" className="form-control" placeholder="xxxx-xxxx-xxxx-xxxx" />
+            <label htmlFor="card-number" className="col-sm-2 control-label">Card Number</label>
+            <div className="col-sm-10">
+              <input type="text" id="card-number" ref="cardNumber" size="20" maxLength="19" className="form-control" placeholder="xxxx-xxxx-xxxx-xxxx" />
+            </div>
           </div>
           <div className="form-group">
-            <label htmlFor="card-cvv">CVV</label>
-            <input type="text" id="card-cvv" ref="cardCVV" size="3" maxLength="3" className="form-control" />
+            <label htmlFor="card-cvv" className="col-sm-2 control-label">CVV</label>
+            <div className="col-sm-10">
+              <input type="text" id="card-cvv" ref="cardCVV" size="3" maxLength="3" className="form-control" />
+            </div>
           </div>
           <div className="form-group">
-            <label htmlFor="card-expired">Expired Month</label>
-            <input type="text" id="card-expired" ref="cardExpired" size="7" maxLength="7" className="form-control" placeholder="mm/yyyy" />
+            <label htmlFor="card-expired" className="col-sm-2 control-label">Expired Month</label>
+            <div className="col-sm-10">
+              <input type="text" id="card-expired" ref="cardExpired" size="7" maxLength="7" className="form-control" placeholder="mm/yyyy" />
+            </div>
           </div>
           <div className="form-group">
-            <label htmlFor="topup">Select topup</label>
-            <TopupSelector topupList={topupList} updateTopup={this.updateTopup.bind(this)} />
+            <label htmlFor="topup" className="col-sm-2 control-label">Select topup</label>
+            <div className="col-sm-10">
+              <TopupSelector topupList={topupList} updateTopup={this.updateTopup.bind(this)} />
+            </div>
           </div>
-          <button className="btn btn-success" onClick={this.submit.bind(this)}>Add topup</button>
-          {(this.state.msg != '')? (
-            <div className="alert alert-danger" role="alert">{this.state.msg}</div>
-          ): false}
+          <div style={{'textAlign': 'center'}}>
+            <button className="btn btn-success" onClick={this.submit.bind(this)}>Add topup</button>
+            {(this.state.msg != '')? (
+              <div className="alert alert-danger" role="alert">{this.state.msg}</div>
+            ): false}
+          </div>
         </div>
       </div>
     )
