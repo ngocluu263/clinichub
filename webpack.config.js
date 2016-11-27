@@ -1,6 +1,7 @@
 
 var webpack = require('webpack')
 var path = require('path')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 const DEBUG = process.env.NODE_ENV !== 'production'
 
 module.exports = {
@@ -29,7 +30,9 @@ module.exports = {
       }
     ]
   },
-  plugins: DEBUG? []: [
+  plugins: DEBUG? [
+      new CopyWebpackPlugin([{ from: '../../dist', to: 'static' }])
+    ]: [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
