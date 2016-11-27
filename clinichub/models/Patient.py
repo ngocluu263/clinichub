@@ -22,6 +22,7 @@ class Patient(User):
             phone_no = request.POST.get('phone_no', '')
             address = request.POST.get('address', '')
             allergy = request.POST.get('allergy', '')
+            img_url = request.POST.get('img_url', '/static/user/default-user.jpg')
 
             if (password != password_confirm):
                 raise ValidationError('PasswordNotMatched')
@@ -36,6 +37,7 @@ class Patient(User):
             user.phone_no = phone_no
             user.address = address
             user.allergy = allergy
+            user.img_url = img_url
             
             user.save()
         except ValidationError:
