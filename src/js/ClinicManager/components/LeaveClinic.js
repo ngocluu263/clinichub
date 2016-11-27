@@ -4,8 +4,8 @@ export default class ClinicEditor extends Component {
 
   render() {
     return (
-      <div>
-        <button className="btn btn-danger"
+      <div style={{'textAlign': 'center'}}>
+        <button className="btn btn-danger btn-lg"
           onClick={() => this.props.submit()}>Leave clinic</button>
       </div>
     )

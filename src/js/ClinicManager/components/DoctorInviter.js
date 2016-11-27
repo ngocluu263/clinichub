@@ -56,9 +56,11 @@ export default class ClinicEditor extends Component {
           })
         }
         </div>
-        <button disabled={!this.shouldEnableButton()}
-          onClick={this.submit.bind(this)}
-          className="btn btn-success">Invite doctors</button>
+        <div style={{'textAlign': 'center'}}>
+          <button disabled={!this.shouldEnableButton()}
+            onClick={this.submit.bind(this)}
+            className="btn btn-success">Invite doctors</button>
+        </div>
       </div>
     )
   }

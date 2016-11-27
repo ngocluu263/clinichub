@@ -42,14 +42,18 @@ export default class ClinicManager extends Component {
           </div>
         </div>
         <div className="col-md-9">
-          {innerComponent}
-          {(() => {
-            if (store.msg != "") {
-              return (
-                <div className="alert alert-success">{store.msg}</div>
-              )
-            }
-          })()} 
+          <div className="panel panel-default">
+            <div className="panel-body">
+            {innerComponent}
+            {(() => {
+              if (store.msg != "") {
+                return (
+                  <div className="alert alert-success">{store.msg}</div>
+                )
+              }
+            })()} 
+            </div>
+          </div>
         </div>
       </div>
     )  

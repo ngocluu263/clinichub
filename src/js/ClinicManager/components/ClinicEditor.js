@@ -33,8 +33,10 @@ export default class ClinicEditor extends Component {
           <input type="text" id="clinic-img_url" ref="img_url"
             defaultValue={this.props.clinic.img_url} className="form-control" />
         </div>
-        <button className="btn btn-success"
-          onClick={this.submit.bind(this)}>Edit clinic</button>
+        <div style={{'textAlign': 'center'}}>
+          <button className="btn btn-success"
+            onClick={this.submit.bind(this)}>Edit clinic</button>
+        </div>
       </div>
     )
   }
