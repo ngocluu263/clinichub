@@ -14,3 +14,8 @@
     font-family: "AvenirNext-Regular";
     src: url('../resource/AvenirNext-Regular.ttf');
 }
+
+@font-face {
+    font-family: "FontAwesome";
+    src: url('../resource/fontawesome-webfont.ttf');
+}

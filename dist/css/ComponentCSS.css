@@ -121,6 +121,12 @@ input:checked + .slider:before {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+.LabelManual a:hover {
+    color:blue !important;
+    text-decoration: none;
+}
+
 .MultiLineLabel {
     text-align: left;
     position: relative;
@@ -164,6 +170,8 @@ input:checked + .slider:before {
 .InputStandard:focus {
     border-color: #9b9b9b;
     border-width: 2px;
+    outline:none !important;
+    box-shadow: none !important;
 }
 .InputStandard {
     height: 50px;
@@ -176,7 +184,7 @@ input:checked + .slider:before {
     color: grey !important;
     border-radius: 13px;
     -webkit-box-sizing: border-box;
-    outline: none;
+    outline: none !important;
     transition: 0.2s;
     margin-bottom: 6px;
 }
@@ -566,4 +574,10 @@ input:checked + .slider:before {
     top: 13px;
     right: 45px;
     color: rgba(255,0,0,0.2);
+}
+.Unique_LoginPage{
+    color:#e4caca;
+}
+.Unique_LoginPage:hover{
+    color:#e3b1b1;
 }

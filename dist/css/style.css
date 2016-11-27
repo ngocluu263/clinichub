@@ -68,3 +68,16 @@ body{
 .LineSpace{
   margin-bottom: 0.9em;
 }
+
+.UserMenuCustomize{
+  color:#9b9b9b;
+  padding-left: 20px;
+}
+.UserMenuCustomize:hover{
+  color:#454545;
+  text-decoration: none;
+}
+
+.activeMenu{
+  color:#454545;
+}
