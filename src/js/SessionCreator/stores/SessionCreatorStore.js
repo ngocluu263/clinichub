@@ -2,14 +2,6 @@ import { observable, computed, action, toJS } from 'mobx'
 import _ from 'lodash'
 import { myFetch } from '../../utils'
 
-function getFakeData(data) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(data)
-    }, 1000)
-  })
-}
-
 export default class SessionCreatorStore {
   @observable step = 1
   @observable fieldFilter = ""
