@@ -10,6 +10,7 @@ class Clinic(Document):
     name = StringField(required = True, max_length=50)
     description = StringField(max_length=100)
     price = FloatField()
+    url = StringField(max_length=100)
 
     @property
     def fields(self):

@@ -6,6 +6,7 @@ class User(User):
     lastname = StringField(max_length=50)
     birthdate = DateTimeField()
     id_no = StringField(max_length=20)
+    url = StringField(max_length=100)
 
     @property
     def fullname(self):
