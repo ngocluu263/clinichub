@@ -1,15 +1,4 @@
 
-/*@media screen and (max-width:620px){
-  .NotiPane{
-    height: 60vh;
-  }
-}*/
-
-body{
-  font-family: AvenirNext-Regular !important;
-  min-height: 100%;
-}
-
 #main {
   margin-top: 70px;
 }
@@ -64,9 +53,18 @@ body{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#bfbfbf',GradientType=0 ); /* IE6-9 */
   overflow-y: auto;
   overflow-x: hidden; !important;
+  font-family: AvenirNext-Regular !important;
   }
 
 .MenuBar_Text:hover {
   cursor: pointer;
   color: #6c6c6c;
         }
+.InfoTitleBox{
+  padding-left: 15%;
+  min-width: 145px;
+}
+
+.LineSpace{
+  margin-bottom: 0.9em;
+}
