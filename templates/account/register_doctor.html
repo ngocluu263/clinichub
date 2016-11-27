@@ -3,64 +3,134 @@
 {% block title %} Register - ClinicHub {% endblock %}
 
 {% block content %}
-<div class="col-sm-6 col-sm-offset-3">
-  <h2 style="text-align: center;">Register for doctor</h2>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <form action="" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input id="username" type="text" name="username" maxlength="30" class="form-control" required />
+<div class="container">
+  <div class="row">
+    <div class="box-center" style=" display: flex; justify-content: center;">
+      <div class="NotiPane" style="width: 800px; height: 980px; overflow: hidden; margin-bottom:75px;">
+        <div class="Gapper_UltraSmall"></div>
+        <div class="NotiPane_HeaderText"> Please Type Your Information </div>
+        <div class="NotiPane_Space" style="top: 50px; ">
+          <form action="" method="post">
+            {% csrf_token %}
+          <form class="form-horizontal">
+            <div class="container" style="width:800px">
+              <div class="row">
+                <div class="form-group">
+                  <div class="Gapper_Medium"></div>
+                  <label for="firstname"  class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft ">First Name</label>
+                    <div class="col-md-9">
+                      <input id="firstname" type="text" name="firstname" maxlength="50" class="form-control InputStandard" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="lastname"  class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">Last Name</label>
+                    <div class="col-md-9">
+                      <input id="lastname" type="text" name="lastname" maxlength="50" class="form-control InputStandard" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="birthdate" class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">Date of birth</label>
+                    <div class="col-md-9">
+                      <input id="birthdate" name="birthdate" maxlength="50" class="col-md-3 form-control InputStandard" required="" type="date">
+                      <div class="col-md-5" style="width: 270px;">
+                        <label class="col-md-1 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft" for="Gender" style="width: 110px; padding-right: 10px; padding-left: 10px;">Gender</label>
+                        <div class="col-md-5">
+                          <select class="form-control InputStandard" style="width: 123.2px;" width:="">
+                            <option>Male</option>
+                            <option>Female</option>
+
+                          </select>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="id_no" class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">ID Number</label>
+                    <div class="col-md-9">
+                      <input id="id_no" type="text" name="id_no" maxlength="50" class="form-control InputStandard" required />
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="Gapper_Medium"></div>
+                  <div class="Gapper_Tiny" style="background-color: #ebebeb; margin-top: 20px; margin-bottom: 20px ; height:2px"></div>
+                  <div class="Gapper_Medium"></div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <label for="md_no" class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">MD Number</label>
+                    <div class="col-md-9">
+                      <input id="md_no" type="text" name="md_no" maxlength="50" class="form-control InputStandard" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="email"  class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">Email</label>
+                  <div class="col-md-9">
+                    <input id="email" type="email" name="email" maxlength="50" class="form-control InputStandard" style="width:70%" required />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="field" class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">Field</label>
+                  <div class="col-md-9">
+                    <input id="field" type="text" name="field" maxlength="50" class="form-control InputStandard" style="width:70%" required />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="img_url" class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">Doctor avatar url</label>
+                  <div class="col-md-9">
+                    <input id="img_url" type="text" name="img_url" maxlength="50" class="form-control InputStandard" style="width:70%" required />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="Gapper_Medium"></div>
+                  <div class="Gapper_Tiny" style="background-color: #ebebeb; margin-top: 20px; margin-bottom: 20px ; height:2px"></div>
+                  <div class="Gapper_Medium"></div>
+              </div>
+              <div class="row">
+                  <div class="form-group">
+                    <label for="username" class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">Username</label>
+                    <div class="col-md-9">
+                      <input id="username" type="text" name="username" maxlength="30" class="form-control InputStandard" required />
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="form-group">
+                    <label for="password"  class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">Password</label>
+                      <div class="col-md-9">
+                        <input id="password" type="password" name="password" class="form-control InputStandard" required />
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <label for="password_confirm"  class="col-md-3 LabelManual LabelManual_Font_Medium ButtonWidth_Large  LabelLeft">Confirm Password</label>
+                    <div class="col-md-9">
+                      <input id="password_confirm" type="password" name="password_confirm" class="form-control InputStandard" required />
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="Gapper_Medium"></div>
+                  <div class="Gapper_Tiny" style="background-color: #ebebeb; margin-top: 20px; margin-bottom: 20px ; height:2px"></div>
+                  <div class="Gapper_Medium"></div>
+              </div>
+              <div class="row" style="text-align:center">
+                <div class="form-group">
+                  <input type="submit" value="Register" class="btn btn-success ButtonStandard ButtonStandard_RoundCorner Button_RedColor ButtonWidth_Medium ButtonHeight_OneLineText_Medium" />
+                </div>
+              </div>
+            </div>
+          </form>
+            {% if error_message %}
+              <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+            {% endif %}
+          </form>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input id="password" type="password" name="password" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label for="password_confirm">Confirm Password</label>
-          <input id="password_confirm" type="password" name="password_confirm" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input id="email" type="email" name="email" maxlength="50" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label for="firstname">First Name</label>
-          <input id="firstname" type="text" name="firstname" maxlength="50" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label for="lastname">Last Name</label>
-          <input id="lastname" type="text" name="lastname" maxlength="50" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label for="birthdate">Date of birth</label>
-          <input id="birthdate" type="date" name="birthdate" maxlength="50" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label for="id_no">ID Number</label>
-          <input id="id_no" type="text" name="id_no" maxlength="50" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label for="field">Field</label>
-          <input id="field" type="text" name="field" maxlength="50" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label for="md_no">MD Number</label>
-          <input id="md_no" type="text" name="md_no" maxlength="50" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label for="img_url">Avatar url</label>
-          <input id="img_url" type="text" name="img_url" maxlength="100" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Register" class="btn btn-success" />
-        </div>
-        {% if error_message %}
-          <div class="alert alert-danger" role="alert">{{ error_message }}</div>
-        {% endif %}
-      </form>
+      </div>
     </div>
   </div>
 </div>
+s
 {% endblock %}
