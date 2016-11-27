@@ -86,8 +86,13 @@ def doctor_create_clinic(request):
                 try:
                     name = request.POST.get('name', 'Unnamed clinic')
                     description = request.POST.get('description', '')
+                    url = request.POST.get('url', '/static/user/default-clinic.jpg')
+                    try:
+                        price = int(request.POST.get('price', '100'))
+                    except Exception as e:
+                        price = 100
 
-                    clinic = Clinic.objects.create(name=name, description=description, price=100)
+                    clinic = Clinic.objects.create(name=name, description=description, price=price, url=url)
                     if not clinic:
                         raise Exception('Create clinic fail')
 
