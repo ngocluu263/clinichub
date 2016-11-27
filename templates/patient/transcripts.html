@@ -23,10 +23,81 @@
             </ul>
           </td>
           <td class="view-button">
-            <a href="{% url 'transcript' transcript.id %}" class="btn btn-info" target="_blank"><span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span> View</a>
+            <button class="btn btn-info" target="_blank" data-toggle="modal" data-target="#exampleModal" data-id="{{ transcript.id }}">
+              <span class="glyphicon glyphicon glyphicon-eye-open" aria-hidden="true"></span> View</button>
           </td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">Transcript</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label class="control-label">Doctor</label>
+              <h5 class="doctor-name"></h5>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Clinic</label>
+              <h5 class="clinic-name"></h5>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Note</label>
+              <p class="note"></p>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Drugs</label>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Usage</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+  <script type="text/javascript">
+    $('#exampleModal').on('show.bs.modal', function (event) {
+      let button = $(event.relatedTarget)
+      let id = button.data('id')
+      let modal = $(this)
+
+      $.get(`/api/transcripts/${id}/`, function(data) {
+        modal.find('.doctor-name').text(`${data.doctor.fullname} (${data.doctor.username})`)
+        modal.find('.clinic-name').text(data.doctor.clinic.name)
+        modal.find('.note').text(data.note)
+        
+        let $drugs = modal.find('tbody').html('')
+        data.drugs.forEach((item, index) => {
+          let usage = item.time + '<br />' + item.usage
+          $('<tr></tr>')
+            .append(`<td>${index+1}</td>`)
+            .append(`<td>${item.name}</td>`)
+            .append(`<td>${item.amount}</td>`)
+            .append(`<td>${usage}</td>`)
+            .appendTo($drugs)
+        })
+      })
+    })
+  </script>
 {% endblock %}

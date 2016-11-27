@@ -105,7 +105,7 @@ def patient_transcripts(request):
                 transcripts = Transcript.objects(patient=user)
                 transcripts_ = [{
                     'id': transcript.id, 
-                    'doctor': transcript.doctor.username, 
+                    'doctor': transcript.doctor.fullname, 
                     'clinic': transcript.doctor.clinic.name, 
                     'drugs': transcript.drugs, 
                     'note': transcript.note, 
