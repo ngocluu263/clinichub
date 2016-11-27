@@ -1,83 +1,11 @@
 {% extends './base.html' %}
 
 {% block innercontent %}
-  <div id="appointment-list"></div>
-  <div class="container">
+<div class="container">
     <div class="row">
-      <div class="box-center" style=" display: flex; justify-content: center;">
-        <div class="NotiPane" style=" height:80vh; width:600px">
-                <div class="Gapper_UltraSmall"></div>
-                <p class="NotiPane_HeaderText">Appointment</p>
-                <div class="NotiPane_Space" style="top: 50px">
-                    <div class="colorgray1 ExpandableList">
-                        <div class="ExpandableList_TopLabel">&nbsp;Active</div>
-                        <div class="BigSpaceList">
-                            <div class="Gapper_Small"></div>
-                            <span class="BigSpaceList_RedTopSection">3 hours 32 minute<br></span>
-                            <span class="colorgrayDark BigSpaceList_UnderTopSection1"> 13:12 &nbsp; WED 13 Jan 2016</span><br>
-                            <div class="Gapper"></div>
-                            <div class="colorgray1 BigSpaceList_AddressSection">
-                                <p> Appointment to Xray</p><br>
-                            </div>
-                            <div class="colorgray1 BigSpaceList_RightSection">
-                                <div style="position:relative ;height: 25px"> </div>
-                                <span style="position: relative;padding-right: 10px;font-size: 20px; line-height:3px; font-weight: bold"> Clinic : The despair</span> <br>
-                                <div style="position: relative;height: 5px;"></div>
-                                <span style="position: relative;padding-right: 10px;font-size: 18px; line-height:3px"> Session : My head is hurt</span> <br><br>
-                                <div style="position: relative;height: 3px;"></div>
-                                <div class="ButtonStandard_RoundCorner ButtonStandard ButtonHeight_OneLineText_Small ButtonWidth_BiggerMedium Button_NormalColor" style="display: inline-block; margin-right: 10px"> show description</div><br>
-                                <div class="ButtonStandard_RoundCorner ButtonStandard ButtonHeight_OneLineText_Small ButtonWidth_BiggerMedium Button_NormalColor" style="display: inline-block; margin-right: 10px"> goto session</div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="colorgray1 ExpandableList" style="filter: grayscale(100%) opacity(0.8); -webkit-filter: grayscale(100%) opacity(0.8)">
-                        <div class="ExpandableList_TopLabel">&nbsp;History</div>
-                        <div class="BigSpaceList">
-                            <div class="Gapper_Small"></div>
-                            <span class="BigSpaceList_RedTopSection">Completed<br></span>
-                            <span class="colorgrayDark BigSpaceList_UnderTopSection1"> 13:12 &nbsp; WED 13 Jan 2016</span><br>
-                            <div class="Gapper"></div>
-                            <div class="colorgray1 BigSpaceList_AddressSection">
-                                Appointment to see the doctor <br>
-                                <span style="color: black"></span><br>
-                                Address<br>
-                                <span style="color: black"> Thailand, Tel 086-xxxxxxx </span>
-                            </div>
-                            <div class="colorgray1 BigSpaceList_RightSection">
-                                <div style="position:relative ;height: 25px"> </div>
-                                <span style="position: relative;padding-right: 10px;font-size: 20px; line-height:3px; font-weight: bold"> Clinic : The despair</span> <br>
-                                <div style="position: relative;height: 5px;"></div>
-                                <span style="position: relative;padding-right: 10px;font-size: 18px; line-height:3px"> Session : My head is hurt</span> <br><br>
-                                <div style="position: relative;height: 3px;"></div>
-                                <div class="ButtonStandard_RoundCorner ButtonStandard ButtonHeight_OneLineText_Small ButtonWidth_BiggerMedium Button_NormalColor" style="display: inline-block; margin-right: 10px"> hide description</div><br>
-                                <div class="ButtonStandard_RoundCorner ButtonStandard ButtonHeight_OneLineText_Small ButtonWidth_BiggerMedium Button_NormalColor" style="display: inline-block; margin-right: 10px"> goto session</div>
-                            </div>
-                        </div>
-                        <div class="BigSpaceList">
-                            <div class="Gapper_Small"></div>
-                            <span class="BigSpaceList_RedTopSection">Canceled<br></span>
-                            <span class="colorgrayDark BigSpaceList_UnderTopSection1"> 13:12 &nbsp; WED 13 Jan 2016</span><br>
-                            <div class="Gapper"></div>
-                            <div class="colorgray1 BigSpaceList_AddressSection">
-                                Appointment to Surgery! <br>
-                            </div>
-                            <div class="colorgray1 BigSpaceList_RightSection">
-                                <div style="position:relative ;height: 25px"> </div>
-                                <span style="position: relative;padding-right: 10px;font-size: 20px; line-height:3px; font-weight: bold"> Clinic : The despair</span> <br>
-                                <div style="position: relative;height: 5px;"></div>
-                                <span style="position: relative;padding-right: 10px;font-size: 18px; line-height:3px"> Session : My Pussy is Wet</span> <br><br>
-                                <div style="position: relative;height: 3px;"></div>
-                                <div class="ButtonStandard_RoundCorner ButtonStandard ButtonHeight_OneLineText_Small ButtonWidth_BiggerMedium Button_NormalColor" style="display: inline-block; margin-right: 10px"> show description</div><br>
-                                <div class="ButtonStandard_RoundCorner ButtonStandard ButtonHeight_OneLineText_Small ButtonWidth_BiggerMedium Button_NormalColor" style="display: inline-block; margin-right: 10px"> goto session</div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
-      </div>
+        <div id="appointment-list"></div>
     </div>
-  </div>
+</div>
 {% endblock %}
 
 {% load static %}
@@ -85,6 +13,7 @@
   <script type="text/javascript" src="{% static 'js/vendors.js' %}"></script>
   <script type="text/javascript">
     window.patient = "{{ user_id }}"
+    window.me = 'patient'
   </script>
   <script type="text/javascript" src="{% static 'js/appointmentList.js' %}"></script>
 {% endblock %}

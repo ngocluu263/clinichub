@@ -17,21 +17,27 @@ export default class AppointmentList extends Component {
       case 'active': var list = appointments.filter(item => item.state == 'active'); break
       case 'history': var list = appointments.filter(item => item.state == 'history' || item.state == 'cancel'); break
     }
-
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          <span>Appointment: &nbsp;</span>
-          <span style={{'position': 'absolute', 'float': 'right'}}>
-            <TabLink enable={store.page != 'active'} pageName="Active" changePage={() => store.page = 'active'} />  | &nbsp;
-            <TabLink enable={store.page != 'history'} pageName="History" changePage={() => store.page = 'history'} />  
-          </span>
+      <div className="box-center" style={{'display': 'flex', 'justifyContent': 'center'}}>
+        <div className="NotiPane" style={{'height': '80vh', 'width': '600px'}}>
+          <div className="Gapper_UltraSmall"></div>
+          <p className="NotiPane_HeaderText">
+            <span>Appointment</span>&nbsp;&nbsp;&nbsp;
+            <span>
+              <TabLink enable={store.page != 'active'} pageName="Active" changePage={() => store.page = 'active'} />  | &nbsp;
+              <TabLink enable={store.page != 'history'} pageName="History" changePage={() => store.page = 'history'} />
+            </span>
+          </p>
+          <div className="NotiPane_Space" style={{'top': '50px'}}>
+            <div className="colorgray1 ExpandableList">
+              <AppointmentFilteredList
+                page={page} list={list} me={store.me}
+                changePage={(page) => this.props.store.page = page}
+                doneAppointment={store.doneAppointment.bind(store)}
+                cancelAppointment={store.cancelAppointment.bind(store)} />
+            </div>
+          </div>
         </div>
-        <AppointmentFilteredList
-          page={page} list={list} me={store.me}
-          changePage={(page) => this.props.store.page = page}
-          doneAppointment={store.doneAppointment.bind(store)}
-          cancelAppointment={store.cancelAppointment.bind(store)} />
       </div>
     )
   }

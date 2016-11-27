@@ -17,7 +17,7 @@ let Item = ({appointment, page, me, selected, toggleDetail, doneAppointment, can
   let timeStr = time_.format('ddd, DD MMM YYYY HH:mm')
   let userStr = (me == 'doctor')?
     `Patient: ${appointment.patient.fullname}`:
-    `Doctor: ${appointment.doctor.fullname}`
+    `Clinic: ${appointment.doctor.clinic.name}`
   
   const active = selected == appointment.id
   switch (appointment.state) {
@@ -25,42 +25,37 @@ let Item = ({appointment, page, me, selected, toggleDetail, doneAppointment, can
     case 'cancel': var title = "Canceled"; break;
     case 'history': var title = "Completed"; break;
   }
+
   return (
-    <li className="list-group-item">
-      <div className="row">
-        <div className="col-sm-9">
-          <h3 className="list-group-item-heading">
-            <span>{title}</span>
-          </h3>
-          <h4 className="list-group-item-heading">
-            <span>{timeStr}<br /></span>
-            <span>Session: </span>
-            <a href={'/session/'+ appointment.session.id}>{appointment.session.topic}</a>
-          </h4>
-          <p className="list-group-item-text">
-            {(active & me == 'patient')?
-              <span>Clinic: {appointment.doctor.clinic.name}<br /></span>: false}
-            {(active)?
-              <span>{userStr}<br /></span>: false}
-            {(active)?
-              <span>Adress: {appointment.location}<br /></span>: false}
-          </p>
+    <div className="BigSpaceList" style={{'minHeight': '200px'}}>
+      <div className="Gapper_Small"></div>
+      <span className="BigSpaceList_RedTopSection">{title}<br /></span>
+      <span className="colorgrayDark BigSpaceList_UnderTopSection1">{timeStr}</span><br />
+      <div className="Gapper"></div>
+      <div className="colorgray1 BigSpaceList_AddressSection">
+      {active? (
+        <div>
+          <p>{appointment.note}</p>
+          <p>Address: {appointment.location}</p>
           <p>
-            {(active)?
-              <span>Note: {appointment.note}<br /></span>: false}
+            {(page == 'active')? <div className="ButtonStandard_RoundCorner ButtonStandard ButtonHeight_OneLineText_Small ButtonWidth_BiggerMedium Button_NormalColor" style={{'display': 'inline-block', 'marginRight': '10px'}}
+              onClick={() => cancelAppointment(appointment.id)}>Discard</div>: false}
           </p>
-          { (page == 'active' && active)?
-            (<p>
-              <button className="btn btn-danger" onClick={() => cancelAppointment(appointment.id)}>Discard</button>
-            </p>): false
-          }
         </div>
-        <div className="col-sm-3" style={{'textAlign': 'right'}}>
-          <button className="btn btn-default" onClick={() => toggleDetail(appointment.id)}>
-            {(active)? 'Hide Detail': 'Show Detail'}</button>
-        </div>
+      ): false} 
       </div>
-    </li>
+      <div className="colorgray1 BigSpaceList_RightSection">
+        <div style={{'position': 'relative', 'height': '25px'}}> </div>
+        <span style={{'position': 'relative', 'paddingRight': '10px', 'fontSize': '20px', 'lineHeight': '3px', 'fontWeight': 'bold'}}>{userStr}</span> <br />
+        <div style={{'position': 'relative', 'height': '5px'}}></div>
+        <span style={{'position': 'relative', 'paddingRight': '10px', 'fontSize': '18px', 'lineHeight': '3px'}}> Session: {appointment.session.topic}</span> <br /><br />
+        <div style={{'position': 'relative', 'height': '3px'}}></div>
+        <div className="ButtonStandard_RoundCorner ButtonStandard ButtonHeight_OneLineText_Small ButtonWidth_BiggerMedium Button_NormalColor" style={{'display': 'inline-block', 'marginRight': '10px'}}
+          onClick={() => toggleDetail(appointment.id)}>{(active)? 'Hide Detail': 'Show Detail'}</div><br />
+        <div className="ButtonStandard_RoundCorner ButtonStandard ButtonHeight_OneLineText_Small ButtonWidth_BiggerMedium Button_NormalColor" style={{'display': 'inline-block', 'marginRight': '10px'}}
+          onClick={() => window.location = '/session/'+ appointment.session.id}>View session</div>
+      </div>
+    </div>
   )
 }
 
@@ -98,7 +93,6 @@ export default class AppointmentFilteredList extends Component {
         cancelAppointment={this.props.cancelAppointment}
         />
     })
-    
     return (
       <ul className="list-group">
         {ItemList}
