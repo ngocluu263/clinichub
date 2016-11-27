@@ -3,7 +3,7 @@ import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
 import Message from './Message'
 import SessionList from './SessionList'
-import TranscriptCreator from './TranscriptCreator'
+import PrescriptionCreator from './PrescriptionCreator'
 import AppointmentCreator from './AppointmentCreator'
 import UserInfo from './UserInfo'
 import Appointments from './Appointments'
@@ -24,11 +24,11 @@ export default class SessionViewer extends Component {
             deleteSession={store.deleteSession.bind(store)}
           />
         )
-        case 'transcript': return (
-          <TranscriptCreator
+        case 'prescription': return (
+          <PrescriptionCreator
             doctor={store.session.doctor.fullname}
             patient={store.session.patient.fullname}
-            submitTranscript={store.submitTranscript.bind(store)}
+            submitPrescription={store.submitPrescription.bind(store)}
             changePage={store.changePage.bind(store)}
           />
         )

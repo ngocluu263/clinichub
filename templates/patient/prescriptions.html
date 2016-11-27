@@ -4,7 +4,7 @@
 <div class="box-center" style=" display: flex; justify-content: center;">
   <div class="NotiPane" style=" height:80vh; width:800px">
     <div class="Gapper_UltraSmall"></div>
-    <div class="NotiPane_HeaderText"> Transcript </div>
+    <div class="NotiPane_HeaderText"> Prescription </div>
     <div class="NotiPane_Space" style="top: 50px; bottom: 40px">
     <table class="table">
       <thead>
@@ -16,20 +16,20 @@
         </tr>
       </thead>
       <tbody>
-        {% for transcript in transcripts %}
+        {% for prescription in prescriptions %}
           <tr>
-            <td>{{transcript.doctor}}</td>
-            <td>{{transcript.clinic}}</td>
+            <td>{{prescription.doctor}}</td>
+            <td>{{prescription.clinic}}</td>
             <td>
               <ul>
-              {% for drug in transcript.drugs %}
+              {% for drug in prescription.drugs %}
                 <li>{{drug.name}} ({{drug.amount}})</li> 
               {% endfor %}
               </ul>
             </td>
             <td class="view-button">
               <button class="ButtonStandard ButtonStandard_RoundCorner Button_RedColor ButtonHeight_OneLineText_Small ButtonWidth_Small"
-                style="padding: 0px;" data-toggle="modal" data-target="#exampleModal" data-id="{{ transcript.id }}">View</button>
+                style="padding: 0px;" data-toggle="modal" data-target="#exampleModal" data-id="{{ prescription.id }}">View</button>
             </td>
           </tr>
         {% endfor %}
@@ -42,7 +42,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="exampleModalLabel">Transcript</h4>
+          <h4 class="modal-title" id="exampleModalLabel">Prescription</h4>
         </div>
         <div class="modal-body">
           <form>
@@ -89,7 +89,7 @@
       let id = button.data('id')
       let modal = $(this)
 
-      $.get(`/api/transcripts/${id}/`, function(data) {
+      $.get(`/api/prescriptions/${id}/`, function(data) {
         modal.find('.doctor-name').text(`${data.doctor.fullname} (${data.doctor.username})`)
         modal.find('.clinic-name').text(data.doctor.clinic.name)
         modal.find('.note').text(data.note)

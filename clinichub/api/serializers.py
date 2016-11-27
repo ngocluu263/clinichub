@@ -120,12 +120,12 @@ class DrugSerializer(EmbeddedDocumentSerializer):
         model = Drug
         fields = ('name', 'amount', 'time', 'usage')
 
-class TranscriptSerializer(DocumentSerializer):
+class PrescriptionSerializer(DocumentSerializer):
     doctor = DoctorPrimaryKeyRelatedField(queryset=Doctor.objects)
     patient = PatientPrimaryKeyRelatedField(queryset=Patient.objects)
     drugs = ListField(child=DrugSerializer())
     note = CharField(allow_blank=True)
 
     class Meta:
-        model = Transcript
+        model = Prescription
         fields = ('id', 'doctor', 'patient', 'note', 'drugs')

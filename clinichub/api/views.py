@@ -110,9 +110,9 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 
         return queryset
 
-class TranscriptViewSet(viewsets.ModelViewSet):
-    queryset = Transcript.objects.all()
-    serializer_class = TranscriptSerializer
+class PrescriptionViewSet(viewsets.ModelViewSet):
+    queryset = Prescription.objects.all()
+    serializer_class = PrescriptionSerializer
 
     def get_queryset(self):
         queryset = self.queryset

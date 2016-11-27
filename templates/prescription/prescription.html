@@ -1,17 +1,17 @@
 {% extends '../base.html' %}
 
-{% block title %}Transcript{% endblock %}
+{% block title %}Prescription{% endblock %}
 
 {% block content%}
-  <h1>Transcript</h1>
+  <h1>Prescription</h1>
   {% if not error_message%}
   <div>
-    <p><b>Doctor: </b>{{transcript.doctor}}</p>
-    <p><b>Patient: </b>{{transcript.patient}}</p>
-    <p><b>Note: </b>{{transcript.note}}</p>
+    <p><b>Doctor: </b>{{prescription.doctor}}</p>
+    <p><b>Patient: </b>{{prescription.patient}}</p>
+    <p><b>Note: </b>{{prescription.note}}</p>
     <p><b>Drugs: </b></p>
     <ul>
-      {% for drug in transcript.drugs%}
+      {% for drug in prescription.drugs%}
         <li>
           <b>{{ drug.name }}</b><br />
           Amount: {{ drug.amount }}<br />

@@ -3,10 +3,10 @@ import moment from 'moment'
 
 let modifyMessage = (msg, sender) => {
   if (sender == 'D') {
-    if (msg.match(/^\/create-transcript/)) {
+    if (msg.match(/^\/create-prescription/)) {
       return (
         <span>Create a&nbsp; 
-          <a href={"/transcript/"+ msg.split(' ')[1]} target="_black">transcript</a>
+          <a href={"/prescription/"+ msg.split(' ')[1]} target="_black">prescription</a>
         </span>
       )
     } else if (msg.match(/^\/create-appointment/)) {
@@ -108,7 +108,7 @@ let ToolsBox = ({changePage, deleteSession}) => {
   return (
     <div style={{'textAlign': 'center'}}>
       <button className="btn btn-default" style={{'marginRight': '10px'}}
-        onClick={() => changePage('transcript')}>Create Transcript</button>
+        onClick={() => changePage('prescription')}>Create Prescription</button>
       <button className="btn btn-default" style={{'marginRight': '10px'}}
         onClick={() => changePage('appointment')}>Create Appointment</button>
       <button className="btn btn-danger"

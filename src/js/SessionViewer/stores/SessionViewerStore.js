@@ -19,14 +19,14 @@ export default class SessionViewerStore {
     this.session.messages.push(msg)
   }
 
-  submitTranscript(data) {
-    myFetch.post('/api/transcripts/', {
+  submitPrescription(data) {
+    myFetch.post('/api/prescriptions/', {
       drugs: data.drugs, 
       note: data.note,
       patient: this.session.patient.id,
       doctor: this.session.doctor.id
     }).then(data => {
-      this.sendMessage('/create-transcript '+ data.id)
+      this.sendMessage('/create-prescription '+ data.id)
       this.page = 'message'
     })
   }

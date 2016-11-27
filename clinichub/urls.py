@@ -8,7 +8,7 @@ patient_urlpatterns = [
     url(r'^info$', views.patient_info, name='patient_info'),
     url(r'^payment$', views.patient_payment, name='patient_payment'),
     url(r'^appointments$', views.patient_appointments, name='patient_appointments'),
-    url(r'^transcripts$', views.patient_transcripts, name='patient_transcripts'),
+    url(r'^prescriptions$', views.patient_prescriptions, name='patient_prescriptions'),
 ]
 
 doctor_urlpatterns = [
@@ -25,8 +25,8 @@ session_urlpatterns = [
     url(r'^(?P<session_id>[a-f0-9]{24})$', views.session, name='session'),
 ]
 
-transcript_urlpatterns = [
-    url(r'^(?P<transcript_id>[a-f0-9]{24})$', views.transcript, name='transcript'),
+prescription_urlpatterns = [
+    url(r'^(?P<prescription_id>[a-f0-9]{24})$', views.prescription, name='prescription'),
 ]
 
 appointment_urlpatterns = [
@@ -44,7 +44,7 @@ urlpatterns = [
     url(r'^doctor/register$', views.doctor_register, name='doctor_register'),
     url(r'^doctor/profile/', include(doctor_urlpatterns)),
     url(r'^session/', include(session_urlpatterns)),
-    url(r'^transcript/', include(transcript_urlpatterns)),
+    url(r'^prescription/', include(prescription_urlpatterns)),
     url(r'^appointment/', include(appointment_urlpatterns)),
     url(r'^api/', include('clinichub.api.urls')),
 ]

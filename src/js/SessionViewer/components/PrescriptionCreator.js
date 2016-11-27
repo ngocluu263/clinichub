@@ -16,7 +16,7 @@ function deriveTimeString(drug) {
   return str
 }
 
-export default class TranscriptCreator extends Component {
+export default class PrescriptionCreator extends Component {
   constructor() {
     super()
     this.state = {
@@ -41,7 +41,7 @@ export default class TranscriptCreator extends Component {
         usage: drug.usage.trim()
       }))
     let data = { drugs, note: this.refs.note.value.trim() }
-    this.props.submitTranscript(data)
+    this.props.submitPrescription(data)
   }
 
   handleSubmitDrug(data) {
@@ -54,7 +54,7 @@ export default class TranscriptCreator extends Component {
   render() {
     return (
       <div>
-        <h4>Create Transcript</h4>
+        <h4>Create Prescription</h4>
         <div className="form">
           <div className="form-group">
             <label>Doctor</label>
@@ -66,7 +66,7 @@ export default class TranscriptCreator extends Component {
           </div>
           <div className="form-group">
             <label>Note</label>
-            <textarea ref="note" id="transcript-note" className="form-control" rows="5"></textarea>
+            <textarea ref="note" id="prescription-note" className="form-control" rows="5"></textarea>
           </div>
           <div className="form-group">
             <label>Drugs</label>
@@ -101,7 +101,7 @@ export default class TranscriptCreator extends Component {
           </div>
           <div className="form-group" style={{'textAlign': 'center'}}>
             <button className="btn btn-success" style={{'marginRight': '10px'}}
-              onClick={this.submit.bind(this)}>Create Transcript</button>
+              onClick={this.submit.bind(this)}>Create Prescription</button>
             <button className="btn btn-default"
               onClick={this.props.changePage.bind(null, 'message')}>Cancel</button>
           </div>

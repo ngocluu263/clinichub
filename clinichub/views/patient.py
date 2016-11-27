@@ -95,27 +95,27 @@ def patient_appointments(request):
     else:
         return redirect(reverse('login'))
 
-def patient_transcripts(request):
+def patient_prescriptions(request):
     if 'username' in request.session:
         if request.session.get('user_type') != 'patient':
             return redirect(reverse('doctor_profile'))
         else:
             try:
                 user = Patient.objects(username=request.session.get('username')).first()
-                transcripts = Transcript.objects(patient=user)
-                transcripts_ = [{
-                    'id': transcript.id, 
-                    'doctor': transcript.doctor.fullname, 
-                    'clinic': transcript.doctor.clinic.name, 
-                    'drugs': transcript.drugs, 
-                    'note': transcript.note, 
-                } for transcript in transcripts]
-                return render(request, 'patient/transcripts.html', {
-                    'page': 'transcripts',
-                    'transcripts': transcripts_
+                prescriptions = Prescription.objects(patient=user)
+                prescriptions_ = [{
+                    'id': prescription.id, 
+                    'doctor': prescription.doctor.fullname, 
+                    'clinic': prescription.doctor.clinic.name, 
+                    'drugs': prescription.drugs, 
+                    'note': prescription.note, 
+                } for prescription in prescriptions]
+                return render(request, 'patient/prescriptions.html', {
+                    'page': 'prescriptions',
+                    'prescriptions': prescriptions_
                 })
             except Exception as e:
-                return render(request, 'patient/transcripts.html', {
+                return render(request, 'patient/prescriptions.html', {
                     'error_message': e.args[0]
                 })
     else:
