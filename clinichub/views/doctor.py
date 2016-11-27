@@ -23,15 +23,21 @@ def doctor_sessions(request):
                 sessions_ = [{
                     'id': session.id,
                     'topic': session.topic,
-                    'patient': session.patient.username,
+                    'patient': session.patient.fullname,
+                    'clinic': session.doctor.clinic.name,
+                    'state': session.state
                 } for session in sessions] 
+                sessions_active = [ session for session in sessions_ if session['state'] == 'active' ]
+                sessions_archive = [ session for session in sessions_ if session['state'] == 'archive' ]
             except Exception as e:
                 return render(request, 'doctor/sessions.html', {
                     'error_message': e.args[0]
                 })
             return render(request, 'doctor/sessions.html', {
                 'page': 'sessions',
-                'sessions': sessions_
+                'sessions': sessions_,
+                'sessions_active': sessions_active,
+                'sessions_archive': sessions_archive
             })
     else:
         return redirect(reverse('doctor_login'))

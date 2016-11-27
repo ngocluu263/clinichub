@@ -13,23 +13,27 @@
               <div class="NotiPane_Space" style="top: 50px; bottom: 80px">
                   <div class="colorgray1 ExpandableList">
                       <div class="ExpandableList_TopLabel">&nbsp;All Session</div>
-                       {% for session in sessions %}
+                       {% for session in sessions_active %}
                       <div class="BigSpaceList BigSpaceList_Grey BigSpaceList_GreyBorder1">
                           <div class="MultiLineLabel LabelManual_Font_Medium" style="margin: 10px">{{session.topic}}<br> <span style="color: red">{{session.clinic}} / {{session.doctor}}</span> </div>
                           <div class="Square_Tiny RoundImage RoundButton RoundButton_Red" style="position: absolute; top: 10px; right: 10px">
-                              <img src="{% static "resource/ArrowRed.png" %}" class="RoundButton_Arrow">
+                            <a href="{% url 'session' session.id %}">
+                                <img src="{% static "resource/ArrowRed.png" %}" class="RoundButton_Arrow">
+                            </a>
                           </div>
-                          <div class="LabelManual LabelManual_Font_Small Unique_SessionPage_RedDateLabel">13:05 PM</div>
                       </div>
                       {% endfor %}
                   </div>
                   <div class="colorgray1 ExpandableList">
                       <div class="ExpandableList_TopLabel">&nbsp;History Session</div>
+                       {% for session in sessions_archive %}
                       <div class="BigSpaceList BigSpaceList_UltraGrey BigSpaceList_UltraGreyBorder1">
-                          <div class="MultiLineLabel LabelManual_Font_Medium" style="margin: 10px; color: #cdcdcd"> My Thoart Is Hurt<br> Clinic : Hellgate </div>
-                          <div class="Square_Tiny RoundImage RoundButton RoundButton_Grey RoundButton_Grey_Dot"> ... </div>
-                          <div class="LabelManual LabelManual_Font_Small Unique_SessionPage_DateLabel">15 July 2018</div>
+                          <div class="MultiLineLabel LabelManual_Font_Medium" style="margin: 10px; color: #cdcdcd">{{session.topic}}<br> {{session.clinic}} / {{session.doctor}}</div>
+                          <div class="Square_Tiny RoundImage RoundButton RoundButton_Grey RoundButton_Grey_Dot">
+                              <a href="{% url 'session' session.id %}" style="text-decoration: none; color: grey;">...</a>
+                        </div>
                       </div>
+                      {% endfor %}
                   </div>
               </div>
               <div class="NotiPane_Space" style="background-color: transparent; top: auto;bottom: 0px;height: 80px">

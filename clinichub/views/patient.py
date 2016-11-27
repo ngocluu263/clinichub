@@ -23,7 +23,7 @@ def patient_sessions(request):
                 sessions_ = [{
                     'id': session.id,
                     'topic': session.topic,
-                    'doctor': session.doctor.username,
+                    'doctor': session.doctor.fullname,
                     'clinic': session.doctor.clinic.name,
                     'state': session.state
                 } for session in sessions] 
@@ -35,7 +35,9 @@ def patient_sessions(request):
                 })
             return render(request, 'patient/sessions.html', {
                 'page': 'sessions',
-                'sessions': sessions_
+                'sessions': sessions_,
+                'sessions_active': sessions_active,
+                'sessions_archive': sessions_archive
             })
     else:
         return redirect(reverse('login'))
