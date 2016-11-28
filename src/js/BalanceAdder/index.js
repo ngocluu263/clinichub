@@ -8,7 +8,7 @@ import BalanceAdderStore from './stores/BalanceAdderStore'
 let patient = window.patient || '582bc44f5a95ef40981b50bb'
 
 let initialData = {
-  topupList: [5, 10, 15, 20, 25, 30]
+  topupList: [500, 1000, 1500, 2000, 2500, 3000]
 }
 
 myFetch.get(`/api/patients/${patient}/`).then((data) => {

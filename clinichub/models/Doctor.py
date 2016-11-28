@@ -32,7 +32,7 @@ class Doctor(User):
             id_no = request.POST.get('id_no', '')
             field = request.POST.get('field', '')
             md_no = request.POST.get('md_no', '')
-            img_url = request.POST.get('img_url', '/static/user/default-user.jpg')
+            img_url = request.POST.get('img_url', '') or '/static/user/default-doctor.png'
         
             if (password != password_confirm):
                 raise ValidationError('PasswordNotMatched')

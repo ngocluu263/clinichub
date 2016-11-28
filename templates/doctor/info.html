@@ -10,6 +10,9 @@
             <!-- <div class="Gapper_Medium"></div>   -->
             <div class="NotiPane_Space" style="bottom: 40px; overflow:visible">
               <div class="container LabelManual_Font_Medium" style="width:100%">
+                <div class="row LineSpace" style="margin-top:10%; text-align: center;" >
+                    <img src="{{ user.img_url }}" class="img-circle" style="width: 200px;" />
+                </div>
                 <div class="row LineSpace" style="margin-top:10%;" >
                   <div class="col-md-5 col-xs-5 InfoTitleBox">
                     <b>Username: </b>
@@ -31,7 +34,7 @@
                     <b>Name: </b>
                   </div>
                   <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
-                     {{user.firstname}} {{user.lastname}}
+                     {{user.fullname}}
                   </div>
                 </div>
                 <div class="row LineSpace"  >
@@ -39,7 +42,7 @@
                     <b>Date of birth: </b>
                   </div>
                   <div class="col-md-offset-1 col-md-6 col-xs-6 col-xs-offset-1">
-                    {{user.birthdate}}
+                    {{user.birthdate | date:"j M Y"}}
                   </div>
                 </div>
                 <div class="row LineSpace"  >

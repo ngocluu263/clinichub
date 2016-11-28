@@ -62,6 +62,7 @@ def patient_payment(request):
         else:
             user = Patient.objects(username=request.session.get('username')).first()
             return render(request, 'patient/payment.html', {
+                'user_id': user.id,
                 'page': 'payment',
                 'balance': user.balance
             })

@@ -5,15 +5,11 @@ let modifyMessage = (msg, sender) => {
   if (sender == 'D') {
     if (msg.match(/^\/create-prescription/)) {
       return (
-        <span>Create a&nbsp; 
-          <a href={"/prescription/"+ msg.split(' ')[1]} target="_black">prescription</a>
-        </span>
+        <span><i>Create a prescription</i></span>
       )
     } else if (msg.match(/^\/create-appointment/)) {
       return (
-        <span>Create an&nbsp; 
-          <a href={"/appointment/"+ msg.split(' ')[1]} target="_black">appointment</a>
-        </span>
+        <span><i>Create an appointment</i></span>
       )
     }
   }

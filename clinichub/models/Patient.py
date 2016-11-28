@@ -22,7 +22,7 @@ class Patient(User):
             phone_no = request.POST.get('phone_no', '')
             address = request.POST.get('address', '')
             allergy = request.POST.get('allergy', '')
-            img_url = request.POST.get('img_url', '/static/user/default-user.jpg')
+            img_url = request.POST.get('img_url', '') or '/static/user/default-user.jpg'
 
             if (password != password_confirm):
                 raise ValidationError('PasswordNotMatched')
@@ -31,7 +31,7 @@ class Patient(User):
             user.email = email
             user.firstname = firstname
             user.lastname = lastname
-            user.balance = 100000.01
+            user.balance = 0
             user.birthdate = datetime.datetime.strptime(birthdate, '%Y-%M-%d')
             user.id_no = id_no
             user.phone_no = phone_no
