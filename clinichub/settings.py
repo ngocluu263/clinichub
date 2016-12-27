@@ -157,4 +157,4 @@ connect(MONGODB_DATABASE,
         host=MONGODB_HOST,
         port=MONGODB_PORT,
         username=MONGODB_USERNAME,
-        password=MONGODB_PASSWORD)
+        password=MONGODB_PASSWORD, authentication_source='admin')
