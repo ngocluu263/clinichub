@@ -6,3 +6,4 @@ django-cors-headers
 channels
 djangorestframework
 django-rest-framework-mongoengine
+django-cors-middleware
